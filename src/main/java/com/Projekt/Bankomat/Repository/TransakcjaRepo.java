@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 @Repository
-public interface TransakcjaRepo extends JpaRepository<Transakcja, UUID> {
-
-    Optional<Transakcja> findByLiczba(Integer liczba);
+public interface TransakcjaRepo extends JpaRepository<Transakcja, String> {
 }
