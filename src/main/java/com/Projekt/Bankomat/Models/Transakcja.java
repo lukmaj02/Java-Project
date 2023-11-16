@@ -1,12 +1,11 @@
 package com.Projekt.Bankomat.Models;
 
 import com.Projekt.Bankomat.Enums.TypTranskacji;
+import com.Projekt.Bankomat.Enums.TypWaluty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -15,6 +14,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "TRANSAKCJA")
@@ -28,27 +28,25 @@ public class Transakcja {
     @Enumerated(EnumType.STRING)
     private TypTranskacji typTranskacji;
 
-    @Column(name = "status", nullable = false)
-    private boolean status;
+    @Column(name = "status")
+    private boolean status=false;
 
-    @Column(name = "data", nullable = false)
-    private LocalDate data;
+    @Column(name = "dataTransakcji", nullable = false)
+    private LocalDate dataTransakcji;
 
-    @OneToMany(mappedBy = "transakcja")
-    private Set<Przelew> przelewy;
+    @Column(name = "kwota", nullable = false)
+    private BigDecimal kwota;
 
-    @ManyToMany(mappedBy = "transakcje")
-    Set<KontoBankowe> kontoBankowe;
+    @Column(name = "waluta", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TypWaluty waluta;
 
-    public Transakcja(String idTransakcji,
-                      TypTranskacji typTranskacji,
-                      boolean status,
-                      LocalDate data,
-                      KontoBankowe kontoBankowe) {
-        this.idTransakcji = idTransakcji;
-        this.typTranskacji = typTranskacji;
-        this.status = status;
-        this.data = data;
+    @Column(name = "tytul")
+    private String tytul;
 
-    }
+    @Column(name = "doKonta",nullable = false)
+    private String doKonta;
+
+    @Column(name = "zKonta", nullable = false)
+    private String zKonta;
 }

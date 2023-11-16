@@ -2,16 +2,14 @@ package com.Projekt.Bankomat.Models;
 
 import com.Projekt.Bankomat.Enums.TypKarty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "KARTA_PLATNICZA")
@@ -21,20 +19,23 @@ public class KartaPlatnicza {
     @Column(name = "idKarty", nullable = false)
     private String idKarty;
 
-    @Column(name = "numerKarty",nullable = false)
-    private Integer numerKarty;
+    @Column(name = "nrKarty",nullable = false, length = 16)
+    private String nrKarty;
 
     @Column(name = "dataWaznosci", nullable = false)
     private LocalDate dataWaznosci;
 
     @Column(name = "cvc", nullable = false, length = 3)
-    private Integer cvc;
+    private String cvc;
 
     @Column(name = "typKarty", nullable = false)
     @Enumerated(EnumType.STRING)
     private TypKarty typKarty;
 
+    @Column(name ="czyZablokowana", nullable = false)
+    private boolean czyZablokowana = true;
+
     @ManyToOne
     @JoinColumn(name = "idKonta")
-    private KontoBankowe kontoBankowe;
+    private KontoBankowe idKonta;
 }

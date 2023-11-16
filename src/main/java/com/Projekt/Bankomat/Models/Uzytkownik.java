@@ -1,10 +1,7 @@
 package com.Projekt.Bankomat.Models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
@@ -13,6 +10,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "UZYTKOWNIK")
@@ -37,8 +35,11 @@ public class Uzytkownik {
     @Column(name = "dataUrodzenia", nullable = false)
     private LocalDate dataUrodzenia;
 
-    @Column(name = "nrTelefonu", nullable = false)
+    @Column(name = "nrTelefonu", nullable = false, length = 9)
     private String nrTelefonu;
+
+    @Column(name = "adres")
+    private String adres;
 
     public Uzytkownik(String idUzytkownika,
                       String imie,
@@ -46,7 +47,8 @@ public class Uzytkownik {
                       String email,
                       String haslo,
                       LocalDate dataUrodzenia,
-                      String nrTelefonu) {
+                      String nrTelefonu,
+                      String adres) {
         this.idUzytkownika = idUzytkownika;
         this.imie = imie;
         this.nazwisko = nazwisko;
@@ -54,8 +56,9 @@ public class Uzytkownik {
         this.haslo = haslo;
         this.dataUrodzenia = dataUrodzenia;
         this.nrTelefonu = nrTelefonu;
+        this.adres = adres;
     }
 
-    @OneToMany(mappedBy = "uzytkownik")
+    @OneToMany(mappedBy = "uzytkownik", fetch = FetchType.EAGER)
     private Set<KontoBankowe> kontoBankowe;
 }
