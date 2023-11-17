@@ -1,5 +1,6 @@
 package com.Projekt.Bankomat.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -60,5 +61,6 @@ public class Uzytkownik {
     }
 
     @OneToMany(mappedBy = "uzytkownik", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private Set<KontoBankowe> kontoBankowe;
 }
