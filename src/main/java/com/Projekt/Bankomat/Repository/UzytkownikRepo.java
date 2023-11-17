@@ -11,4 +11,5 @@ public interface UzytkownikRepo extends JpaRepository<Uzytkownik,String> {
     boolean existsByNrTelefonu(String nrTelefonu);
     boolean existsByEmail(String email);
     Optional<Uzytkownik> findByEmail(String email);
+    void deleteByEmail(String email);
 }
