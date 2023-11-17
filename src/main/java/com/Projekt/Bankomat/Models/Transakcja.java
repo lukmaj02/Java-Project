@@ -49,4 +49,16 @@ public class Transakcja {
 
     @Column(name = "zKonta", nullable = false)
     private String zKonta;
+
+    @Override
+    public String toString() {
+        return "Transakcja{" +
+                "idTransakcji='" + idTransakcji + '\'' +
+                ", kwota=" + kwota +
+                ", waluta=" + waluta +
+                ", tytul='" + tytul + '\'' +
+                ", doKonta='" + doKonta + '\'' +
+                ", zKonta='" + zKonta + '\'' +
+                '}';
+    }
 }

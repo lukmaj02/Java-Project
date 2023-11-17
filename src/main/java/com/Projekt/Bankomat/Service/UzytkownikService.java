@@ -29,8 +29,9 @@ public class UzytkownikService {
 
     public void edytujDaneUzytkownika(String email, UzytkownikDto uzytkownikDto){
         var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
+        //todo
     }
-    public Set<KontoBankowe> wyswietlKontaBankowe(String email){
+    public Set<KontoBankowe> wyswietlKontaBankoweUzytkownika(String email){
         var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
         return uzytkownik.getKontoBankowe();
     }
@@ -53,5 +54,6 @@ public class UzytkownikService {
     }
     public void usunUzytkownika(String email){
         var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
+        //todo
     }
 }

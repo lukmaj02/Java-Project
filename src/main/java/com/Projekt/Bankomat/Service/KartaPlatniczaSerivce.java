@@ -1,7 +1,7 @@
 package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.Enums.TypKarty;
-import com.Projekt.Bankomat.Exceptions.KartaPlatniczaNotFound;
+import com.Projekt.Bankomat.Exceptions.KartaPlatniczaNotFoundException;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.Models.KartaPlatnicza;
 import com.Projekt.Bankomat.Models.KontoBankowe;
@@ -33,13 +33,13 @@ public class KartaPlatniczaSerivce {
     }
 
     public void zablokujKarte(String nrKarty){
-        var karta = kartaPlatniczaRepo.findByNrKarty(nrKarty).orElseThrow(() -> new KartaPlatniczaNotFound(nrKarty));
+        var karta = kartaPlatniczaRepo.findByNrKarty(nrKarty).orElseThrow(() -> new KartaPlatniczaNotFoundException(nrKarty));
         karta.setCzyZablokowana(true);
         kartaPlatniczaRepo.save(karta);
     }
 
     public void usunKarte(String nrKarty){
-        var karta = kartaPlatniczaRepo.findByNrKarty(nrKarty).orElseThrow(() -> new KartaPlatniczaNotFound(nrKarty));
+        var karta = kartaPlatniczaRepo.findByNrKarty(nrKarty).orElseThrow(() -> new KartaPlatniczaNotFoundException(nrKarty));
         kartaPlatniczaRepo.delete(karta);
     }
 }

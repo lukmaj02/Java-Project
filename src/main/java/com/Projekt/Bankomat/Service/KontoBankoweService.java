@@ -21,7 +21,6 @@ import java.util.UUID;
 public class KontoBankoweService {
     private final KontoBankoweRepo kontoBankoweRepo;
 
-
     @Autowired
     public KontoBankoweService(KontoBankoweRepo kontoBankoweRepo) {
         this.kontoBankoweRepo = kontoBankoweRepo;

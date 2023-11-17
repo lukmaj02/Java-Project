@@ -12,13 +12,17 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 @Service
 public class TransakcjaService {
-    TransakcjaRepo transakcjaRepo;
+    private final TransakcjaRepo transakcjaRepo;
+    private final ExecutorService executorService;
     @Autowired
-    public TransakcjaService(TransakcjaRepo transakcjaRepo) {
+    public TransakcjaService(TransakcjaRepo transakcjaRepo, ExecutorService executorService) {
         this.transakcjaRepo = transakcjaRepo;
+        this.executorService = executorService;
     }
 
     public void wyslijTransakcje(TypTranskacji typTranskacji,
@@ -46,19 +50,32 @@ public class TransakcjaService {
         transakcjaRepo.save(transakcja);
     }
 
-    public List<Transakcja> pomyslnieWyslaneTransakcjeZKonta(String zKonta){
-        return transakcjaRepo.znajdzWyslanePomyslnieZKonta(zKonta);
+    public Future<List<Transakcja>> pomyslnieWyslaneTransakcjeZKonta(String zKonta){
+        return executorService.submit(() -> {
+            Thread.sleep(1000);
+            return transakcjaRepo.znajdzWyslanePomyslnieZKonta(zKonta);
+        });
+
     }
 
-    public List<Transakcja> niePomyslnieWyslaneTransakcjeZKonta(String zKonta){
-        return transakcjaRepo.znajdzNieWyslanePomyslnieZKonta(zKonta);
+    public Future<List<Transakcja>> niePomyslnieWyslaneTransakcjeZKonta(String zKonta){
+        return executorService.submit(() -> {
+            Thread.sleep(1000);
+            return transakcjaRepo.znajdzNieWyslanePomyslnieZKonta(zKonta);
+        });
     }
 
-    public List<Transakcja> wszystkieTransakcjeZKonta(String zKonta){
-        return transakcjaRepo.znajdzWszystkieTransakcjeZKonta(zKonta);
+    public Future<List<Transakcja>> wszystkieTransakcjeZKonta(String zKonta){
+        return executorService.submit(() ->{
+            Thread.sleep(1000);
+            return transakcjaRepo.znajdzWszystkieTransakcjeZKonta(zKonta);
+        });
     }
 
-    public List<Transakcja> pomyslnieWyslaneTransakcjeDoKonta(String doKonta){
-        return transakcjaRepo.znajdzWyslanePomyslnieDoKonta(doKonta);
+    public Future<List<Transakcja>> pomyslnieWyslaneTransakcjeDoKonta(String doKonta){
+        return executorService.submit(() -> {
+            Thread.sleep(1000);
+            return transakcjaRepo.znajdzWyslanePomyslnieDoKonta(doKonta);
+        });
     }
 }
