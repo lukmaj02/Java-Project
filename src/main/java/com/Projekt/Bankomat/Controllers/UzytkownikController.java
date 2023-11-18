@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
+
 @RestController
 @RequestMapping("/server")
 public class UzytkownikController {
@@ -50,11 +52,12 @@ public class UzytkownikController {
     }
 
     //fix this method
-    @DeleteMapping("/deleteUser/{email}")
-    public ResponseEntity<String> DeleteUser(@PathVariable String email)
+
+    @RequestMapping("/deleteUser/{email}")
+    @ResponseBody
+    public void DeleteUser(@PathVariable String email)
     {
         _service.usunUzytkownika(email);
-        return ResponseEntity.ok(email);
     }
 
 }
