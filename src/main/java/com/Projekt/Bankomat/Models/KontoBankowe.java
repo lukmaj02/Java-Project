@@ -3,8 +3,6 @@ package com.Projekt.Bankomat.Models;
 import com.Projekt.Bankomat.Enums.TypKonta;
 import com.Projekt.Bankomat.Enums.TypWaluty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;

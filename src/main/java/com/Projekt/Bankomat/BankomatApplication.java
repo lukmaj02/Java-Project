@@ -42,7 +42,8 @@ public class BankomatApplication {
 										  KontoBankoweService kontoBankoweService,
 										  TransakcjaService transakcjaService,
 										  KartaPlatniczaSerivce kartaPlatniczaSerivce,
-										  KontoBankoweRepo kontoBankoweRepo) {
+										  KontoBankoweRepo kontoBankoweRepo,
+										  KartaPlatniczaRepo kartaPlatniczaRepo) {
 		return args -> {
 //			var realUzytkownik = uzytkownikRepo.findByEmail("random@example.com").orElseThrow(EmailUzytkownikaNotFound::new);
 
@@ -102,8 +103,8 @@ public class BankomatApplication {
 //					.adres("RandomStreet")
 //					.build();
 //			uzytkownikService.zarejestrujUzytkownika(uzytkownik);
-			var realuzytkownik = uzytkownikService.wyswietlDaneUzytkownika("random@example.com");
-			System.out.println(realuzytkownik);
+//			var realuzytkownik = uzytkownikService.wyswietlDaneUzytkownika("random@example.com");
+//			System.out.println(realuzytkownik);
 //			kontoBankoweService.utworzKonto(
 //					realuzytkownik.orElseThrow(EmailUzytkownikaNotFound::new),
 //					TypKonta.OSOBISTE,
@@ -112,6 +113,14 @@ public class BankomatApplication {
 //			kartaPlatniczaSerivce.utworzKarte(
 //					konto.orElseThrow(NrKontaNotFoundException::new),
 //					TypKarty.DEBETOWA);
+//			var karta = kartaPlatniczaRepo.znajdzKarteUzytkownika(
+//					"8828063284979948",
+//					"201",
+//					"RandomImie",
+//					"RandomNazwisko");
+//			System.out.println(karta);
+//			kontoBankoweService.usunKonto("17004046596712662895852028");
+//			uzytkownikService.usunUzytkownika("random@example.com");
 		};
 	}
 }

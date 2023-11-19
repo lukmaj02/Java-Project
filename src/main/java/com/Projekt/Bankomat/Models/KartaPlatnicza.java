@@ -42,4 +42,16 @@ public class KartaPlatnicza {
     @JoinColumn(name = "idKonta")
     @JsonIgnore
     private KontoBankowe kontoBankowe;
+
+    @Override
+    public String toString() {
+        return "KartaPlatnicza{" +
+                "idKarty='" + idKarty + '\'' +
+                ", nrKarty='" + nrKarty + '\'' +
+                ", dataWaznosci=" + dataWaznosci +
+                ", cvc='" + cvc + '\'' +
+                ", typKarty=" + typKarty +
+                ", czyZablokowana=" + czyZablokowana +
+                '}';
+    }
 }

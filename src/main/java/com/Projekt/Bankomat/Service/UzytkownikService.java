@@ -3,6 +3,7 @@ package com.Projekt.Bankomat.Service;
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
 import com.Projekt.Bankomat.DtoModels.UzytkownikDto;
 import com.Projekt.Bankomat.Exceptions.EmailUzytkownikaNotFound;
+import com.Projekt.Bankomat.Exceptions.KontoBankoweExistsException;
 import com.Projekt.Bankomat.Exceptions.UzytkownikExistsException;
 import com.Projekt.Bankomat.Models.KontoBankowe;
 import com.Projekt.Bankomat.Models.Uzytkownik;
@@ -65,7 +66,9 @@ public class UzytkownikService implements IUzytkownikService {
     }
     public void usunUzytkownika(String email){
         var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
-        uzytkownikRepo.deleteByEmail(email);
-        //todo
+        if(!uzytkownik.getKontoBankowe().isEmpty()){
+            throw new KontoBankoweExistsException();
+        }
+        uzytkownikRepo.delete(uzytkownik);
     }
 }
