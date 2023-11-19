@@ -26,4 +26,14 @@ public interface TransakcjaRepo extends JpaRepository<Transakcja, String> {
 
     @Query(value = "SELECT t FROM TRANSAKCJA t WHERE t.zKonta = ?1")
     List<Transakcja> znajdzWszystkieTransakcjeZKonta(String zKonta);
+
+    @Query(value = "SELECT t FROM TRANSAKCJA t WHERE t.zKonta in " +
+            "(SELECT k.nrKonta from KONTO_BANKOWE k JOIN uzytkownik u WHERE u.email = ?1)")
+    List<Transakcja> znajdzWszystkieWyslaneTransakcjeUzytkownika(String email);
+
+    @Query(value = "SELECT t FROM TRANSAKCJA t WHERE t.status = TRUE and t.doKonta in " +
+            "(SELECT k.nrKonta from KONTO_BANKOWE k JOIN uzytkownik u WHERE u.email = ?1)")
+    List<Transakcja> znajdzWszystkieOdebraneTransakcjeUzytkownika(String email);
+
+
 }

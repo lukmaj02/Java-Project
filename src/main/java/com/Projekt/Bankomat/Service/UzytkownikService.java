@@ -65,7 +65,7 @@ public class UzytkownikService implements IUzytkownikService {
     }
     public void usunUzytkownika(String email){
         var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
-        uzytkownikRepo.deleteByEmail(email);
+        uzytkownikRepo.delete(uzytkownik);
         //todo
     }
 }

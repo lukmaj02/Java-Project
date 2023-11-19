@@ -53,7 +53,7 @@ public class UzytkownikController {
 
     //fix this method
 
-    @RequestMapping("/deleteUser/{email}")
+    @DeleteMapping("/deleteUser/{email}")
     @ResponseBody
     public void DeleteUser(@PathVariable String email)
     {

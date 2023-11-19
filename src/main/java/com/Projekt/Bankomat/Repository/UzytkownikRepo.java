@@ -16,6 +16,6 @@ public interface UzytkownikRepo extends JpaRepository<Uzytkownik,String> {
     Optional<Uzytkownik> findByEmail(String email);
 
     @Modifying
-    @Query("DELETE FROM UZYTKOWNIK u WHERE u.email = :email")
-    void deleteByEmail(@Param("email") String email);
+    @Query(value = "DELETE FROM UZYTKOWNIK u WHERE u.email = ?1")
+    void deleteByEmail(String email);
 }

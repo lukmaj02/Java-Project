@@ -1,6 +1,13 @@
 package com.Projekt.Bankomat;
 
 
+import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
+import com.Projekt.Bankomat.Enums.TypKarty;
+import com.Projekt.Bankomat.Enums.TypKonta;
+import com.Projekt.Bankomat.Enums.TypWaluty;
+import com.Projekt.Bankomat.Exceptions.EmailUzytkownikaNotFound;
+import com.Projekt.Bankomat.Exceptions.NrKontaNotFoundException;
+import com.Projekt.Bankomat.Models.KartaPlatnicza;
 import com.Projekt.Bankomat.Models.Transakcja;
 import com.Projekt.Bankomat.Repository.*;
 import com.Projekt.Bankomat.Service.KartaPlatniczaSerivce;
@@ -12,7 +19,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -23,42 +32,33 @@ public class BankomatApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BankomatApplication.class, args);
 	}
-
-
 	@Bean
 	public ExecutorService executorService(){
 		return Executors.newSingleThreadExecutor();
 	}
-//	@Bean
-//	public CommandLineRunner runOnStartup(UzytkownikService uzytkownikService,
-//										  UzytkownikRepo uzytkownikRepo,
-//										  KontoBankoweService kontoBankoweService,
-//										  TransakcjaService transakcjaService) {
-//		return args -> {
-////			var uzytkownik = RegistrarionRequest.builder()
-////					.imie("RandomImie")
-////					.nazwisko("RandomNazwisko")
-////					.email("random@example.com")
-////					.haslo("RandomHaslo")
-////					.nrTelefonu("123456644")
-////					.dataUrodzenia(LocalDate.of(1990, 1, 1))
-////					.adres("RandomStreet")
-////					.build();
-////			uzytkownikService.zarejestrujUzytkownika(uzytkownik);
-////			var realUzytkownik = uzytkownikRepo.findByEmail("random@example.com").orElseThrow(EmailUzytkownikaNotFound::new);
-//
+	@Bean
+	public CommandLineRunner runOnStartup(UzytkownikService uzytkownikService,
+										  UzytkownikRepo uzytkownikRepo,
+										  KontoBankoweService kontoBankoweService,
+										  TransakcjaService transakcjaService,
+										  KartaPlatniczaSerivce kartaPlatniczaSerivce,
+										  KontoBankoweRepo kontoBankoweRepo,
+										  KartaPlatniczaRepo kartaPlatniczaRepo) {
+		return args -> {
+//			var realUzytkownik = uzytkownikRepo.findByEmail("random@example.com").orElseThrow(EmailUzytkownikaNotFound::new);
+
 //			Future<List<Transakcja>> future1 = transakcjaService.pomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789");
 //			Future<List<Transakcja>> future2 = transakcjaService.pomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789");
 //			Future<List<Transakcja>> future6 = transakcjaService.niePomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789");
 //			Future<List<Transakcja>> future3 = transakcjaService.pomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789");
 //			Future<List<Transakcja>> future4 = transakcjaService.wszystkieTransakcjeZKonta("45678901234567890123456789");
 //			Future<List<Transakcja>> future5 = transakcjaService.niePomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789");
-////			System.out.println(uzytkownikService.wyswietlDaneUzytkownika("krzysztof.gonciarz@gmail.com"));
-////			System.out.println(uzytkownikService.wyswietlKontaBankowe("krzysztof.gonciarz@gmail.com"));
-////			System.out.println(transakcjaService.pomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789"));
-////			System.out.println(transakcjaService.niePomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789"));
-////			System.out.println(transakcjaService.wszystkieTransakcjeZKonta("45678901234567890123456789"));
-////			System.out.println(transakcjaService.pomyslnieWyslaneTransakcjeDoKonta("78190456231890724568903214"));
+//			System.out.println(uzytkownikService.wyswietlDaneUzytkownika("krzysztof.gonciarz@gmail.com"));
+//			System.out.println(uzytkownikService.wyswietlKontaBankowe("krzysztof.gonciarz@gmail.com"));
+//			System.out.println(transakcjaService.pomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789"));
+//			System.out.println(transakcjaService.niePomyslnieWyslaneTransakcjeZKonta("45678901234567890123456789"));
+//			System.out.println(transakcjaService.wszystkieTransakcjeZKonta("45678901234567890123456789"));
+//			System.out.println(transakcjaService.pomyslnieWyslaneTransakcjeDoKonta("78190456231890724568903214"));
 //			long currentTimeMillis = System.currentTimeMillis();
 //			while (!(future1.isDone() && future2.isDone() && future3.isDone() && future4.isDone() && future5.isDone() && future6.isDone())) {
 //				System.out.println(
@@ -93,6 +93,34 @@ public class BankomatApplication {
 //				System.out.println(tmp4);
 //				System.out.println(tmp5);
 //				System.out.println(tmp6);
-//		};
-//	}
+//			var uzytkownik = RegistrarionRequest.builder()
+//					.imie("RandomImie")
+//					.nazwisko("RandomNazwisko")
+//					.email("random@example.com")
+//					.haslo("RandomHaslo")
+//					.nrTelefonu("123456644")
+//					.dataUrodzenia(LocalDate.of(1990, 1, 1))
+//					.adres("RandomStreet")
+//					.build();
+//			uzytkownikService.zarejestrujUzytkownika(uzytkownik);
+//			var realuzytkownik = uzytkownikService.wyswietlDaneUzytkownika("random@example.com");
+//			System.out.println(realuzytkownik);
+//			kontoBankoweService.utworzKonto(
+//					realuzytkownik.orElseThrow(EmailUzytkownikaNotFound::new),
+//					TypKonta.OSOBISTE,
+//					TypWaluty.EURO);
+//			var konto = kontoBankoweRepo.findByNrKonta("17004046596712662895852028");
+//			kartaPlatniczaSerivce.utworzKarte(
+//					konto.orElseThrow(NrKontaNotFoundException::new),
+//					TypKarty.DEBETOWA);
+//			var karta = kartaPlatniczaRepo.znajdzKarteUzytkownika(
+//					"8828063284979948",
+//					"201",
+//					"RandomImie",
+//					"RandomNazwisko");
+//			System.out.println(karta);
+//			kontoBankoweService.usunKonto("17004046596712662895852028");
+//			uzytkownikService.usunUzytkownika("random@example.com");
+		};
+	}
 }

@@ -29,7 +29,7 @@ public class Transakcja {
     private TypTranskacji typTranskacji;
 
     @Column(name = "status")
-    private boolean status=false;
+    private boolean status;
 
     @Column(name = "dataTransakcji", nullable = false)
     private LocalDate dataTransakcji;
