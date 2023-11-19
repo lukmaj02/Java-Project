@@ -7,14 +7,15 @@ import java.util.Random;
 
 
 public final class Generators {
+
     private Generators(){}
-    public static String generateUniqueRandomDigitNumber(Integer length) {
-        long timestamp = System.currentTimeMillis();
+    public static String generateRandomNumber(int numberOfDigits) {
+        StringBuilder result = new StringBuilder();
         Random random = new Random();
-        StringBuilder uniqueRandomStringBuilder = new StringBuilder(Long.toString(timestamp));
-        for (int i = 0; i < length - Long.toString(timestamp).length(); i++) {
-            uniqueRandomStringBuilder.append(random.nextInt(10));
+        result.append(random.nextInt(9) + 1);
+        for (int i = 1; i < numberOfDigits; i++) {
+            result.append(random.nextInt(10));
         }
-        return uniqueRandomStringBuilder.toString();
+        return result.toString();
     }
 }

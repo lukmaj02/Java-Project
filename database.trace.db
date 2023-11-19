@@ -730,3 +730,11 @@ Database is already closed (to disable automatic closing at VM shutdown, add ";D
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:1589)
+2023-11-19 15:54:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Wartość za długa dla kolumny "CVC CHARACTER VARYING(3)": "'1700405641432' (13)"
+Value too long for column "CVC CHARACTER VARYING(3)": "'1700405641432' (13)"; SQL statement:
+insert into karta_platnicza (cvc,czy_zablokowana,data_waznosci,id_konta,nr_karty,typ_karty,id_karty) values (?,?,?,?,?,?,?) [22001-214]
+2023-11-19 15:55:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Wartość za długa dla kolumny "CVC CHARACTER VARYING(3)": "'1700405739496332' (16)"
+Value too long for column "CVC CHARACTER VARYING(3)": "'1700405739496332' (16)"; SQL statement:
+insert into karta_platnicza (cvc,czy_zablokowana,data_waznosci,id_konta,nr_karty,typ_karty,id_karty) values (?,?,?,?,?,?,?) [22001-214]

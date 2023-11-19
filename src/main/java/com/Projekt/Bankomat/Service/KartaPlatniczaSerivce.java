@@ -26,12 +26,13 @@ public class KartaPlatniczaSerivce {
 
     public void utworzKarte(KontoBankowe kontoBankowe, TypKarty typKarty){
         var nowaKarta = KartaPlatnicza.builder()
-                .cvc(Generators.generateUniqueRandomDigitNumber(3))
+                .cvc(Generators.generateRandomNumber(3))
                 .dataWaznosci(LocalDate.now().plusYears(4))
-                .nrKarty(Generators.generateUniqueRandomDigitNumber(16))
+                .nrKarty(Generators.generateRandomNumber(16))
                 .typKarty(typKarty)
                 .idKarty(UUID.randomUUID().toString())
                 .czyZablokowana(false)
+                .kontoBankowe(kontoBankowe)
                 .build();
         kartaPlatniczaRepo.save(nowaKarta);
     }

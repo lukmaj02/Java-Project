@@ -39,6 +39,7 @@ public class KontoBankoweService {
         kontoBankoweRepo.save(doKonta);
         return true;
     }
+
     public void usunKonto(String nrKonta){
         var konto = kontoBankoweRepo.findByNrKonta(nrKonta).orElseThrow(NrKontaNotFoundException::new);
         if(konto.getSaldo().compareTo(BigDecimal.ZERO) > 0){
@@ -50,7 +51,7 @@ public class KontoBankoweService {
     public void utworzKonto(Uzytkownik uzytkownik, TypKonta typKonta, TypWaluty waluta){
         var konto = KontoBankowe.builder()
                 .idKonta(UUID.randomUUID().toString())
-                .nrKonta(Generators.generateUniqueRandomDigitNumber(26))
+                .nrKonta(Generators.generateRandomNumber(26))
                 .saldo(BigDecimal.valueOf(0))
                 .typKonta(typKonta)
                 .uzytkownik(uzytkownik)

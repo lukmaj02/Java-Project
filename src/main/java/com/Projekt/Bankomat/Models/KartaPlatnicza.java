@@ -2,6 +2,8 @@ package com.Projekt.Bankomat.Models;
 
 import com.Projekt.Bankomat.Enums.TypKarty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -38,6 +40,6 @@ public class KartaPlatnicza {
 
     @ManyToOne
     @JoinColumn(name = "idKonta")
-    @JsonBackReference
+    @JsonIgnore
     private KontoBankowe kontoBankowe;
 }

@@ -3,6 +3,7 @@ package com.Projekt.Bankomat.Models;
 import com.Projekt.Bankomat.Enums.TypKonta;
 import com.Projekt.Bankomat.Enums.TypWaluty;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -36,29 +37,15 @@ public class KontoBankowe {
     private TypKonta typKonta;
 
     @OneToMany(
-            mappedBy = "idKonta",
+            mappedBy = "kontoBankowe",
+            fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JsonManagedReference
     private Set<KartaPlatnicza> kartyPlatnicze;
 
     @ManyToOne
     @JoinColumn(name = "idUzytkownika")
     @JsonBackReference
     private Uzytkownik uzytkownik;
-
-    public KontoBankowe(String idKonta,
-                        String nrKonta,
-                        BigDecimal saldo,
-                        TypKonta typKonta,
-                        TypWaluty waluta,
-                        Uzytkownik uzytkownik) {
-        this.idKonta = idKonta;
-        this.nrKonta = nrKonta;
-        this.saldo = saldo;
-        this.typKonta = typKonta;
-        this.waluta = waluta;
-        this.uzytkownik = uzytkownik;
-    }
 }
