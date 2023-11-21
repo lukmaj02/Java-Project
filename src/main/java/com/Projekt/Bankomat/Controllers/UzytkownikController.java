@@ -4,7 +4,7 @@ package com.Projekt.Bankomat.Controllers;
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
 import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Models.User;
-import com.Projekt.Bankomat.Service.IUzytkownikService;
+import com.Projekt.Bankomat.Service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +16,10 @@ import java.util.Set;
 @RequestMapping("/server")
 public class UzytkownikController {
 
-    private final IUzytkownikService _service;
+    private final IUserService _service;
 
     @Autowired
-    public UzytkownikController(IUzytkownikService service) {
+    public UzytkownikController(IUserService service) {
         _service = service;
     }
 

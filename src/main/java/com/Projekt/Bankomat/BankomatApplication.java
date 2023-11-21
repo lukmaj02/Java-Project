@@ -111,11 +111,11 @@ public class BankomatApplication {
 //					CurrencyType.ZLOTY,
 //					TransactionType.BLIK);
 			transactionService.createTransaction("98765432109876543210987654",
-					"57038850376133876745234565",
+					"000000000",
 					BigDecimal.valueOf(1500),
 					"Za wczoraj",
 					CurrencyType.ZLOTY,
-					TransactionType.PRZELEW_TRADYCYJNY);
+					TransactionType.BLIK);
 //			var konto = bankAccountRepo.findByNrKonta("17004046596712662895852028");
 //			cardService.createCard(
 //					konto.orElseThrow(AccountNumberNotFoundException::new),

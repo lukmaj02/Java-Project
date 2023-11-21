@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 
 @Component
-public class Generators {
+public class Generators{
     public static String generateRandomNumber(int numberOfDigits) {
         StringBuilder result = new StringBuilder();
         Random random = new Random();

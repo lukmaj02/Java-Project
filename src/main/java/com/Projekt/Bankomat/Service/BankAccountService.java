@@ -25,6 +25,7 @@ public class BankAccountService {
 
     public String getAccountNrByUserPhoneNumber(String phoneNumber, CurrencyType currencyType){
         var acc = bankAccountRepo.getAccountNrByUserPhoneNumber(currencyType, phoneNumber);
+        if(acc.isEmpty()) throw new BankAccountNotFoundException();
         return acc.get(0).getAccountNr();
     }
     
@@ -55,7 +56,6 @@ public class BankAccountService {
         bankAccountRepo.delete(konto);
     }
     public void createAccount(User user, AccountType accountType, CurrencyType waluta){
-
         var konto = BankAccount.builder()
                 .accountId(UUID.randomUUID().toString())
                 .accountNr(Generators.generateRandomNumber(26))

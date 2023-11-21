@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-public class UserService implements IUzytkownikService {
+public class UserService implements IUserService {
     private final UserRepo userRepo;
     @Autowired
     public UserService(UserRepo userRepo) {

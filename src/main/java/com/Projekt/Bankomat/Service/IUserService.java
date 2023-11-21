@@ -8,7 +8,7 @@ import com.Projekt.Bankomat.Models.User;
 import java.util.List;
 import java.util.Set;
 
-public interface IUzytkownikService {
+public interface IUserService {
     User getUser(String email);
     List<User> getAllUsers();
     void editUserInformations(String email, UserDto userDto);
