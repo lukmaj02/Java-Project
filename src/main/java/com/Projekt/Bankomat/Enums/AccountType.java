@@ -1,5 +1,5 @@
 package com.Projekt.Bankomat.Enums;
 
-public enum TypKonta {
+public enum AccountType {
     OSZCZEDNOSCIOWE, OSOBISTE, FIRMOWE
 }

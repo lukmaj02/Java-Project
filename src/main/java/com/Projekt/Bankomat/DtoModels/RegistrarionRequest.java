@@ -9,11 +9,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegistrarionRequest {
-    private String imie;
-    private String nazwisko;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String haslo;
-    private String nrTelefonu;
-    private LocalDate dataUrodzenia;
-    private String adres;
+    private String password;
+    private String phoneNumber;
+    private LocalDate dateOfBirth;
+    private String address;
 }

@@ -1,5 +1,5 @@
 package com.Projekt.Bankomat.Enums;
 
-public enum TypKarty {
+public enum CardType {
     KREDYTOWA, DEBETOWA
 }

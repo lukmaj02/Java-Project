@@ -1,71 +1,64 @@
 package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
-import com.Projekt.Bankomat.DtoModels.UzytkownikDto;
-import com.Projekt.Bankomat.Exceptions.EmailUzytkownikaNotFound;
-import com.Projekt.Bankomat.Exceptions.UzytkownikExistsException;
-import com.Projekt.Bankomat.Models.KontoBankowe;
-import com.Projekt.Bankomat.Models.Uzytkownik;
-import com.Projekt.Bankomat.Repository.UzytkownikRepo;
+import com.Projekt.Bankomat.DtoModels.UserDto;
+import com.Projekt.Bankomat.Exceptions.UserEmailNotFoundException;
+import com.Projekt.Bankomat.Exceptions.UserExistsException;
+import com.Projekt.Bankomat.Models.BankAccount;
+import com.Projekt.Bankomat.Models.User;
+import com.Projekt.Bankomat.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 @Service
 public class UzytkownikService implements IUzytkownikService {
-    private final UzytkownikRepo uzytkownikRepo;
+    private final UserRepo userRepo;
     @Autowired
-    public UzytkownikService(UzytkownikRepo uzytkownikRepo) {
-        this.uzytkownikRepo = uzytkownikRepo;
+    public UzytkownikService(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
 
-    public Optional<Uzytkownik> wyswietlDaneUzytkownika(String email){
-         var uzytkownik = uzytkownikRepo.findByEmail(email);
-         if(uzytkownik.isEmpty())
-         {
-             throw  new EmailUzytkownikaNotFound();
-         }
-         return uzytkownik;
+    public User getUser(String email){
+        return userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
     }
 
-    public Optional<List<Uzytkownik>> wyswietlDaneWszytskichUzytkownikow(){
-        var uzytkownicy = uzytkownikRepo.findAll();
-        return Optional.of(uzytkownicy);
+    public List<User> getAllUsers(){
+        return userRepo.findAll();
     }
 
 
-    public void edytujDaneUzytkownika(String email, UzytkownikDto uzytkownikDto){
-        var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
+    public void editUserInformations(String email, UserDto userDto){
+        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
         //todo
     }
-    public Set<KontoBankowe> wyswietlKontaBankoweUzytkownika(String email){
-        var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
-        return uzytkownik.getKontoBankowe();
+    public Set<BankAccount> getUserBankAccounts(String email){
+        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
+        return uzytkownik.getBankAccount();
     }
 
-    public void zarejestrujUzytkownika(RegistrarionRequest registraionRequest){
-        if(uzytkownikRepo.existsByEmail(registraionRequest.getEmail()) || uzytkownikRepo.existsByNrTelefonu(registraionRequest.getNrTelefonu())){
-            throw new UzytkownikExistsException(registraionRequest.getEmail(), registraionRequest.getNrTelefonu());
+    public void registerUser(RegistrarionRequest registraionRequest){
+        if(userRepo.existsByEmail(registraionRequest.getEmail()) || userRepo.existsByPhoneNumber(registraionRequest.getPhoneNumber())){
+            throw new UserExistsException(registraionRequest.getEmail(), registraionRequest.getPhoneNumber());
         }
-        var uzytkownik = Uzytkownik.builder()
-                .idUzytkownika(UUID.randomUUID().toString())
-                .adres(registraionRequest.getAdres())
-                .dataUrodzenia(registraionRequest.getDataUrodzenia())
-                .imie(registraionRequest.getImie())
-                .nazwisko(registraionRequest.getNazwisko())
-                .haslo(registraionRequest.getHaslo())
+        var uzytkownik = User.builder()
+                .userId(UUID.randomUUID().toString())
+                .address(registraionRequest.getAddress())
+                .dateOfBirth(registraionRequest.getDateOfBirth())
+                .firstName(registraionRequest.getFirstName())
+                .lastName(registraionRequest.getLastName())
+                .password(registraionRequest.getPassword())
                 .email(registraionRequest.getEmail())
-                .nrTelefonu(registraionRequest.getNrTelefonu())
+                .phoneNumber(registraionRequest.getPhoneNumber())
                 .build();
-        uzytkownikRepo.save(uzytkownik);
+        userRepo.save(uzytkownik);
     }
-    public void usunUzytkownika(String email){
-        var uzytkownik = uzytkownikRepo.findByEmail(email).orElseThrow(EmailUzytkownikaNotFound::new);
-        uzytkownikRepo.delete(uzytkownik);
+    public void deleteUser(String email){
+        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
+        userRepo.delete(uzytkownik);
         //todo
     }
 }

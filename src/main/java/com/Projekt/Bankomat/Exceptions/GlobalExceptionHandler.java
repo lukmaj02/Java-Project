@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(EmailUzytkownikaNotFound.class)
+    @ExceptionHandler(UserEmailNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ErrorResponse handleNoRecordFoundException(EmailUzytkownikaNotFound ex)
+    public ErrorResponse handleNoRecordFoundException(UserEmailNotFoundException ex)
     {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setMessage(ex.getMessage());

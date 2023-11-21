@@ -1,19 +1,18 @@
 package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
-import com.Projekt.Bankomat.DtoModels.UzytkownikDto;
-import com.Projekt.Bankomat.Models.KontoBankowe;
-import com.Projekt.Bankomat.Models.Uzytkownik;
+import com.Projekt.Bankomat.DtoModels.UserDto;
+import com.Projekt.Bankomat.Models.BankAccount;
+import com.Projekt.Bankomat.Models.User;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 public interface IUzytkownikService {
-    Optional<Uzytkownik> wyswietlDaneUzytkownika(String email);
-    Optional<List<Uzytkownik>> wyswietlDaneWszytskichUzytkownikow();
-    void edytujDaneUzytkownika(String email, UzytkownikDto uzytkownikDto);
-    Set<KontoBankowe> wyswietlKontaBankoweUzytkownika(String email);
-    void zarejestrujUzytkownika(RegistrarionRequest registraionRequest);
-    void usunUzytkownika(String email);
+    User getUser(String email);
+    List<User> getAllUsers();
+    void editUserInformations(String email, UserDto userDto);
+    Set<BankAccount> getUserBankAccounts(String email);
+    void registerUser(RegistrarionRequest registrarionRequest);
+    void deleteUser(String email);
 }

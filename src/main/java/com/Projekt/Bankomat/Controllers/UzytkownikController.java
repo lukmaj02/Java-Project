@@ -2,18 +2,15 @@ package com.Projekt.Bankomat.Controllers;
 
 
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
-import com.Projekt.Bankomat.Models.KontoBankowe;
-import com.Projekt.Bankomat.Models.Uzytkownik;
+import com.Projekt.Bankomat.Models.BankAccount;
+import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Service.IUzytkownikService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 
 @RestController
 @RequestMapping("/server")
@@ -27,37 +24,36 @@ public class UzytkownikController {
     }
 
     @RequestMapping(value = "/get",method = RequestMethod.GET)
-    public Optional<Uzytkownik> GetUzytkownik(@RequestParam String email)
+    public User getUser(@RequestParam String email)
     {
-        var user =  _service.wyswietlDaneUzytkownika(email);
-        return user;
+        return _service.getUser(email);
     }
     @RequestMapping(value = "/getAll",method = RequestMethod.GET)
-    public Optional<List<Uzytkownik>> GetAllUzytkownik()
+    public List<User> getAllUsers()
     {
-        var users =  _service.wyswietlDaneWszytskichUzytkownikow();
-        return users;
+        return _service.getAllUsers();
     }
+
     @RequestMapping(value = "/getAllBankAccounts",method = RequestMethod.GET)
-    public Optional<Set<KontoBankowe>> GetAllkontaBankoweUzytkownika(@RequestParam String email)
+    public Optional<Set<BankAccount>> getAllUserBankAccounts(@RequestParam String email)
     {
-        var konta =  _service.wyswietlKontaBankoweUzytkownika(email);
+        var konta =  _service.getUserBankAccounts(email);
         return Optional.ofNullable(konta);
     }
 
     @PostMapping(value = "/registerUser")
-    public void GetAllkontaBankoweUzytkownika(@RequestBody RegistrarionRequest request)
+    public void registerUser(@RequestBody RegistrarionRequest request)
     {
-        _service.zarejestrujUzytkownika(request);
+        _service.registerUser(request);
     }
 
     //fix this method
 
     @DeleteMapping("/deleteUser/{email}")
     @ResponseBody
-    public void DeleteUser(@PathVariable String email)
+    public void deleteUser (@PathVariable String email)
     {
-        _service.usunUzytkownika(email);
+        _service.deleteUser(email);
     }
 
 }
