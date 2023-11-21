@@ -2,6 +2,7 @@ package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
 import com.Projekt.Bankomat.DtoModels.UserDto;
+import com.Projekt.Bankomat.Exceptions.BankAccountExistsException;
 import com.Projekt.Bankomat.Exceptions.UserEmailNotFoundException;
 import com.Projekt.Bankomat.Exceptions.UserExistsException;
 import com.Projekt.Bankomat.Models.BankAccount;
@@ -58,7 +59,9 @@ public class UserService implements IUzytkownikService {
     }
     public void deleteUser(String email){
         var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
+        if(!uzytkownik.getBankAccount().isEmpty()){
+            throw new BankAccountExistsException();
+        }
         userRepo.delete(uzytkownik);
-        //todo
     }
 }

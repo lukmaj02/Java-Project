@@ -47,8 +47,6 @@ public class UzytkownikController {
         _service.registerUser(request);
     }
 
-    //fix this method
-
     @DeleteMapping("/deleteUser/{email}")
     @ResponseBody
     public void deleteUser (@PathVariable String email)
