@@ -37,6 +37,7 @@ public class TransactionService {
                                   String title,
                                   CurrencyType currency,
                                   TransactionType transactionType){
+
         var transakcja = Transaction.builder()
                 .transactionId(UUID.randomUUID().toString())
                 .transactionDate(LocalDate.now())
@@ -51,11 +52,6 @@ public class TransactionService {
         transactionRepo.save(transakcja);
         if(!transakcja.isValid()) throw new InvalidTransactionException();
 
-    }
-    public void sentAgainTransaction(String transactionId){
-        var transakcja = transactionRepo.findById(transactionId).orElseThrow(TransactionIdNotFoundException::new);
-        transakcja.setValid(true);
-        transactionRepo.save(transakcja);
     }
 
     public Future<List<Transaction>> getAllNotSuccessfullySentTransactionsFromBankAccount(String fromAccountNr){

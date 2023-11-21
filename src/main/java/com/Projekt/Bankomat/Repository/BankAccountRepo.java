@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 @Repository
 public interface BankAccountRepo extends JpaRepository<BankAccount,String> {
@@ -15,4 +16,7 @@ public interface BankAccountRepo extends JpaRepository<BankAccount,String> {
     @Query(value = "SELECT k FROM KONTO_BANKOWE k JOIN user u " +
             "WHERE u.email = ?1")
     List<BankAccount> findUserBankAccount(String email);
+
+    @Query(value = "SELECT k.accountNr FROM KONTO_BANKOWE k JOIN user u WHERE k.accountType = ?1 and k.currencyType = ?2 and u.email = ?3")
+    Optional<String> getAccountNrByUserPhoneNumber(String accountType, String currencyType, String email);
 }

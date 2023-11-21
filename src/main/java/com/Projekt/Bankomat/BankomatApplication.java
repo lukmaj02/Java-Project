@@ -5,7 +5,7 @@ import com.Projekt.Bankomat.Repository.*;
 import com.Projekt.Bankomat.Service.BankAccountService;
 import com.Projekt.Bankomat.Service.CardService;
 import com.Projekt.Bankomat.Service.TransactionService;
-import com.Projekt.Bankomat.Service.UzytkownikService;
+import com.Projekt.Bankomat.Service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +25,7 @@ public class BankomatApplication {
 		return Executors.newSingleThreadExecutor();
 	}
 	@Bean
-	public CommandLineRunner runOnStartup(UzytkownikService uzytkownikService,
+	public CommandLineRunner runOnStartup(UserService userService,
 										  UserRepo userRepo,
 										  BankAccountService bankAccountService,
 										  TransactionService transactionService,
@@ -41,8 +41,8 @@ public class BankomatApplication {
 //			Future<List<Transaction>> future3 = transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount("45678901234567890123456789");
 //			Future<List<Transaction>> future4 = transactionService.wszystkieTransakcjeZKonta("45678901234567890123456789");
 //			Future<List<Transaction>> future5 = transactionService.getAllSuccessfullySentTransactionsFromBankAccount("45678901234567890123456789");
-//			System.out.println(uzytkownikService.getUser("krzysztof.gonciarz@gmail.com"));
-//			System.out.println(uzytkownikService.wyswietlKontaBankowe("krzysztof.gonciarz@gmail.com"));
+//			System.out.println(userService.getUser("krzysztof.gonciarz@gmail.com"));
+//			System.out.println(userService.wyswietlKontaBankowe("krzysztof.gonciarz@gmail.com"));
 //			System.out.println(transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount("45678901234567890123456789"));
 //			System.out.println(transactionService.getAllSuccessfullySentTransactionsFromBankAccount("45678901234567890123456789"));
 //			System.out.println(transactionService.wszystkieTransakcjeZKonta("45678901234567890123456789"));
@@ -90,8 +90,8 @@ public class BankomatApplication {
 //					.dateOfBirth(LocalDate.of(1990, 1, 1))
 //					.address("RandomStreet")
 //					.build();
-//			uzytkownikService.registerUser(user);
-//			var realuzytkownik = uzytkownikService.getUser("random@example.com");
+//			userService.registerUser(user);
+//			var realuzytkownik = userService.getUser("random@example.com");
 //			System.out.println(realuzytkownik);
 //			bankAccountService.createAccount(
 //					realuzytkownik.orElseThrow(UserEmailNotFoundException::new),
@@ -108,7 +108,7 @@ public class BankomatApplication {
 //					"RandomNazwisko");
 //			System.out.println(karta);
 //			bankAccountService.deleteAccount("17004046596712662895852028");
-//			uzytkownikService.deleteUser("random@example.com");
+//			userService.deleteUser("random@example.com");
 		};
 	}
 }

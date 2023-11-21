@@ -33,6 +33,4 @@ public interface TransactionRepo extends JpaRepository<Transaction, String> {
             "(SELECT k.accountNr from KONTO_BANKOWE k JOIN user u WHERE u.email = ?1)")
     List<Transaction> findAllSuccessfullyTransactionsSentToUser(String email);
 
-
-
 }

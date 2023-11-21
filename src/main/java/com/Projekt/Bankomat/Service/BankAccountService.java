@@ -22,10 +22,11 @@ public class BankAccountService {
     public BankAccountService(BankAccountRepo bankAccountRepo) {
         this.bankAccountRepo = bankAccountRepo;
     }
-
+    
     public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta){
         var zKonta = bankAccountRepo.findByAccountNr(zNrKonta)
                 .orElseThrow(() -> new BankAccountNotFoundException(zNrKonta));
+
         var doKonta = bankAccountRepo.findByAccountNr(doNrKonta)
                 .orElseThrow(() -> new BankAccountNotFoundException(zNrKonta));
 
@@ -49,6 +50,7 @@ public class BankAccountService {
         bankAccountRepo.delete(konto);
     }
     public void createAccount(User user, AccountType accountType, CurrencyType waluta){
+
         var konto = BankAccount.builder()
                 .accountId(UUID.randomUUID().toString())
                 .accountNr(Generators.generateRandomNumber(26))

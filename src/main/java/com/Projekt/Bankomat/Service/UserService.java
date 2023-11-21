@@ -15,10 +15,10 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-public class UzytkownikService implements IUzytkownikService {
+public class UserService implements IUzytkownikService {
     private final UserRepo userRepo;
     @Autowired
-    public UzytkownikService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
