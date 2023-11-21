@@ -22,6 +22,11 @@ public class BankAccountService {
     public BankAccountService(BankAccountRepo bankAccountRepo) {
         this.bankAccountRepo = bankAccountRepo;
     }
+
+    public String getAccountNrByUserPhoneNumber(String phoneNumber, CurrencyType currencyType){
+        var acc = bankAccountRepo.getAccountNrByUserPhoneNumber(currencyType, phoneNumber);
+        return acc.get(0).getAccountNr();
+    }
     
     public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta){
         var zKonta = bankAccountRepo.findByAccountNr(zNrKonta)

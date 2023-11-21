@@ -38,6 +38,10 @@ public class TransactionService {
                                   CurrencyType currency,
                                   TransactionType transactionType){
 
+        if(transactionType.equals(TransactionType.BLIK)){
+            toAccountNr = bankAccountService.getAccountNrByUserPhoneNumber(toAccountNr, currency);
+        }
+
         var transakcja = Transaction.builder()
                 .transactionId(UUID.randomUUID().toString())
                 .transactionDate(LocalDate.now())

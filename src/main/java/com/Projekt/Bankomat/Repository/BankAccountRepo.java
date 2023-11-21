@@ -1,5 +1,6 @@
 package com.Projekt.Bankomat.Repository;
 
+import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Models.BankAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,6 @@ public interface BankAccountRepo extends JpaRepository<BankAccount,String> {
             "WHERE u.email = ?1")
     List<BankAccount> findUserBankAccount(String email);
 
-    @Query(value = "SELECT k.accountNr FROM BANK_ACCOUNT k JOIN user u WHERE k.accountType = ?1 and k.currencyType = ?2 and u.email = ?3")
-    Optional<String> getAccountNrByUserPhoneNumber(String accountType, String currencyType, String email);
+    @Query(value = "SELECT k FROM BANK_ACCOUNT k JOIN k.user u WHERE k.accountType = 'OSOBISTE' and k.currencyType = ?1 and u.phoneNumber = ?2")
+    List<BankAccount> getAccountNrByUserPhoneNumber(CurrencyType currencyType, String email);
 }

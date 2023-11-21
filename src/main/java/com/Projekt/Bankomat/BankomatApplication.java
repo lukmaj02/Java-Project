@@ -1,6 +1,9 @@
 package com.Projekt.Bankomat;
 
 
+import com.Projekt.Bankomat.Enums.AccountType;
+import com.Projekt.Bankomat.Enums.CurrencyType;
+import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Repository.*;
 import com.Projekt.Bankomat.Service.BankAccountService;
 import com.Projekt.Bankomat.Service.CardService;
@@ -11,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.math.BigDecimal;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -91,12 +95,27 @@ public class BankomatApplication {
 //					.address("RandomStreet")
 //					.build();
 //			userService.registerUser(user);
-//			var realuzytkownik = userService.getUser("random@example.com");
+//			var realuzytkownik = userService.getUser("krzysztof.gonciarz@gmail.com");
 //			System.out.println(realuzytkownik);
 //			bankAccountService.createAccount(
-//					realuzytkownik.orElseThrow(UserEmailNotFoundException::new),
+//					realuzytkownik,
 //					AccountType.OSOBISTE,
-//					CurrencyType.EURO);
+//					CurrencyType.ZLOTY);
+
+//			var currency = CurrencyType.ZLOTY;
+//			var trans = TransactionType.BLIK;
+//			transactionService.createTransaction("98765432109876543210987654",
+//					"123456789",
+//					BigDecimal.valueOf(1000),
+//					"Za buty",
+//					CurrencyType.ZLOTY,
+//					TransactionType.BLIK);
+			transactionService.createTransaction("98765432109876543210987654",
+					"57038850376133876745234565",
+					BigDecimal.valueOf(1500),
+					"Za wczoraj",
+					CurrencyType.ZLOTY,
+					TransactionType.PRZELEW_TRADYCYJNY);
 //			var konto = bankAccountRepo.findByNrKonta("17004046596712662895852028");
 //			cardService.createCard(
 //					konto.orElseThrow(AccountNumberNotFoundException::new),
