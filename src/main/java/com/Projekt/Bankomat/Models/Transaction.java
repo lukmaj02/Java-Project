@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "TRANSAKCJA")
+@Entity(name = "_TRANSACTION")
 public class Transaction {
     @Id
     @UuidGenerator

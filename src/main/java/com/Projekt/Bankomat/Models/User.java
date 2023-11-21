@@ -14,7 +14,7 @@ import java.util.Set;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "UZYTKOWNIK")
+@Entity(name = "_USER")
 public class User {
     @Id
     @UuidGenerator

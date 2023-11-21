@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "KARTA_PLATNICZA")
+@Entity(name = "PAYMENT_CARD")
 public class Card {
     @Id
     @UuidGenerator

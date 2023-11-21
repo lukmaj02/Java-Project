@@ -18,7 +18,7 @@ public interface CardRepo extends JpaRepository<Card, String> {
 //                                                    String firstName,
 //                                                    String lastName);
 
-    @Query(value = "SELECT k FROM KARTA_PLATNICZA k JOIN bankAccount kb JOIN user u " +
+    @Query(value = "SELECT k FROM PAYMENT_CARD k JOIN bankAccount kb JOIN user u " +
             "WHERE k.cardNr = ?1 and k.cvc = ?2 and u.firstName = ?3 and u.lastName = ?4")
     Optional<Card> findUserCard(String nrKarty,
                                 String cvc,

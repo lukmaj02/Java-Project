@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "KONTO_BANKOWE")
+@Entity(name = "BANK_ACCOUNT")
 public class BankAccount {
     @Id
     @UuidGenerator

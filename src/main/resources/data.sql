@@ -1,5 +1,5 @@
 --DODANIE UZYTKOWNIKOW
-INSERT INTO UZYTKOWNIK (
+INSERT INTO _USER (
             user_id,
             first_name,
             last_name,
@@ -35,32 +35,32 @@ INSERT INTO UZYTKOWNIK (
         'Sloneczna 5, Krakow',
         '192837465');
 --DODANIE KONT BANKOWYCH
-INSERT INTO konto_bankowe (user_id,
+INSERT INTO BANK_ACCOUNT (user_id,
                            account_id,
                            account_nr,
                            account_type,
                            balance,
                            currency_type)
     VALUES
-        ((Select user_id from UZYTKOWNIK where first_name = 'Krzysztof' and last_name = 'Gonciarz'),
+        ((Select user_id from _USER where first_name = 'Krzysztof' and last_name = 'Gonciarz'),
         random_uuid(),
         '78190456231890724568903214',
         'OSOBISTE',
         12345,
         'ZLOTY'),
-        ((Select user_id from UZYTKOWNIK where first_name = 'Janusz' and last_name = 'Korwin'),
+        ((Select user_id from _USER where first_name = 'Janusz' and last_name = 'Korwin'),
         random_uuid(),
         '59013467890234126789012345',
         'FIRMOWE',
         30000,
         'ZLOTY'),
-        ((Select user_id from UZYTKOWNIK where first_name = 'Grazyna' and last_name = 'Wielka'),
+        ((Select user_id from _USER where first_name = 'Grazyna' and last_name = 'Wielka'),
         random_uuid(),
         '45678901234567890123456789',
         'OSZCZEDNOSCIOWE',
         10000,
         'ZLOTY'),
-        ((Select user_id from UZYTKOWNIK where first_name = 'Grazyna' and last_name = 'Wielka'),
+        ((Select user_id from _USER where first_name = 'Grazyna' and last_name = 'Wielka'),
         random_uuid(),
         '98765432109876543210987654',
         'FIRMOWE',
@@ -68,7 +68,7 @@ INSERT INTO konto_bankowe (user_id,
         'ZLOTY');
 
 --DODANIE TRANSAKCJI
-INSERT INTO TRANSAKCJA (transaction_id,
+INSERT INTO _TRANSACTION (transaction_id,
                        transaction_type,
                        is_valid,
                        transaction_date,
@@ -188,7 +188,7 @@ VALUES
     '45678901234567890123456789');
 
 --DODANIE KART PLATNICZYCH
-INSERT INTO karta_platnicza (card_id,
+INSERT INTO PAYMENT_CARD (card_id,
                             card_nr,
                             expiration_date,
                             cvc,
@@ -201,14 +201,14 @@ VALUES
     '2028-10-10',
     '464',
     'KREDYTOWA',
-    (SELECT account_id FROM konto_bankowe WHERE account_nr = '78190456231890724568903214'),
+    (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr = '78190456231890724568903214'),
     FALSE),
     (random_uuid(),
     '7910654321890765',
     '2027-11-11',
     '555',
     'DEBETOWA',
-    (SELECT account_id FROM konto_bankowe WHERE account_nr ='59013467890234126789012345'),
+    (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr ='59013467890234126789012345'),
     FALSE);
 
 
