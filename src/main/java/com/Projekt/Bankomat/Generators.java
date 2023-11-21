@@ -2,13 +2,12 @@ package com.Projekt.Bankomat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-
-public final class Generators {
-
-    private Generators(){}
+@Component
+public class Generators{
     public static String generateRandomNumber(int numberOfDigits) {
         StringBuilder result = new StringBuilder();
         Random random = new Random();
