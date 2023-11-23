@@ -14,15 +14,32 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 
 @SpringBootApplication
 public class BankomatApplication {
-	public static void main(String[] args) {
+	private static final int SERVER_PORT = 5000;
+	private static ServerSocket serverSocket;
+	public static void main(String[] args) throws IOException {
+
+		try{
+			serverSocket = new ServerSocket(SERVER_PORT);
+		}
+		catch(IOException e){
+			System.out.println("Serwer could not listen on port "+ SERVER_PORT);
+		}
 		SpringApplication.run(BankomatApplication.class, args);
+
+		while(true){
+			Socket clienSocket = serverSocket.accept();
+			System.out.println("Client connected " + clienSocket.getInetAddress().getHostAddress());
+		}
 	}
 	@Bean
 	public ExecutorService executorService(){

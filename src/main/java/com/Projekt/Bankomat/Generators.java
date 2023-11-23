@@ -1,12 +1,7 @@
 package com.Projekt.Bankomat;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
 import java.util.Random;
 
-@Component
 public class Generators{
     public static String generateRandomNumber(int numberOfDigits) {
         StringBuilder result = new StringBuilder();
@@ -16,5 +11,8 @@ public class Generators{
             result.append(random.nextInt(10));
         }
         return result.toString();
+    }
+    public static String generateHash(){
+        return "";//todo
     }
 }

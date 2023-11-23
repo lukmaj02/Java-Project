@@ -1,7 +1,6 @@
 package com.Projekt.Bankomat.Models;
 
 import com.Projekt.Bankomat.Enums.CardType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -38,7 +37,7 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "accountId")
-    @JsonIgnore
+    //@JsonIgnore
     private BankAccount bankAccount;
 
     @Override

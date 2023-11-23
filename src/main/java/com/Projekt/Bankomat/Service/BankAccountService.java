@@ -3,7 +3,6 @@ package com.Projekt.Bankomat.Service;
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
-import com.Projekt.Bankomat.Exceptions.AccountNumberNotFoundException;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Models.User;
@@ -48,7 +47,7 @@ public class BankAccountService {
     }
 
     public void deleteAccount(String nrKonta){
-        var konto = bankAccountRepo.findByAccountNr(nrKonta).orElseThrow(AccountNumberNotFoundException::new);
+        var konto = bankAccountRepo.findByAccountNr(nrKonta).orElseThrow(() -> new BankAccountNotFoundException(nrKonta));
         if(konto.getBalance().compareTo(BigDecimal.ZERO) > 0){
             System.out.println("NA KONCIE POZOSTALY PIENIADZE, PRZELEJ JE PRZED USUNIECIEM KONTA");
             throw new RuntimeException();
