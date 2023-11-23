@@ -2,6 +2,7 @@ package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
 import com.Projekt.Bankomat.DtoModels.UserDto;
+import com.Projekt.Bankomat.Exceptions.BadCredentialsException;
 import com.Projekt.Bankomat.Exceptions.BankAccountExistsException;
 import com.Projekt.Bankomat.Exceptions.UserEmailNotFoundException;
 import com.Projekt.Bankomat.Exceptions.UserExistsException;
@@ -41,7 +42,7 @@ public class UserService implements IUserService {
         return uzytkownik.getBankAccount();
     }
 
-    public void registerUser(RegistrarionRequest registraionRequest){
+    public void registerUser(RegistrarionRequest registraionRequest) throws UserExistsException{
         if(userRepo.existsByEmail(registraionRequest.getEmail()) || userRepo.existsByPhoneNumber(registraionRequest.getPhoneNumber())){
             throw new UserExistsException(registraionRequest.getEmail(), registraionRequest.getPhoneNumber());
         }
@@ -63,5 +64,11 @@ public class UserService implements IUserService {
             throw new BankAccountExistsException();
         }
         userRepo.delete(uzytkownik);
+    }
+
+    @Override
+    public User login(String email, String password) {
+        return userRepo.findByEmailAndPassword(email, password)
+                .orElseThrow(BadCredentialsException::new);
     }
 }

@@ -37,7 +37,6 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name = "accountId")
-    //@JsonIgnore
     private BankAccount bankAccount;
 
     @Override

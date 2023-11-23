@@ -1,2 +1,3 @@
-package com.Projekt.Bankomat.Exceptions;public class InvalidUserDeletion {
+package com.Projekt.Bankomat.Exceptions;
+public class InvalidUserDeletion {
 }

@@ -49,13 +49,14 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "transactionId='" + transactionId + '\'' +
-                ", amount=" + amount +
-                ", currencyType=" + currencyType +
-                ", title='" + title + '\'' +
-                ", fromAccountNr='" + fromAccountNr + '\'' +
-                ", toAccountNr='" + toAccountNr + '\'' +
-                '}';
+        return transactionId + "," +
+                transactionType + "," +
+                isValid + "," +
+                transactionDate + "," +
+                amount + "," +
+                currencyType + "," +
+                title + "," +
+                fromAccountNr + "," +
+                toAccountNr;
     }
 }

@@ -43,6 +43,5 @@ public class BankAccount {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    //@JsonBackReference
     private User user;
 }

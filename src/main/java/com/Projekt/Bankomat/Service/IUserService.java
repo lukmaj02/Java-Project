@@ -15,4 +15,5 @@ public interface IUserService {
     Set<BankAccount> getUserBankAccounts(String email);
     void registerUser(RegistrarionRequest registrarionRequest);
     void deleteUser(String email);
+    User login(String email, String password);
 }
