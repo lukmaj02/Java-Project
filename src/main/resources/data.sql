@@ -1,5 +1,3 @@
-
-
 --DODANIE UZYTKOWNIKOW
 INSERT INTO _USER (
             user_id,
@@ -58,19 +56,19 @@ INSERT INTO BANK_ACCOUNT (user_id,
         'ZLOTY'),
         ((Select user_id from _USER where first_name = 'Janusz' and last_name = 'Korwin'),
         (SELECT uuid()),
-        '09d64008-fdf2-4322-8229-83245a1eb734',
+        '45678901234567890123456789',
         'FIRMOWE',
         30000,
         'ZLOTY'),
         ((Select user_id from _USER where first_name = 'Grazyna' and last_name = 'Wielka'),
         (SELECT uuid()),
-        '19427d00-cb64-41b8-a068-b8a4156efb67',
+        '59013467890234126789012345',
         'OSZCZEDNOSCIOWE',
         10000,
         'ZLOTY'),
         ((Select user_id from _USER where first_name = 'Grazyna' and last_name = 'Wielka'),
         (SELECT uuid()),
-        '6fc1915c-bf38-4dbe-b8f1-6e65f0b15613',
+        '84327494823748210194574587',
         'FIRMOWE',
         29000,
         'ZLOTY');

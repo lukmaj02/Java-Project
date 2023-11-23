@@ -34,6 +34,8 @@ public class BankomatApplication {
 		catch(IOException e){
 			System.out.println("Serwer could not listen on port "+ SERVER_PORT);
 		}
+
+
 		SpringApplication.run(BankomatApplication.class, args);
 
 		while(true){
