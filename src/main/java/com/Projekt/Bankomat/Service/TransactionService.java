@@ -2,8 +2,8 @@ package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;
+import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
 import com.Projekt.Bankomat.Exceptions.InvalidTransactionException;
-import com.Projekt.Bankomat.Exceptions.TransactionIdNotFoundException;
 import com.Projekt.Bankomat.Models.Transaction;
 import com.Projekt.Bankomat.Repository.TransactionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +14,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 @Service
-public class TransactionService {
+public class TransactionService implements ITransactionService{
     private final TransactionRepo transactionRepo;
     private final BankAccountService bankAccountService;
     @Autowired
@@ -34,7 +31,8 @@ public class TransactionService {
                                   BigDecimal amount,
                                   String title,
                                   CurrencyType currency,
-                                  TransactionType transactionType){
+                                  TransactionType transactionType)
+    throws BankAccountNotFoundException, InvalidTransactionException {
 
         if(transactionType.equals(TransactionType.BLIK)){
             toAccountNr = bankAccountService.getAccountNrByUserPhoneNumber(toAccountNr, currency);
@@ -64,7 +62,7 @@ public class TransactionService {
             return transactionRepo.findAllSuccessfullyTransactionsFromBankAccount(FromAccountNr);
         }
 
-    public List<Transaction> wszystkieTransakcjeZKonta(String fromAccountNr){
+    public List<Transaction> allTransactionFromAccount(String fromAccountNr){
         return transactionRepo.findAllTransactionsFromBankAccount(fromAccountNr);
     }
 

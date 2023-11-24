@@ -1,7 +1,7 @@
 package com.Projekt.Bankomat.Controller;
 
-import com.Projekt.Bankomat.Exceptions.BadCredentialsException;
-import com.Projekt.Bankomat.Exceptions.UserExistsException;
+import com.Projekt.Bankomat.Exceptions.*;
+import com.Projekt.Bankomat.Service.ITransactionService;
 import com.Projekt.Bankomat.Service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +14,11 @@ public class CommandHandler implements Callable<String> {
     private final Socket clientSocket;
 
     @Autowired
-    IUserService _service;
+    IUserService userService;
+    @Autowired
+    ITransactionService transactionService;
+
+    @Autowired
     public CommandHandler(Socket clientSocket){
         this.clientSocket = clientSocket;
     }
@@ -31,23 +35,30 @@ public class CommandHandler implements Callable<String> {
                 String controller = part[0];
                 String command = part[1];
                 String data = part[2];
-                var commandType = Command.valueOf(command.toUpperCase());
 
-
-                if(controller.equalsIgnoreCase("TRANSACTION")){
-                    sender.println(transactionController(commandType, data));
+                try{
+                    if(controller.equalsIgnoreCase("TRANSACTION")){
+                        var commandType = TransactionCommand.valueOf(command.toUpperCase());
+                        sender.println(transactionController(commandType, data));
+                    }
+                    else if(controller.equalsIgnoreCase("USER")){
+                        var commandType = UserCommand.valueOf(command.toUpperCase());
+                        sender.println(userController(commandType, data));
+                    }
+                    else if(controller.equalsIgnoreCase("BANK_ACCOUNT")){
+                        var commandType = BankAccountCommand.valueOf(command.toUpperCase());
+                        sender.println(bankAccountController(commandType,data));
+                    }
+                    else if(controller.equalsIgnoreCase("CARD")){
+                        var commandType = CardCommand.valueOf(command.toUpperCase());
+                        sender.println(cardController(commandType,data));
+                    }
+                    else {
+                        sender.println("ERROR,Zly kontroler");
+                    }
                 }
-                else if(controller.equalsIgnoreCase("USER")){
-                    sender.println(userController(commandType, data));
-                }
-                else if(controller.equalsIgnoreCase("BANK_ACCOUNT")){
-                    sender.println(bankAccountController(commandType,data));
-                }
-                else if(controller.equalsIgnoreCase("CARD")){
-                    sender.println(cardController(commandType,data));
-                }
-                else {
-                    sender.println("ERROR,Zly kontroler");
+                catch(RuntimeException e){
+                    sender.println("ERROR," + e.getMessage());
                 }
             }
         }
@@ -57,43 +68,40 @@ public class CommandHandler implements Callable<String> {
         return "Task completed";
     }
 
-    private String userController(Command command, String data){
+    private String userController(UserCommand command, String data) throws RuntimeException{
         String systemResponse = "OK,";
         switch(command){
             case LOGIN:
-                try{
-                    var loginInf = Mapper.toLogin(data);
-                    systemResponse += _service.login(loginInf[0], loginInf[1]).toString();
-                }
-                catch(BadCredentialsException e){
-                    return e.getMessage();
-                }
+                var loginInf = Mapper.toLogin(data);
+                systemResponse += userService.login(loginInf[0], loginInf[1]).toString();
                 break;
-
             case REGISTER:
-                try{
-                    var registerInf = Mapper.toRegister(data);
-                    _service.registerUser(registerInf);
-                }
-                catch(UserExistsException e){
-                    return e.getMessage();
-                }
+                userService.registerUser(Mapper.toRegister(data));
+                break;
+            case EDIT_USER:
+                //todo _service.editUserInformations();
                 break;
             default:
-                //todo
+                throw new InvalidCommandException();
         }
         return systemResponse;
     }
 
-    private String transactionController(Command command, String data){
+    private String transactionController(TransactionCommand command, String data){
+        String systemResponse = "OK";
+        switch (command){
+            case CREATE:
+
+                break;
+        }
         return null; //todo
     }
 
-    private String bankAccountController(Command command, String data){
+    private String bankAccountController(BankAccountCommand command, String data){
         return null; //todo
     }
 
-    private String cardController(Command command, String data){
+    private String cardController(CardCommand command, String data){
         return null; //todo
     }
 }

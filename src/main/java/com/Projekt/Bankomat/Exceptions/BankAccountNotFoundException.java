@@ -7,7 +7,7 @@ public class BankAccountNotFoundException extends RuntimeException {
         super("ERROR,Konto z numerem " + nrKonta+ " nie znalezione");
     }
     public BankAccountNotFoundException(){
-        super("404,Brak konta, sprawdz ponownie wprowadzone dane");
+        super("Brak konta sprawdz ponownie wprowadzone dane");
     }
 
 }
