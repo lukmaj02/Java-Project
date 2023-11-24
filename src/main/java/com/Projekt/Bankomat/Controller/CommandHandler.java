@@ -12,9 +12,6 @@ import java.net.Socket;
 import java.util.concurrent.Callable;
 public class CommandHandler implements Callable<String> {
     private final Socket clientSocket;
-    BufferedReader reader;
-    PrintWriter sender;
-
 
     @Autowired
     IUserService _service;
@@ -25,8 +22,8 @@ public class CommandHandler implements Callable<String> {
     @Override
     public String call() {
         try{
-            reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            sender = new PrintWriter(clientSocket.getOutputStream(), true);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            PrintWriter sender = new PrintWriter(clientSocket.getOutputStream(), true);
 
             while(true){
                 String message = reader.readLine();
@@ -38,19 +35,19 @@ public class CommandHandler implements Callable<String> {
 
 
                 if(controller.equalsIgnoreCase("TRANSACTION")){
-
+                    sender.println(transactionController(commandType, data));
                 }
                 else if(controller.equalsIgnoreCase("USER")){
-
+                    sender.println(userController(commandType, data));
                 }
                 else if(controller.equalsIgnoreCase("BANK_ACCOUNT")){
-
+                    sender.println(bankAccountController(commandType,data));
                 }
                 else if(controller.equalsIgnoreCase("CARD")){
-
+                    sender.println(cardController(commandType,data));
                 }
                 else {
-
+                    sender.println("ERROR,Zly kontroler");
                 }
             }
         }
@@ -86,5 +83,17 @@ public class CommandHandler implements Callable<String> {
                 //todo
         }
         return systemResponse;
+    }
+
+    private String transactionController(Command command, String data){
+        return null; //todo
+    }
+
+    private String bankAccountController(Command command, String data){
+        return null; //todo
+    }
+
+    private String cardController(Command command, String data){
+        return null; //todo
     }
 }
