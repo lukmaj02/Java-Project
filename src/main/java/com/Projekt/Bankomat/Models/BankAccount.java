@@ -2,7 +2,6 @@ package com.Projekt.Bankomat.Models;
 
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -44,6 +43,14 @@ public class BankAccount {
 
     @ManyToOne
     @JoinColumn(name = "userId")
-    @JsonBackReference
     private User user;
+
+    @Override
+    public String toString() {
+        return accountId + "," +
+                accountNr + "," +
+                balance + "," +
+                currencyType.toString() + "," +
+                accountType.toString();
+    }
 }

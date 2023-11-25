@@ -2,9 +2,7 @@ package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
 import com.Projekt.Bankomat.DtoModels.UserDto;
-import com.Projekt.Bankomat.Exceptions.BankAccountExistsException;
-import com.Projekt.Bankomat.Exceptions.UserEmailNotFoundException;
-import com.Projekt.Bankomat.Exceptions.UserExistsException;
+import com.Projekt.Bankomat.Exceptions.*;
 import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Repository.UserRepo;
@@ -16,7 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService, IAdminService {
     private final UserRepo userRepo;
     @Autowired
     public UserService(UserRepo userRepo) {
@@ -57,11 +55,17 @@ public class UserService implements IUserService {
                 .build();
         userRepo.save(uzytkownik);
     }
-    public void deleteUser(String email){
+    public void deleteUser(String email) {
         var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
         if(!uzytkownik.getBankAccount().isEmpty()){
             throw new BankAccountExistsException();
         }
         userRepo.delete(uzytkownik);
+    }
+
+    @Override
+    public User login(String email, String password) {
+        return userRepo.findByEmailAndPassword(email, password)
+                .orElseThrow(BadCredentialsException::new);
     }
 }

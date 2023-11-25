@@ -3,24 +3,29 @@ package com.Projekt.Bankomat.Service;
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
-import com.Projekt.Bankomat.Exceptions.AccountNumberNotFoundException;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.Models.BankAccount;
-import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Repository.BankAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Service
-public class BankAccountService {
+public class BankAccountService implements IBankAccountService{
     private final BankAccountRepo bankAccountRepo;
+    private final UserService userService;
 
     @Autowired
-    public BankAccountService(BankAccountRepo bankAccountRepo) {
+    public BankAccountService(BankAccountRepo bankAccountRepo, UserService userService) {
         this.bankAccountRepo = bankAccountRepo;
+        this.userService = userService;
+    }
+
+    public BankAccount getAccountByAccountNr(String accountNr) throws BankAccountNotFoundException{
+        return bankAccountRepo.findByAccountNr(accountNr).orElseThrow(BankAccountNotFoundException::new);
     }
 
     public String getAccountNrByUserPhoneNumber(String phoneNumber, CurrencyType currencyType){
@@ -29,7 +34,7 @@ public class BankAccountService {
         return acc.get(0).getAccountNr();
     }
     
-    public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta){
+    public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta) throws BankAccountNotFoundException{
         var zKonta = bankAccountRepo.findByAccountNr(zNrKonta)
                 .orElseThrow(() -> new BankAccountNotFoundException(zNrKonta));
 
@@ -48,20 +53,20 @@ public class BankAccountService {
     }
 
     public void deleteAccount(String nrKonta){
-        var konto = bankAccountRepo.findByAccountNr(nrKonta).orElseThrow(AccountNumberNotFoundException::new);
+        var konto = bankAccountRepo.findByAccountNr(nrKonta).orElseThrow(() -> new BankAccountNotFoundException(nrKonta));
         if(konto.getBalance().compareTo(BigDecimal.ZERO) > 0){
             System.out.println("NA KONCIE POZOSTALY PIENIADZE, PRZELEJ JE PRZED USUNIECIEM KONTA");
             throw new RuntimeException();
         }
         bankAccountRepo.delete(konto);
     }
-    public void createAccount(User user, AccountType accountType, CurrencyType waluta){
+    public void createAccount(String email, AccountType accountType, CurrencyType waluta){
         var konto = BankAccount.builder()
                 .accountId(UUID.randomUUID().toString())
                 .accountNr(Generators.generateRandomNumber(26))
                 .balance(BigDecimal.valueOf(0))
                 .accountType(accountType)
-                .user(user)
+                .user(userService.getUser(email))
                 .currencyType(waluta)
                 .build();
         bankAccountRepo.save(konto);

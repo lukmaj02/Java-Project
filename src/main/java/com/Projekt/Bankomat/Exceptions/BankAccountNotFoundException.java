@@ -4,10 +4,10 @@ import com.Projekt.Bankomat.Models.BankAccount;
 
 public class BankAccountNotFoundException extends RuntimeException {
     public BankAccountNotFoundException(String nrKonta){
-        super("Konto z numerem %s nie znalezione");
+        super("Konto z numerem " + nrKonta+ " nie znalezione");
     }
     public BankAccountNotFoundException(){
-        super("Brak konta, sprawdz ponownie wprowadzone dane");
+        super("Brak konta sprawdz ponownie wprowadzone dane");
     }
 
 }

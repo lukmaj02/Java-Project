@@ -1,6 +1,5 @@
 package com.Projekt.Bankomat.Models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -11,7 +10,6 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "_USER")
@@ -42,25 +40,18 @@ public class User {
     @Column(name = "address")
     private String address;
 
-    public User(String userId,
-                String firstName,
-                String lastName,
-                String email,
-                String password,
-                LocalDate dateOfBirth,
-                String phoneNumber,
-                String address) {
-        this.userId = userId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<BankAccount> bankAccount;
+
+    @Override
+    public String toString() {
+        return firstName +","+
+                lastName + "," +
+                email + "," +
+                password + "," +
+                dateOfBirth + "," +
+                phoneNumber + "," +
+                address;
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    @JsonManagedReference
-    private Set<BankAccount> bankAccount;
 }
