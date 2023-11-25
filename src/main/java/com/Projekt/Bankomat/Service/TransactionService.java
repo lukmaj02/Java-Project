@@ -31,8 +31,7 @@ public class TransactionService implements ITransactionService{
                                   BigDecimal amount,
                                   String title,
                                   CurrencyType currency,
-                                  TransactionType transactionType)
-    throws BankAccountNotFoundException, InvalidTransactionException {
+                                  TransactionType transactionType) {
 
         if(transactionType.equals(TransactionType.BLIK)){
             toAccountNr = bankAccountService.getAccountNrByUserPhoneNumber(toAccountNr, currency);

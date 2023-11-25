@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
-public class CardService {
+public class CardService implements ICardService{
     private final CardRepo cardRepo;
     private final TransactionService transactionService;
     private final BankAccountService bankAccountService;
@@ -40,18 +40,18 @@ public class CardService {
         cardRepo.save(nowaKarta);
     }
 
-    public void discardCard(String nrKarty) throws CardNotFoundException{
+    public void discardCard(String nrKarty){
         var karta = cardRepo.findByCardNr(nrKarty).orElseThrow(() -> new CardNotFoundException(nrKarty));
         karta.setDiscard(true);
         cardRepo.save(karta);
     }
 
-    public void deleteCard(String nrKarty) throws CardNotFoundException{
+    public void deleteCard(String nrKarty){
         var karta = cardRepo.findByCardNr(nrKarty).orElseThrow(() -> new CardNotFoundException(nrKarty));
         cardRepo.delete(karta);
     }
 
-    public void extendExpirationDate(String nrKarty) throws CardNotFoundException{
+    public void extendExpirationDate(String nrKarty){
         var karta = cardRepo.findByCardNr(nrKarty)
                 .orElseThrow(() -> new CardNotFoundException(nrKarty));
         karta.setExpirationDate(karta.getExpirationDate().plusYears(3));
@@ -62,8 +62,7 @@ public class CardService {
                               String cvc,
                               String imieNadawcy,
                               String nazwiskoNadawcy,
-                              BigDecimal kwota)
-    throws CardNotFoundException, BankAccountNotFoundException, InvalidTransactionException {
+                              BigDecimal kwota) {
         var kartaNadawcy = cardRepo
                 .findUserCard(zNrKarty,cvc,imieNadawcy,nazwiskoNadawcy)
                 .orElseThrow(() -> new CardNotFoundException(zNrKarty));

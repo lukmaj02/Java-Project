@@ -14,12 +14,12 @@ import java.util.concurrent.*;
 
 @SpringBootApplication
 public class BankomatApplication {
-	private final static int SERVER_PORT = 5000;
+	private final static int SERVER_PORT = 6000;
 	private static final ExecutorService executorService = Executors.newFixedThreadPool(5);
 	private static ServerSocket serverSocket;
 
-	@Autowired
-	static CommandHandler controller;
+//	@Autowired
+//	static CommandHandler controller;
 	public static void main(String[] args) throws IOException {
 		try{
 			serverSocket = new ServerSocket(SERVER_PORT);

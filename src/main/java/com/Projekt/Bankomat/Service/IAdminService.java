@@ -8,5 +8,4 @@ import java.util.List;
 public interface IAdminService extends IUserService{
     User getUser(String email);
     List<User> getAllUsers();
-    void deleteUser(String email);
 }

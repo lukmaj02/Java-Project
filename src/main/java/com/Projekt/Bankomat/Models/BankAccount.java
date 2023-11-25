@@ -44,4 +44,13 @@ public class BankAccount {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    @Override
+    public String toString() {
+        return accountId + "," +
+                accountNr + "," +
+                balance + "," +
+                currencyType.toString() + "," +
+                accountType.toString();
+    }
 }

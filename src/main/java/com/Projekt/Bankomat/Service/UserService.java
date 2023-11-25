@@ -21,7 +21,7 @@ public class UserService implements IUserService, IAdminService {
         this.userRepo = userRepo;
     }
 
-    public User getUser(String email) throws UserEmailNotFoundException{
+    public User getUser(String email){
         return userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
     }
 
@@ -30,16 +30,16 @@ public class UserService implements IUserService, IAdminService {
     }
 
 
-    public void editUserInformations(String email, UserDto userDto) throws UserEmailNotFoundException{
+    public void editUserInformations(String email, UserDto userDto){
         var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
         //todo
     }
-    public Set<BankAccount> getUserBankAccounts(String email) throws UserEmailNotFoundException{
+    public Set<BankAccount> getUserBankAccounts(String email){
         var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
         return uzytkownik.getBankAccount();
     }
 
-    public void registerUser(RegistrarionRequest registraionRequest) throws UserExistsException{
+    public void registerUser(RegistrarionRequest registraionRequest){
         if(userRepo.existsByEmail(registraionRequest.getEmail()) || userRepo.existsByPhoneNumber(registraionRequest.getPhoneNumber())){
             throw new UserExistsException(registraionRequest.getEmail(), registraionRequest.getPhoneNumber());
         }
@@ -55,7 +55,7 @@ public class UserService implements IUserService, IAdminService {
                 .build();
         userRepo.save(uzytkownik);
     }
-    public void deleteUser(String email) throws UserEmailNotFoundException, BankAccountExistsException {
+    public void deleteUser(String email) {
         var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
         if(!uzytkownik.getBankAccount().isEmpty()){
             throw new BankAccountExistsException();
@@ -64,7 +64,7 @@ public class UserService implements IUserService, IAdminService {
     }
 
     @Override
-    public User login(String email, String password) throws BadCredentialsException{
+    public User login(String email, String password) {
         return userRepo.findByEmailAndPassword(email, password)
                 .orElseThrow(BadCredentialsException::new);
     }

@@ -1,8 +1,7 @@
 package com.Projekt.Bankomat.Controller;
 
 import com.Projekt.Bankomat.Exceptions.*;
-import com.Projekt.Bankomat.Service.ITransactionService;
-import com.Projekt.Bankomat.Service.IUserService;
+import com.Projekt.Bankomat.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
@@ -14,9 +13,15 @@ public class CommandHandler implements Callable<String> {
     private final Socket clientSocket;
 
     @Autowired
-    IUserService userService;
+    private IUserService userService;
     @Autowired
-    ITransactionService transactionService;
+    private ITransactionService transactionService;
+    @Autowired
+    private IBankAccountService bankAccountService;
+    @Autowired
+    private ICardService cardService;
+    @Autowired
+    private IAdminService adminService;
 
     @Autowired
     public CommandHandler(Socket clientSocket){
@@ -75,11 +80,20 @@ public class CommandHandler implements Callable<String> {
                 var loginInf = Mapper.toLogin(data);
                 systemResponse += userService.login(loginInf[0], loginInf[1]).toString();
                 break;
+            case DELETE:
+                userService.deleteUser(data);
+                break;
             case REGISTER:
                 userService.registerUser(Mapper.toRegister(data));
                 break;
-            case EDIT_USER:
-                //todo _service.editUserInformations();
+            case EDIT:
+                //todo userService.editUserInformations();
+                break;
+            case GET_USER:
+                adminService.getUser(data); //todo
+                break;
+            case GET_ALL:
+                adminService.getAllUsers();//todo
                 break;
             default:
                 throw new InvalidCommandException();
@@ -87,20 +101,23 @@ public class CommandHandler implements Callable<String> {
         return systemResponse;
     }
 
+    //todo
     private String transactionController(TransactionCommand command, String data){
         String systemResponse = "OK";
         switch (command){
             case CREATE:
-
+                //todo
                 break;
         }
-        return null; //todo
+        return systemResponse;
     }
 
+    //todo
     private String bankAccountController(BankAccountCommand command, String data){
         return null; //todo
     }
 
+    //todo
     private String cardController(CardCommand command, String data){
         return null; //todo
     }
