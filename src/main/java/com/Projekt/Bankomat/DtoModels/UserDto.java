@@ -2,16 +2,30 @@ package com.Projekt.Bankomat.DtoModels;
 
 import lombok.*;
 
-@Getter
-@Setter
+import java.time.LocalDate;
+
+@Data
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
-private String firstName;
-private String lastName;
-private String email;
-private String password;
-private String phoneNumber;
-private String address;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String phoneNumber;
+    private LocalDate dateOfBirth;
+    private String address;
+
+    @Override
+    public String toString() {
+        return
+                firstName + "," +
+                lastName + "," +
+                email + "," +
+                password + "," +
+                phoneNumber + "," +
+                dateOfBirth + "," +
+                address + ",";
+    }
 }

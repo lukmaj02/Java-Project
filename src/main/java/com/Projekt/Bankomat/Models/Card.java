@@ -41,13 +41,12 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "cardId='" + cardId + '\'' +
-                ", cardNr='" + cardNr + '\'' +
-                ", expirationDate=" + expirationDate +
-                ", cvc='" + cvc + '\'' +
-                ", cardType=" + cardType +
-                ", isDiscard=" + isDiscard +
-                '}';
+        return
+                cardId + "," +
+                cardNr + "," +
+                expirationDate + "," +
+                cvc + "," +
+                cardType.toString() + "," +
+                isDiscard + ",";
     }
 }

@@ -1,6 +1,7 @@
 package com.Projekt.Bankomat.Controller;
 
 import com.Projekt.Bankomat.Exceptions.*;
+import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -74,31 +75,25 @@ public class CommandHandler implements Callable<String> {
     }
 
     private String userController(UserCommand command, String data) throws RuntimeException{
-        String systemResponse = "OK,";
-        switch(command){
-            case LOGIN:
+        StringBuilder systemResponse = new StringBuilder("OK,");
+        switch (command) {
+            case DELETE -> userService.deleteUser(data);
+            case REGISTER -> userService.registerUser(Mapper.toUserDto(data));
+            case EDIT -> userService.editUserInformations(Mapper.toUserDto(data));
+            case GET_USER -> systemResponse.append(adminService.getUser(data));
+            case LOGIN -> {
                 var loginInf = Mapper.toLogin(data);
-                systemResponse += userService.login(loginInf[0], loginInf[1]).toString();
-                break;
-            case DELETE:
-                userService.deleteUser(data);
-                break;
-            case REGISTER:
-                userService.registerUser(Mapper.toRegister(data));
-                break;
-            case EDIT:
-                //todo userService.editUserInformations();
-                break;
-            case GET_USER:
-                adminService.getUser(data); //todo
-                break;
-            case GET_ALL:
-                adminService.getAllUsers();//todo
-                break;
-            default:
-                throw new InvalidCommandException();
+                systemResponse.append(userService.login(loginInf[0], loginInf[1]).toString());
+            }
+            case GET_ALL -> {
+                var users = adminService.getAllUsers();
+                for (User user : users) {
+                    systemResponse.append(user.toString());
+                }
+            }
+            default -> throw new InvalidCommandException();
         }
-        return systemResponse;
+        return systemResponse.toString();
     }
 
     //todo

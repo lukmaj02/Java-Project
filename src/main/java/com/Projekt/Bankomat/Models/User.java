@@ -51,7 +51,7 @@ public class User {
                 password + "," +
                 dateOfBirth + "," +
                 phoneNumber + "," +
-                address;
+                address + ",";
     }
 
 }

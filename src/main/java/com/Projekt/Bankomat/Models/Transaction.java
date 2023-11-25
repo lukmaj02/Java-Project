@@ -57,6 +57,6 @@ public class Transaction {
                 currencyType + "," +
                 title + "," +
                 fromAccountNr + "," +
-                toAccountNr;
+                toAccountNr +",";
     }
 }

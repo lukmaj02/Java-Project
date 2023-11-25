@@ -51,6 +51,6 @@ public class BankAccount {
                 accountNr + "," +
                 balance + "," +
                 currencyType.toString() + "," +
-                accountType.toString();
+                accountType.toString() + ",";
     }
 }

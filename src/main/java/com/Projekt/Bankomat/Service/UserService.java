@@ -1,6 +1,5 @@
 package com.Projekt.Bankomat.Service;
 
-import com.Projekt.Bankomat.DtoModels.RegistrarionRequest;
 import com.Projekt.Bankomat.DtoModels.UserDto;
 import com.Projekt.Bankomat.Exceptions.*;
 import com.Projekt.Bankomat.Models.BankAccount;
@@ -30,16 +29,20 @@ public class UserService implements IUserService, IAdminService {
     }
 
 
-    public void editUserInformations(String email, UserDto userDto){
-        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
-        //todo
+    public void editUserInformations(UserDto userDto){
+        var uzytkownik = userRepo.findByEmail(userDto.getEmail()).orElseThrow(UserEmailNotFoundException::new);
+        uzytkownik.setFirstName(userDto.getFirstName());
+        uzytkownik.setLastName(userDto.getLastName());
+        uzytkownik.setAddress(userDto.getAddress());
+        uzytkownik.setPhoneNumber(userDto.getPhoneNumber());
+        userRepo.save(uzytkownik);
     }
     public Set<BankAccount> getUserBankAccounts(String email){
         var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
         return uzytkownik.getBankAccount();
     }
 
-    public void registerUser(RegistrarionRequest registraionRequest){
+    public void registerUser(UserDto registraionRequest){
         if(userRepo.existsByEmail(registraionRequest.getEmail()) || userRepo.existsByPhoneNumber(registraionRequest.getPhoneNumber())){
             throw new UserExistsException(registraionRequest.getEmail(), registraionRequest.getPhoneNumber());
         }

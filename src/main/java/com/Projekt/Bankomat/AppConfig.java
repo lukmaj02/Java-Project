@@ -80,7 +80,7 @@ public class AppConfig {
 //				System.out.println(tmp4);
 //				System.out.println(tmp5);
 //				System.out.println(tmp6);
-//			var user = RegistrarionRequest.builder()
+//			var user = UserDto.builder()
 //					.firstName("RandomImie")
 //					.lastName("RandomNazwisko")
 //					.email("random@example.com")
