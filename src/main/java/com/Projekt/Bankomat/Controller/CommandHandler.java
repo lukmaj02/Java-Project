@@ -103,22 +103,74 @@ public class CommandHandler implements Callable<String> {
 
     //todo
     private String transactionController(TransactionCommand command, String data){
-        String systemResponse = "OK";
+        String systemResponse = "OK,";
         switch (command){
             case CREATE:
                 //todo
                 break;
+            case SUC_FROM_ACC:
+                //todo
+                break;
+            case NOT_SUC_FROM_ACC:
+                //todo
+                break;
+            case SUC_TO_ACC:
+                //todo
+                break;
+            case ALL_FROM_ACC:
+                //todo
+                break;
+            case ALL_TO_USER:
+                //todo
+                break;
+            case ALL_FROM_USER:
+                //todo
+                break;
+            case ALL_USER:
+                //todo
+                break;
+            default:
+                throw new InvalidCommandException();
         }
         return systemResponse;
     }
 
     //todo
     private String bankAccountController(BankAccountCommand command, String data){
-        return null; //todo
+        String systemResponse = "OK,";
+        switch (command){
+            case DELETE :
+                //todo
+                break;
+            case CREATE:
+                //todo
+                break;
+            default:
+                throw new InvalidCommandException();
+        }
+        return systemResponse;
     }
 
     //todo
     private String cardController(CardCommand command, String data){
-        return null; //todo
+        String systemResponse = "OK,";
+        switch (command){
+            case DELETE :
+                //todo
+                break;
+            case DISCARD:
+                //todo
+                break;
+            case CREATE:
+                //todo
+                break;
+            case PAY:
+                //todo
+                break;
+            case EXTEND:
+                //todo
+                break;
+        }
+        return systemResponse;
     }
 }
