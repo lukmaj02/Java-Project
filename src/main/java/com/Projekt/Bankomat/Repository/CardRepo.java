@@ -10,13 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CardRepo extends JpaRepository<Card, String> {
     Optional<Card> findByCardNr(String nrKarty);
-//    @Query(value = "SELECT k FROM KARTA_PLATNICZA k JOIN bankAccount kb " +
-//            "WHERE k.cardNr = ?1 and k.cvc = ?2 and kb.userId = " +
-//            "(SELECT u.userId FROM UZYTKOWNIK u WHERE u.firstName = ?3 and u.lastName = ?4)")
-//    Optional<Card> findUserCard(String cardNr,
-//                                                    String cvc,
-//                                                    String firstName,
-//                                                    String lastName);
 
     @Query(value = "SELECT k FROM PAYMENT_CARD k JOIN bankAccount kb JOIN user u " +
             "WHERE k.cardNr = ?1 and k.cvc = ?2 and u.firstName = ?3 and u.lastName = ?4")

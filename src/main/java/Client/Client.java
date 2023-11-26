@@ -7,20 +7,22 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client {
+    private static Socket socket;
+    private static PrintWriter sender;
+    private static BufferedReader reader;
+
     public static void main(String[] args){
 
         try{
-            var socket = new Socket("localhost", 5000);
-            PrintWriter pr = new PrintWriter(socket.getOutputStream());
-            InputStreamReader in = new InputStreamReader(socket.getInputStream());
-            BufferedReader bf = new BufferedReader(in);
+            socket = new Socket("localhost", 6000);
+            sender = new PrintWriter(socket.getOutputStream(),true);
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         }
         catch(IOException e){
             System.out.println("Failed connection to server");
         }
 
-        while(true){
-
-        }
+        //sender.println("USER,LOGIN,krzysztof.gonciarz@gmail.com,password123");
+        sender.println("TRANSACTION,SUC_FROM_ACC,78190456231890724568903214");
     }
 }

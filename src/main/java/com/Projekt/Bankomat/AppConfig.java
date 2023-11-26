@@ -23,6 +23,12 @@ import java.util.concurrent.Executors;
 
 @Configuration
 public class AppConfig {
+
+    @Bean
+    public Socket socket(){
+        return new Socket();
+    }
+
     @Bean
     public CommandLineRunner runOnStartup(UserService userService,
                                           UserRepo userRepo,
@@ -32,7 +38,7 @@ public class AppConfig {
                                           BankAccountRepo bankAccountRepo,
                                           CardRepo cardRepo) {
         return args -> {
-//			var realUzytkownik = userRepo.findByEmail("random@example.com").orElseThrow(UserEmailNotFoundException::new);
+//			var realUzytkownik = userRepo.findByEmail("random@example.com").orElseThrow(UserNotFoundException::new);
 
 //			Future<List<Transaction>> future1 = transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount("45678901234567890123456789");
 //			Future<List<Transaction>> future2 = transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount("45678901234567890123456789");

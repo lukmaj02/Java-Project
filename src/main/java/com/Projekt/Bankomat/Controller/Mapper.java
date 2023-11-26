@@ -1,13 +1,10 @@
 package com.Projekt.Bankomat.Controller;
 
-import com.Projekt.Bankomat.DtoModels.TransactionDto;
 import com.Projekt.Bankomat.DtoModels.UserDto;
-import com.Projekt.Bankomat.Enums.CurrencyType;
-import com.Projekt.Bankomat.Enums.TransactionType;
+import com.Projekt.Bankomat.Models.Transaction;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Mapper {
     private Mapper(){}
@@ -29,15 +26,15 @@ public class Mapper {
                 .build();
     }
 
-    public static TransactionDto toTransactionDto(String data){
-        var splitedData = data.split(",",6);
-        return TransactionDto.builder()
-                .fromAccountNr(splitedData[0])
-                .toAccountNr(splitedData[1])
-                .amount(new BigDecimal(splitedData[2]))
-                .title(splitedData[3])
-                .currencyType(CurrencyType.valueOf(splitedData[4]))
-                .transactionType(TransactionType.valueOf(splitedData[5]))
-                .build();
+    public static String[] toTransaction(String data){
+        return data.split(",",6);
+    }
+
+    public static String TransactionsToString(List<Transaction> transactions){
+        StringBuilder response = new StringBuilder();
+        for (Transaction transaction : transactions){
+            response.append(transaction.toString());
+        }
+        return response.toString();
     }
 }

@@ -21,7 +21,7 @@ public class UserService implements IUserService, IAdminService {
     }
 
     public User getUser(String email){
-        return userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
+        return userRepo.findByEmail(email).orElseThrow(UserNotFoundException::new);
     }
 
     public List<User> getAllUsers(){
@@ -30,7 +30,7 @@ public class UserService implements IUserService, IAdminService {
 
 
     public void editUserInformations(UserDto userDto){
-        var uzytkownik = userRepo.findByEmail(userDto.getEmail()).orElseThrow(UserEmailNotFoundException::new);
+        var uzytkownik = userRepo.findByEmail(userDto.getEmail()).orElseThrow(UserNotFoundException::new);
         uzytkownik.setFirstName(userDto.getFirstName());
         uzytkownik.setLastName(userDto.getLastName());
         uzytkownik.setAddress(userDto.getAddress());
@@ -38,7 +38,7 @@ public class UserService implements IUserService, IAdminService {
         userRepo.save(uzytkownik);
     }
     public Set<BankAccount> getUserBankAccounts(String email){
-        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
+        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserNotFoundException::new);
         return uzytkownik.getBankAccount();
     }
 
@@ -59,7 +59,7 @@ public class UserService implements IUserService, IAdminService {
         userRepo.save(uzytkownik);
     }
     public void deleteUser(String email) {
-        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserEmailNotFoundException::new);
+        var uzytkownik = userRepo.findByEmail(email).orElseThrow(UserNotFoundException::new);
         if(!uzytkownik.getBankAccount().isEmpty()){
             throw new BankAccountExistsException();
         }

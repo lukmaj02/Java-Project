@@ -61,7 +61,7 @@ public class TransactionService implements ITransactionService{
             return transactionRepo.findAllSuccessfullyTransactionsFromBankAccount(FromAccountNr);
         }
 
-    public List<Transaction> allTransactionFromAccount(String fromAccountNr){
+    public List<Transaction> getAllTransactionFromAccount(String fromAccountNr){
         return transactionRepo.findAllTransactionsFromBankAccount(fromAccountNr);
     }
 

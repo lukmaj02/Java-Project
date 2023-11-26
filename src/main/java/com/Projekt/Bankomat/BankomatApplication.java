@@ -2,9 +2,10 @@ package com.Projekt.Bankomat;
 
 
 import com.Projekt.Bankomat.Controller.CommandHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.Projekt.Bankomat.Service.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -18,8 +19,6 @@ public class BankomatApplication {
 	private static final ExecutorService executorService = Executors.newFixedThreadPool(5);
 	private static ServerSocket serverSocket;
 
-//	@Autowired
-//	static CommandHandler controller;
 	public static void main(String[] args) throws IOException {
 		try{
 			serverSocket = new ServerSocket(SERVER_PORT);
@@ -30,11 +29,23 @@ public class BankomatApplication {
 			System.exit(-1);
 		}
 
-		SpringApplication.run(BankomatApplication.class, args);
+		ConfigurableApplicationContext appContext = SpringApplication.run(BankomatApplication.class, args);
+		IUserService userService = appContext.getBean(IUserService.class);
+		ICardService cardService = appContext.getBean(ICardService.class);
+		ITransactionService transactionService = appContext.getBean(ITransactionService.class);
+		IBankAccountService bankAccountService = appContext.getBean(IBankAccountService.class);
+		IAdminService adminService = appContext.getBean(IAdminService.class);
+
 		while(true){
 			Socket clientSocket = serverSocket.accept();
 			System.out.println("Client connected " + clientSocket.getInetAddress().getHostAddress());
-			FutureTask<String> task = new FutureTask<>(new CommandHandler(clientSocket));
+			FutureTask<String> task = new FutureTask<>(new CommandHandler(
+					clientSocket,
+					userService,
+					transactionService,
+					bankAccountService,
+					cardService,
+					adminService));
 			executorService.submit(task);
 		}
 	}

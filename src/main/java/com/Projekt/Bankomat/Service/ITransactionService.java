@@ -16,7 +16,7 @@ public interface ITransactionService {
                                   TransactionType transactionType);
     List<Transaction> getAllNotSuccessfullySentTransactionsFromBankAccount(String fromAccountNr);
     List<Transaction> getAllSuccessfullySentTransactionsFromBankAccount(String FromAccountNr);
-    List<Transaction> allTransactionFromAccount(String fromAccountNr);
+    List<Transaction> getAllTransactionFromAccount(String fromAccountNr);
     List<Transaction> getAllSuccessfullySentTransactionsToBankAccount(String toAccountNr);
     List<Transaction> getAllTransactionsSentByUser(String email);
     List<Transaction> getAllTransactionsSentToUser(String email);

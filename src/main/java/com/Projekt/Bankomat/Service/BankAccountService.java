@@ -24,7 +24,7 @@ public class BankAccountService implements IBankAccountService{
         this.userService = userService;
     }
 
-    public BankAccount getAccountByAccountNr(String accountNr) throws BankAccountNotFoundException{
+    public BankAccount getAccountByAccountNr(String accountNr){
         return bankAccountRepo.findByAccountNr(accountNr).orElseThrow(BankAccountNotFoundException::new);
     }
 
@@ -34,7 +34,7 @@ public class BankAccountService implements IBankAccountService{
         return acc.get(0).getAccountNr();
     }
     
-    public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta) throws BankAccountNotFoundException{
+    public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta){
         var zKonta = bankAccountRepo.findByAccountNr(zNrKonta)
                 .orElseThrow(() -> new BankAccountNotFoundException(zNrKonta));
 
