@@ -2,6 +2,7 @@ package com.Projekt.Bankomat.Controller;
 
 import com.Projekt.Bankomat.DtoModels.UserDto;
 import com.Projekt.Bankomat.Models.Transaction;
+import com.Projekt.Bankomat.Models.User;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,6 +35,13 @@ public class Mapper {
         StringBuilder response = new StringBuilder();
         for (Transaction transaction : transactions){
             response.append(transaction.toString());
+        }
+        return response.toString();
+    }
+    public static String UsersToString(List<User> users){
+        StringBuilder response = new StringBuilder();
+        for (User user : users){
+            response.append(user.toString());
         }
         return response.toString();
     }

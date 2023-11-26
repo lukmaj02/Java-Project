@@ -6,7 +6,9 @@ import com.Projekt.Bankomat.Exceptions.*;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Service.*;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,28 +16,28 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.Socket;
 import java.util.concurrent.Callable;
-@Configurable
+
+@Component
 public class CommandHandler implements Callable<String> {
-    private final Socket clientSocket;
+    
+    private Socket clientSocket;
+    @Autowired
+    private IUserService userService;
+    @Autowired
+    private ITransactionService transactionService;
+    @Autowired
+    private IBankAccountService bankAccountService;
+    @Autowired
+    private ICardService cardService;
+    @Autowired
+    private IAdminService adminService;
 
-    private final IUserService userService;
-    private final ITransactionService transactionService;
-    private final IBankAccountService bankAccountService;
-    private final ICardService cardService;
-    private final IAdminService adminService;
+    public CommandHandler(){
 
-    public CommandHandler(Socket clientSocket,
-                          IUserService userService,
-                          ITransactionService transactionService,
-                          IBankAccountService bankAccountService,
-                          ICardService cardService,
-                          IAdminService adminService){
+    }
+
+    public void a(Socket clientSocket){
         this.clientSocket = clientSocket;
-        this.userService = userService;
-        this.transactionService = transactionService;
-        this.bankAccountService = bankAccountService;
-        this.cardService = cardService;
-        this.adminService = adminService;
     }
 
     @Override
@@ -97,12 +99,7 @@ public class CommandHandler implements Callable<String> {
                 var loginInf = Mapper.toLogin(data);
                 systemResponse.append(userService.login(loginInf[0], loginInf[1]).toString());
             }
-            case GET_ALL -> {
-                var users = adminService.getAllUsers();
-                for (User user : users) {
-                    systemResponse.append(user.toString());
-                }
-            }
+            case GET_ALL -> Mapper.UsersToString(adminService.getAllUsers());
             default -> throw new InvalidCommandException();
         }
         return systemResponse.toString();

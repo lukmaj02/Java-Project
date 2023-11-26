@@ -7,16 +7,11 @@ import com.Projekt.Bankomat.Service.BankAccountService;
 import com.Projekt.Bankomat.Service.CardService;
 import com.Projekt.Bankomat.Service.TransactionService;
 import com.Projekt.Bankomat.Service.UserService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,8 +20,8 @@ import java.util.concurrent.Executors;
 public class AppConfig {
 
     @Bean
-    public Socket socket(){
-        return new Socket();
+    public ExecutorService executorService(){
+        return Executors.newFixedThreadPool(5);
     }
 
     @Bean

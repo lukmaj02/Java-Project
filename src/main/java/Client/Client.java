@@ -11,7 +11,7 @@ public class Client {
     private static PrintWriter sender;
     private static BufferedReader reader;
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
 
         try{
             socket = new Socket("localhost", 6000);
@@ -21,8 +21,7 @@ public class Client {
         catch(IOException e){
             System.out.println("Failed connection to server");
         }
-
-        //sender.println("USER,LOGIN,krzysztof.gonciarz@gmail.com,password123");
         sender.println("TRANSACTION,SUC_FROM_ACC,78190456231890724568903214");
+        socket.close();
     }
 }
