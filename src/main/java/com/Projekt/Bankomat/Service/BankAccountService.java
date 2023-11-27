@@ -1,5 +1,6 @@
 package com.Projekt.Bankomat.Service;
 
+import com.Projekt.Bankomat.Controller.Commands.BankAccountCommand;
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
@@ -32,6 +33,10 @@ public class BankAccountService implements IBankAccountService{
         var acc = bankAccountRepo.getAccountNrByUserPhoneNumber(currencyType, phoneNumber);
         if(acc.isEmpty()) throw new BankAccountNotFoundException();
         return acc.get(0).getAccountNr();
+    }
+
+    public List<BankAccount> getUserBankAccounts(String email){
+        return bankAccountRepo.getAllUserAccounts(email);
     }
     
     public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta){

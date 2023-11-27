@@ -1,14 +1,16 @@
 package com.Projekt.Bankomat.Controller;
 
+import com.Projekt.Bankomat.Controller.Commands.*;
+import com.Projekt.Bankomat.Enums.AccountType;
+import com.Projekt.Bankomat.Enums.CardType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.*;
 import com.Projekt.Bankomat.Generators;
-import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
+import static com.Projekt.Bankomat.Controller.Mapper.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -19,24 +21,28 @@ import java.util.concurrent.Callable;
 
 @Component
 public class CommandHandler implements Callable<String> {
-    
+
     private Socket clientSocket;
-    @Autowired
-    private IUserService userService;
-    @Autowired
-    private ITransactionService transactionService;
-    @Autowired
-    private IBankAccountService bankAccountService;
-    @Autowired
-    private ICardService cardService;
-    @Autowired
-    private IAdminService adminService;
+    private final IUserService userService;
+    private final ITransactionService transactionService;
+    private final IBankAccountService bankAccountService;
+    private final ICardService cardService;
+    private final IAdminService adminService;
 
-    public CommandHandler(){
-
+    @Autowired
+    public CommandHandler(IUserService userService,
+                          ITransactionService transactionService,
+                          IBankAccountService bankAccountService,
+                          ICardService cardService,
+                          IAdminService adminService) {
+        this.userService = userService;
+        this.transactionService = transactionService;
+        this.bankAccountService = bankAccountService;
+        this.cardService = cardService;
+        this.adminService = adminService;
     }
 
-    public void a(Socket clientSocket){
+    public void initSocket(Socket clientSocket){
         this.clientSocket = clientSocket;
     }
 
@@ -49,7 +55,7 @@ public class CommandHandler implements Callable<String> {
             while(true){
                 String message = reader.readLine();
                 String[] part = message.split(",", 3);
-                Command controller = Command.valueOf(part[0].toUpperCase());
+                MainCommand controller = MainCommand.valueOf(part[0].toUpperCase());
                 String command = part[1].toUpperCase();
                 String data = part[2];
 
@@ -83,33 +89,33 @@ public class CommandHandler implements Callable<String> {
             }
         }
         catch(Exception e) {
-            System.out.println("a");
+            System.out.println("initSocket");
         }
         return "Task completed";
     }
 
     private String userController(UserCommand command, String data) throws RuntimeException{
-        StringBuilder systemResponse = new StringBuilder("OK,");
+        String systemResponse = "OK,";
         switch (command) {
             case DELETE -> userService.deleteUser(data);
-            case REGISTER -> userService.registerUser(Mapper.toUserDto(data));
-            case EDIT -> userService.editUserInformations(Mapper.toUserDto(data));
-            case GET_USER -> systemResponse.append(adminService.getUser(data));
+            case REGISTER -> userService.registerUser(toUserDto(data));
+            case EDIT -> userService.editUserInformations(toUserDto(data));
+            case GET_USER -> systemResponse += (adminService.getUser(data));
             case LOGIN -> {
-                var loginInf = Mapper.toLogin(data);
-                systemResponse.append(userService.login(loginInf[0], loginInf[1]).toString());
+                var loginInf = toLogin(data);
+                systemResponse += (userService.login(loginInf[0], loginInf[1]).toString());
             }
-            case GET_ALL -> Mapper.UsersToString(adminService.getAllUsers());
+            case GET_ALL -> listToString(adminService.getAllUsers());
             default -> throw new InvalidCommandException();
         }
         return systemResponse.toString();
     }
 
     private String transactionController(TransactionCommand command, String data){
-        StringBuilder systemResponse = new StringBuilder("OK,");
+        String systemResponse = "OK,";
         switch (command) {
             case CREATE -> {
-                var info = Mapper.toTransaction(data);
+                var info = toTransaction(data);
                 transactionService.createTransaction(
                         info[0],
                         info[1],
@@ -119,44 +125,40 @@ public class CommandHandler implements Callable<String> {
                         TransactionType.valueOf(info[5]));
             }
             case SUC_FROM_ACC ->
-                    systemResponse.append(Mapper.TransactionsToString(
-                    transactionService.getAllSuccessfullySentTransactionsFromBankAccount(data)));
+                    systemResponse += (listToString(transactionService.getAllSuccessfullySentTransactionsFromBankAccount(data)));
             case NOT_SUC_FROM_ACC ->
-                    systemResponse.append(Mapper.TransactionsToString(
-                    transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount(data)));
+                    systemResponse += (listToString(transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount(data)));
             case SUC_TO_ACC ->
-                    systemResponse.append(Mapper.TransactionsToString(
-                    transactionService.getAllSuccessfullySentTransactionsToBankAccount(data)));
+                    systemResponse += (listToString(transactionService.getAllSuccessfullySentTransactionsToBankAccount(data)));
             case ALL_FROM_ACC ->
-                    systemResponse.append(Mapper.TransactionsToString(
-                    transactionService.getAllTransactionFromAccount(data)));
+                    systemResponse += (listToString(transactionService.getAllTransactionFromAccount(data)));
             case ALL_TO_USER ->
-                    systemResponse.append(Mapper.TransactionsToString(
-                    transactionService.getAllTransactionsSentToUser(data)));
+                    systemResponse += (listToString(transactionService.getAllTransactionsSentToUser(data)));
             case ALL_FROM_USER ->
-                    systemResponse.append(Mapper.TransactionsToString(
-                    transactionService.getAllTransactionsSentByUser(data)));
+                    systemResponse += (listToString(transactionService.getAllTransactionsSentByUser(data)));
             case ALL_USER ->
-                    systemResponse.append(Mapper.TransactionsToString(
-                    transactionService.getAllUserTransactions(data)));
+                    systemResponse += (listToString(transactionService.getAllUserTransactions(data)));
             default ->
                     throw new InvalidCommandException();
         }
-        return systemResponse.toString();
+        return systemResponse;
     }
 
     //todo
     private String bankAccountController(BankAccountCommand command, String data){
         String systemResponse = "OK,";
-        switch (command){
-            case DELETE :
-                //todo
-                break;
-            case CREATE:
-                //todo
-                break;
-            default:
-                throw new InvalidCommandException();
+        switch (command) {
+            case DELETE -> bankAccountService.deleteAccount(data);
+            case CREATE -> {
+                var splitedData = splitedData(data);
+                bankAccountService.createAccount(
+                        splitedData[0],
+                        AccountType.valueOf(splitedData[1]),
+                        CurrencyType.valueOf(splitedData[2]));
+            }
+            case USER_ACCOUNTS ->
+                    systemResponse += listToString(bankAccountService.getUserBankAccounts(data));
+            default -> throw new InvalidCommandException();
         }
         return systemResponse;
     }
@@ -165,21 +167,28 @@ public class CommandHandler implements Callable<String> {
     private String cardController(CardCommand command, String data){
         String systemResponse = "OK,";
         switch (command){
-            case DELETE :
-                //todo
-                break;
-            case DISCARD:
-                //todo
-                break;
-            case CREATE:
-                //todo
-                break;
-            case PAY:
-                //todo
-                break;
-            case EXTEND:
-                //todo
-                break;
+            case DELETE ->
+                cardService.deleteCard(data);
+            case DISCARD ->
+                cardService.discardCard(data);
+            case EXTEND ->
+                cardService.extendExpirationDate(data);
+            case CREATE -> {
+                var splitedData = splitedData(data);
+                cardService.createCard(
+                splitedData[0],
+                CardType.valueOf(splitedData[1]));
+            }
+            case PAY -> {
+                var splitedData = splitedData(data);
+                cardService.paymentByCard(
+                        splitedData[0],
+                        splitedData[1],
+                        splitedData[2],
+                        splitedData[3],
+                        splitedData[4],
+                        new BigDecimal(splitedData[5]));
+            }
         }
         return systemResponse;
     }

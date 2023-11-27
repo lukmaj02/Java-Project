@@ -1,4 +1,4 @@
-package com.Projekt.Bankomat.Controller;
+package com.Projekt.Bankomat.Controller.Commands;
 
 public enum CardCommand {
     CREATE,

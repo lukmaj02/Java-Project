@@ -1,6 +1,7 @@
 package com.Projekt.Bankomat.Controller;
 
 import com.Projekt.Bankomat.DtoModels.UserDto;
+import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Models.Transaction;
 import com.Projekt.Bankomat.Models.User;
 
@@ -10,6 +11,9 @@ import java.util.List;
 public class Mapper {
     private Mapper(){}
 
+    public static String[] splitedData(String data){
+        return data.split(",");
+    }
     public static String[] toLogin(String data) {
         return data.split(",",2);
     }
@@ -31,17 +35,10 @@ public class Mapper {
         return data.split(",",6);
     }
 
-    public static String TransactionsToString(List<Transaction> transactions){
+    public static <T> String listToString(List<T> objects){
         StringBuilder response = new StringBuilder();
-        for (Transaction transaction : transactions){
-            response.append(transaction.toString());
-        }
-        return response.toString();
-    }
-    public static String UsersToString(List<User> users){
-        StringBuilder response = new StringBuilder();
-        for (User user : users){
-            response.append(user.toString());
+        for (T object : objects){
+            response.append(object.toString());
         }
         return response.toString();
     }

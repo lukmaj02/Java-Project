@@ -2,8 +2,6 @@ package com.Projekt.Bankomat;
 
 
 import com.Projekt.Bankomat.Controller.CommandHandler;
-import com.Projekt.Bankomat.Service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -18,8 +16,6 @@ import java.util.concurrent.*;
 public class BankomatApplication {
 	private final static int SERVER_PORT = 6000;
 	private static ServerSocket serverSocket;
-	//private static final ExecutorService executorService = Executors.newFixedThreadPool(5);
-
 
 	public static void main(String[] args) throws IOException {
 		try{
@@ -37,7 +33,7 @@ public class BankomatApplication {
 
 		while(true){
 			Socket clientSocket = serverSocket.accept();
-			commandHandler.a(clientSocket);
+			commandHandler.initSocket(clientSocket);
 			System.out.println("Client connected " + clientSocket.getInetAddress().getHostAddress());
 			FutureTask<String> task = new FutureTask<>(commandHandler);
 			executorService.submit(task);
