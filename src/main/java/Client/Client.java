@@ -1,5 +1,8 @@
 package Client;
 
+import Client.Gui.LoginSystem;
+
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +15,7 @@ public class Client {
     private static BufferedReader reader;
 
     public static void main(String[] args) throws IOException {
-
+        SwingUtilities.invokeLater(() -> new LoginSystem());
         try{
             socket = new Socket("localhost", 6000);
             sender = new PrintWriter(socket.getOutputStream(),true);
@@ -20,11 +23,6 @@ public class Client {
         }
         catch(IOException e){
             System.out.println("Failed connection to server");
-        }
-        sender.println("TRANSACTION,SUC_FROM_ACC,78190456231890724568903214");
-        while (true){
-            String msg = reader.readLine();
-            System.out.println(msg);
         }
     }
 }
