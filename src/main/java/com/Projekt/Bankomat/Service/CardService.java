@@ -4,7 +4,6 @@ import com.Projekt.Bankomat.Enums.CardType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
 import com.Projekt.Bankomat.Exceptions.CardNotFoundException;
-import com.Projekt.Bankomat.Exceptions.InvalidTransactionException;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.Models.Card;
 import com.Projekt.Bankomat.Repository.CardRepo;

@@ -21,7 +21,10 @@ public class Client {
         catch(IOException e){
             System.out.println("Failed connection to server");
         }
-        sender.println("TRANSACTION,CREATE,78190456231890724568903214,45678901234567890123456789,200.00,za zakupy,EURO,PRZELEW_TRADYCYJNY");
-        socket.close();
+        sender.println("TRANSACTION,SUC_FROM_ACC,78190456231890724568903214");
+        while (true){
+            String msg = reader.readLine();
+            System.out.println(msg);
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.Projekt.Bankomat.Service;
 
-import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
 import com.Projekt.Bankomat.Models.User;
 
 import java.util.List;

@@ -1,7 +1,6 @@
 package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.Enums.CardType;
-import com.Projekt.Bankomat.Models.BankAccount;
 
 import java.math.BigDecimal;
 

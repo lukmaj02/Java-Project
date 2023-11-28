@@ -3,7 +3,6 @@ package com.Projekt.Bankomat.Service;
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Models.BankAccount;
-import com.Projekt.Bankomat.Models.User;
 
 import java.util.List;
 

@@ -6,7 +6,6 @@ import com.Projekt.Bankomat.Enums.CardType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.*;
-import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +19,7 @@ import java.net.Socket;
 import java.util.concurrent.Callable;
 
 @Component
-public class CommandHandler implements Callable<String> {
+public class ClientHandler implements Callable<String> {
 
     private Socket clientSocket;
     private final IUserService userService;
@@ -30,11 +29,11 @@ public class CommandHandler implements Callable<String> {
     private final IAdminService adminService;
 
     @Autowired
-    public CommandHandler(IUserService userService,
-                          ITransactionService transactionService,
-                          IBankAccountService bankAccountService,
-                          ICardService cardService,
-                          IAdminService adminService) {
+    public ClientHandler(IUserService userService,
+                         ITransactionService transactionService,
+                         IBankAccountService bankAccountService,
+                         ICardService cardService,
+                         IAdminService adminService) {
         this.userService = userService;
         this.transactionService = transactionService;
         this.bankAccountService = bankAccountService;
@@ -63,33 +62,25 @@ public class CommandHandler implements Callable<String> {
                 try{
                     String response = "";
                     switch (controller) {
-                        case USER -> {
-                            System.out.println("wszedl");
+                        case USER ->
                             response = userController(UserCommand.valueOf(command), data);
-                        }
-                        case TRANSACTION -> {
+                        case TRANSACTION ->
                             response = transactionController(TransactionCommand.valueOf(command), data);
-                        }
-                        case BANK_ACCOUNT -> {
+                        case BANK_ACCOUNT ->
                             response = bankAccountController(BankAccountCommand.valueOf(command), data);
-                        }
-                        case CARD -> {
+                        case CARD ->
                             response = cardController(CardCommand.valueOf(command), data);
-                        }
-                        case EXIT ->{
-                            clientSocket.close();
-                        }
                         default -> response = "ERROR,Zly kontroler";
                     }
-                    sender.println(Generators.generateHash(response));
+                    sender.println(response);
                 }
                 catch(RuntimeException e){
-                    sender.println(Generators.generateHash("ERROR," + e.getMessage()));
+                    sender.println("ERROR," + e.getMessage());
                 }
             }
         }
         catch(Exception e) {
-            System.out.println("initSocket");
+            e.printStackTrace();
         }
         return "Task completed";
     }
@@ -108,7 +99,7 @@ public class CommandHandler implements Callable<String> {
             case GET_ALL -> listToString(adminService.getAllUsers());
             default -> throw new InvalidCommandException();
         }
-        return systemResponse.toString();
+        return systemResponse;
     }
 
     private String transactionController(TransactionCommand command, String data){
@@ -125,26 +116,25 @@ public class CommandHandler implements Callable<String> {
                         TransactionType.valueOf(info[5]));
             }
             case SUC_FROM_ACC ->
-                    systemResponse += (listToString(transactionService.getAllSuccessfullySentTransactionsFromBankAccount(data)));
+                    systemResponse += listToString(transactionService.getAllSuccessfullySentTransactionsFromBankAccount(data));
             case NOT_SUC_FROM_ACC ->
-                    systemResponse += (listToString(transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount(data)));
+                    systemResponse += listToString(transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount(data));
             case SUC_TO_ACC ->
-                    systemResponse += (listToString(transactionService.getAllSuccessfullySentTransactionsToBankAccount(data)));
+                    systemResponse += listToString(transactionService.getAllSuccessfullySentTransactionsToBankAccount(data));
             case ALL_FROM_ACC ->
-                    systemResponse += (listToString(transactionService.getAllTransactionFromAccount(data)));
+                    systemResponse += listToString(transactionService.getAllTransactionFromAccount(data));
             case ALL_TO_USER ->
-                    systemResponse += (listToString(transactionService.getAllTransactionsSentToUser(data)));
+                    systemResponse += listToString(transactionService.getAllTransactionsSentToUser(data));
             case ALL_FROM_USER ->
-                    systemResponse += (listToString(transactionService.getAllTransactionsSentByUser(data)));
+                    systemResponse += listToString(transactionService.getAllTransactionsSentByUser(data));
             case ALL_USER ->
-                    systemResponse += (listToString(transactionService.getAllUserTransactions(data)));
+                    systemResponse += listToString(transactionService.getAllUserTransactions(data));
             default ->
                     throw new InvalidCommandException();
         }
         return systemResponse;
     }
 
-    //todo
     private String bankAccountController(BankAccountCommand command, String data){
         String systemResponse = "OK,";
         switch (command) {
@@ -163,7 +153,6 @@ public class CommandHandler implements Callable<String> {
         return systemResponse;
     }
 
-    //todo
     private String cardController(CardCommand command, String data){
         String systemResponse = "OK,";
         switch (command){

@@ -1,7 +1,7 @@
 package com.Projekt.Bankomat;
 
 
-import com.Projekt.Bankomat.Controller.CommandHandler;
+import com.Projekt.Bankomat.Controller.ClientHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -29,14 +29,16 @@ public class BankomatApplication {
 
 		ConfigurableApplicationContext appContext = SpringApplication.run(BankomatApplication.class, args);
 		ExecutorService executorService = appContext.getBean(ExecutorService.class);
-		CommandHandler commandHandler = appContext.getBean(CommandHandler.class);
+		ClientHandler clientHandler = appContext.getBean(ClientHandler.class);
 
 		while(true){
 			Socket clientSocket = serverSocket.accept();
-			commandHandler.initSocket(clientSocket);
-			System.out.println("Client connected " + clientSocket.getInetAddress().getHostAddress());
-			FutureTask<String> task = new FutureTask<>(commandHandler);
-			executorService.submit(task);
+			if(clientSocket.isConnected()){
+				clientHandler.initSocket(clientSocket);
+				System.out.println("Client connected " + clientSocket.getInetAddress().getHostAddress());
+				FutureTask<String> task = new FutureTask<>(clientHandler);
+				executorService.submit(task);
+			}
 		}
 	}
 }

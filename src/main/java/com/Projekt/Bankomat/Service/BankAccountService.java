@@ -1,6 +1,5 @@
 package com.Projekt.Bankomat.Service;
 
-import com.Projekt.Bankomat.Controller.Commands.BankAccountCommand;
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
