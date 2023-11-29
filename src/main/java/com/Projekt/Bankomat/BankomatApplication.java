@@ -31,10 +31,12 @@ public class BankomatApplication {
 		ExecutorService executorService = appContext.getBean(ExecutorService.class);
 		ClientHandler clientHandler = appContext.getBean(ClientHandler.class);
 		DecryptionManager decryptionManager = appContext.getBean(DecryptionManager.class);
+
 		try{
 			decryptionManager.initFromString();
 		}catch (Exception e){
 			System.out.println("Failed to wire DecryptionManager");
+			System.exit(-1);
 		}
 
 
