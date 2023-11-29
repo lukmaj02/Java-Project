@@ -30,11 +30,18 @@ public class BankomatApplication {
 		ConfigurableApplicationContext appContext = SpringApplication.run(BankomatApplication.class, args);
 		ExecutorService executorService = appContext.getBean(ExecutorService.class);
 		ClientHandler clientHandler = appContext.getBean(ClientHandler.class);
+		DecryptionManager decryptionManager = appContext.getBean(DecryptionManager.class);
+		try{
+			decryptionManager.initFromString();
+		}catch (Exception e){
+			System.out.println("Failed to wire DecryptionManager");
+		}
+
 
 		while(true){
 			Socket clientSocket = serverSocket.accept();
+			clientHandler.initSocket(clientSocket);
 			if(clientSocket.isConnected()){
-				clientHandler.initSocket(clientSocket);
 				System.out.println("Client connected " + clientSocket.getInetAddress().getHostAddress());
 				FutureTask<String> task = new FutureTask<>(clientHandler);
 				executorService.submit(task);

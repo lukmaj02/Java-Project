@@ -3,6 +3,7 @@ package com.Projekt.Bankomat;
 import java.util.Random;
 
 public class Generators{
+    private Generators(){}
     public static String generateRandomNumber(int numberOfDigits) {
         StringBuilder result = new StringBuilder();
         Random random = new Random();

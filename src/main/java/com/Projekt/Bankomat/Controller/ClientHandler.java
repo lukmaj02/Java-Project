@@ -1,6 +1,7 @@
 package com.Projekt.Bankomat.Controller;
 
 import com.Projekt.Bankomat.Controller.Commands.*;
+import com.Projekt.Bankomat.DecryptionManager;
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CardType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
@@ -16,6 +17,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.concurrent.Callable;
 
 @Component
@@ -27,18 +29,20 @@ public class ClientHandler implements Callable<String> {
     private final IBankAccountService bankAccountService;
     private final ICardService cardService;
     private final IAdminService adminService;
+    private final DecryptionManager decryptionManager;
 
     @Autowired
     public ClientHandler(IUserService userService,
                          ITransactionService transactionService,
                          IBankAccountService bankAccountService,
                          ICardService cardService,
-                         IAdminService adminService) {
+                         IAdminService adminService, DecryptionManager decryptionManager) {
         this.userService = userService;
         this.transactionService = transactionService;
         this.bankAccountService = bankAccountService;
         this.cardService = cardService;
         this.adminService = adminService;
+        this.decryptionManager = decryptionManager;
     }
 
     public void initSocket(Socket clientSocket){
@@ -52,7 +56,7 @@ public class ClientHandler implements Callable<String> {
             PrintWriter sender = new PrintWriter(clientSocket.getOutputStream(), true);
 
             while(true){
-                String message = reader.readLine();
+                String message = decryptionManager.decrypt(reader.readLine());
                 String[] part = message.split(",", 3);
                 MainCommand controller = MainCommand.valueOf(part[0].toUpperCase());
                 String command = part[1].toUpperCase();
@@ -60,7 +64,7 @@ public class ClientHandler implements Callable<String> {
 
 
                 try{
-                    String response = "";
+                    String response = "OK,";
                     switch (controller) {
                         case USER ->
                             response = userController(UserCommand.valueOf(command), data);
@@ -70,7 +74,7 @@ public class ClientHandler implements Callable<String> {
                             response = bankAccountController(BankAccountCommand.valueOf(command), data);
                         case CARD ->
                             response = cardController(CardCommand.valueOf(command), data);
-                        default -> response = "ERROR,Zly kontroler";
+                        default -> throw new InvalidCommandException();
                     }
                     sender.println(response);
                 }
@@ -79,6 +83,9 @@ public class ClientHandler implements Callable<String> {
                 }
             }
         }
+        catch(SocketException e){
+            System.out.println("Client Disconnected");
+        }
         catch(Exception e) {
             e.printStackTrace();
         }
@@ -86,7 +93,7 @@ public class ClientHandler implements Callable<String> {
     }
 
     private String userController(UserCommand command, String data) throws RuntimeException{
-        String systemResponse = "OK,";
+        String systemResponse = "";
         switch (command) {
             case DELETE -> userService.deleteUser(data);
             case REGISTER -> userService.registerUser(toUserDto(data));
@@ -103,7 +110,7 @@ public class ClientHandler implements Callable<String> {
     }
 
     private String transactionController(TransactionCommand command, String data){
-        String systemResponse = "OK,";
+        String systemResponse = "";
         switch (command) {
             case CREATE -> {
                 var info = toTransaction(data);
@@ -136,7 +143,7 @@ public class ClientHandler implements Callable<String> {
     }
 
     private String bankAccountController(BankAccountCommand command, String data){
-        String systemResponse = "OK,";
+        String systemResponse = "";
         switch (command) {
             case DELETE -> bankAccountService.deleteAccount(data);
             case CREATE -> {
@@ -154,7 +161,7 @@ public class ClientHandler implements Callable<String> {
     }
 
     private String cardController(CardCommand command, String data){
-        String systemResponse = "OK,";
+        String systemResponse = "";
         switch (command){
             case DELETE ->
                 cardService.deleteCard(data);
