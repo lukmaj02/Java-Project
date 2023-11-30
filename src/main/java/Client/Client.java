@@ -1,7 +1,5 @@
 package Client;
 
-import Client.Gui.LoginSystem;
-
 import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +26,6 @@ public class Client {
         catch (Exception e){
             System.out.println("Decryption Manager Failed to launch");
         }
-        SwingUtilities.invokeLater(() -> new LoginSystem());
         String msg = "TRANSACTION,SUC_FROM_ACC,78190456231890724568903214";
         sender.println(encrypt(msg));
         while(true){
