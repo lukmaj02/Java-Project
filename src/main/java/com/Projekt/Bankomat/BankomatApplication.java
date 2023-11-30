@@ -50,7 +50,5 @@ public class BankomatApplication {
 				executorService.submit(task);
 			}
 		}
-
-
 	}
 }

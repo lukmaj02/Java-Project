@@ -37,7 +37,7 @@ public class TransactionService implements ITransactionService {
             toAccountNr = bankAccountService.getAccountNrByUserPhoneNumber(toAccountNr, currency);
         }
 
-        var transakcja = Transaction.builder()
+        var transaction = Transaction.builder()
                 .transactionId(UUID.randomUUID().toString())
                 .transactionDate(LocalDate.now())
                 .title(title)
@@ -46,11 +46,16 @@ public class TransactionService implements ITransactionService {
                 .fromAccountNr(toAccountNr)
                 .currencyType(currency)
                 .transactionType(transactionType)
-                .isValid(bankAccountService.isPaymentValid(fromAccountNr,toAccountNr,amount,currency))
                 .build();
-        transactionRepo.save(transakcja);
-        if(!transakcja.isValid()) throw new InvalidTransactionException();
 
+        try{
+            transaction.setValid(bankAccountService.isPaymentValid(fromAccountNr,toAccountNr,amount));
+            transactionRepo.save(transaction);
+        }catch(InvalidTransactionException e){
+            transaction.setValid(false);
+            transactionRepo.save(transaction);
+            throw new InvalidTransactionException();
+        }
     }
 
     public List<Transaction> getAllNotSuccessfullySentTransactionsFromBankAccount(String fromAccountNr){

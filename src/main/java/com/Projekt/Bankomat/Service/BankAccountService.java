@@ -2,8 +2,11 @@ package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
+import com.Projekt.Bankomat.Enums.DepositStatus;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
 import com.Projekt.Bankomat.Exceptions.InvalidAccountDeletionException;
+import com.Projekt.Bankomat.Exceptions.InvalidCurrencyTypeException;
+import com.Projekt.Bankomat.Exceptions.InvalidTransactionException;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.IService.IBankAccountService;
 import com.Projekt.Bankomat.Models.BankAccount;
@@ -15,10 +18,13 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import static com.Projekt.Bankomat.Enums.DepositStatus.ACTIVE;
+
 @Service
 public class BankAccountService implements IBankAccountService {
     private final BankAccountRepo bankAccountRepo;
     private final UserService userService;
+
 
     @Autowired
     public BankAccountService(BankAccountRepo bankAccountRepo, UserService userService) {
@@ -36,21 +42,18 @@ public class BankAccountService implements IBankAccountService {
         return acc.get(0).getAccountNr();
     }
 
-    public boolean isPaymentValid(String zNrKonta, String doNrKonta, BigDecimal kwota, CurrencyType waluta){
-        var zKonta = bankAccountRepo.findByAccountNr(zNrKonta)
-                .orElseThrow(() -> new BankAccountNotFoundException(zNrKonta));
+    public boolean isPaymentValid(String fromAccountNr, String toAccountNr, BigDecimal amount){
+        var fromAccount = bankAccountRepo.findByAccountNr(fromAccountNr)
+                .orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
 
-        var doKonta = bankAccountRepo.findByAccountNr(doNrKonta)
-                .orElseThrow(() -> new BankAccountNotFoundException(zNrKonta));
+        var toAccount = bankAccountRepo.findByAccountNr(toAccountNr)
+                .orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
 
-        if(!(waluta.equals(doKonta.getCurrencyType())
-                && waluta.equals(zKonta.getCurrencyType())
-                && zKonta.getBalance().compareTo(kwota) >= 0)) return false;
+        if(!fromAccount.getCurrencyType().equals(toAccount.getCurrencyType()))
+            throw new InvalidCurrencyTypeException(toAccount.getCurrencyType());
 
-        zKonta.setBalance(zKonta.getBalance().subtract(kwota));
-        doKonta.setBalance(doKonta.getBalance().add(kwota));
-        bankAccountRepo.save(zKonta);
-        bankAccountRepo.save(doKonta);
+        withdrawFromAccount(fromAccount,amount);
+        paymentToAccount(toAccount,amount);
         return true;
     }
 
@@ -58,28 +61,38 @@ public class BankAccountService implements IBankAccountService {
         bankAccount.setBalance(bankAccount.getBalance().add(amount));
         bankAccountRepo.save(bankAccount);
     }
+
+    public void withdrawFromAccount(BankAccount bankAccount, BigDecimal amount){
+        if(bankAccount.getBalance().compareTo(amount) < 0) throw new InvalidTransactionException();
+        bankAccount.setBalance(bankAccount.getBalance().subtract(amount));
+        bankAccountRepo.save(bankAccount);
+    }
     @Override
     public List<BankAccount> getUserBankAccounts(String email){
         return bankAccountRepo.getAllUserAccounts(email);
     }
+
     @Override
-    public void deleteAccount(String nrKonta){
-        var konto = bankAccountRepo.findByAccountNr(nrKonta).orElseThrow(() -> new BankAccountNotFoundException(nrKonta));
-        if(konto.getBalance().compareTo(BigDecimal.ZERO) > 0 || (!konto.getDeposits().isEmpty())){
-            throw new InvalidAccountDeletionException();
-        }
-        bankAccountRepo.delete(konto);
-    }
-    @Override
-    public void createAccount(String email, AccountType accountType, CurrencyType waluta){
+    public void createAccount(String email, AccountType accountType, CurrencyType currencyType){
         var konto = BankAccount.builder()
                 .accountId(UUID.randomUUID().toString())
                 .accountNr(Generators.generateRandomNumber(26))
                 .balance(BigDecimal.valueOf(0))
                 .accountType(accountType)
                 .user(userService.getUser(email))
-                .currencyType(waluta)
+                .currencyType(currencyType)
                 .build();
         bankAccountRepo.save(konto);
+    }
+
+    @Override
+    public void deleteAccount(String accountNr){
+        var account = bankAccountRepo.findByAccountNr(accountNr).orElseThrow(() -> new BankAccountNotFoundException(accountNr));
+        if(account.getBalance().compareTo(BigDecimal.ZERO) > 0)
+            throw new InvalidAccountDeletionException(account.getBalance());
+        if(account.getDeposits().stream().anyMatch(deposit -> deposit.getDepositStatus().equals(ACTIVE)))
+            throw new InvalidAccountDeletionException(ACTIVE);
+
+        bankAccountRepo.delete(account);
     }
 }

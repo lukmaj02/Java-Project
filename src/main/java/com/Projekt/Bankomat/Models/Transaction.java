@@ -26,7 +26,7 @@ public class Transaction {
     private TransactionType transactionType;
 
     @Column(name = "isValid")
-    private boolean isValid;
+    private boolean isValid = false;
 
     @Column(name = "transactionDate", nullable = false)
     private LocalDate transactionDate;

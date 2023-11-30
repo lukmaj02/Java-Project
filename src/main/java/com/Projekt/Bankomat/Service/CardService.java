@@ -63,8 +63,7 @@ public class CardService implements ICardService {
                               String imieNadawcy,
                               String nazwiskoNadawcy,
                               BigDecimal kwota) {
-        var kartaNadawcy = cardRepo
-                .findUserCard(zNrKarty,cvc,imieNadawcy,nazwiskoNadawcy)
+        var kartaNadawcy = cardRepo.findUserCard(zNrKarty,cvc,imieNadawcy,nazwiskoNadawcy)
                 .orElseThrow(() -> new CardNotFoundException(zNrKarty));
         var kontoKarty = kartaNadawcy.getBankAccount();
 

@@ -4,7 +4,7 @@ import com.Projekt.Bankomat.Models.User;
 
 import java.util.List;
 
-public interface IAdminService extends IUserService{
+public interface IAdminService {
     User getUser(String email);
     List<User> getAllUsers();
 }

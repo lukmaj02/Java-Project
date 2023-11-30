@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import static com.Projekt.Bankomat.Enums.DepositStatus.*;
@@ -34,7 +35,7 @@ public class DepositService implements IDepositService {
     public void createDeposit(String accountNr, DepositType depositType, BigDecimal amount) {
         var account = bankAccountService.getAccountByAccountNr(accountNr);
         if(account.getBalance().compareTo(amount) < 0) throw new InvalidDepositException();
-        
+
         account.setBalance(account.getBalance().subtract(amount));
         var deposit = Deposit.builder()
                 .depositId(UUID.randomUUID().toString())

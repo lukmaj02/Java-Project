@@ -48,7 +48,8 @@ public class BankAccount {
     @OneToMany(
             mappedBy = "bankAccountDeposit",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.PERSIST
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private Set<Deposit> deposits;
 
