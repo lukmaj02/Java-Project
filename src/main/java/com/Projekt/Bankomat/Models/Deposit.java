@@ -1,5 +1,6 @@
 package com.Projekt.Bankomat.Models;
 
+import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.DepositStatus;
 import com.Projekt.Bankomat.Enums.DepositType;
 import jakarta.persistence.*;
@@ -38,7 +39,11 @@ public class Deposit {
     @Enumerated(EnumType.STRING)
     private DepositStatus depositStatus;
 
-    @ManyToOne
+    @Column(name = "currencyType", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private CurrencyType currencyType;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "accountId")
     private BankAccount bankAccountDeposit;
 
@@ -49,6 +54,7 @@ public class Deposit {
                 creationDate.toString() + "," +
                 finishDate.toString() + "," +
                 amount.toString() + "," +
+                currencyType.toString() + "," +
                 depositStatus.toString() + ",";
     }
 }

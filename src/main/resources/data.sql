@@ -234,7 +234,8 @@ INSERT INTO DEPOSIT(deposit_id,
                     finish_date,
                     amount,
                     deposit_status,
-                    account_id)
+                    account_id,
+                    currency_type)
 VALUES(
        '44b08bab-9238-409a-8863-67ccedbbb745',
        'ANNUAL',
@@ -242,7 +243,8 @@ VALUES(
        '2024-11-11',
        20000.00,
        'ACTIVE',
-       (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr = '78190456231890724568903214')
+       (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr = '78190456231890724568903214'),
+       'ZLOTY'
 );
 
 
