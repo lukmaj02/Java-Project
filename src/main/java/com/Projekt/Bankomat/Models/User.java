@@ -2,6 +2,7 @@ package com.Projekt.Bankomat.Models;
 
 import com.Projekt.Bankomat.Enums.Gender;
 import com.Projekt.Bankomat.Enums.MaritalStatus;
+import com.Projekt.Bankomat.Enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
@@ -52,6 +53,10 @@ public class User {
     @Column(name = "maritalStatus", nullable = false)
     @Enumerated(EnumType.STRING)
     private MaritalStatus maritalStatus;
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<BankAccount> bankAccount;

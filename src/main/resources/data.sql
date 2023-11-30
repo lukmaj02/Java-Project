@@ -10,7 +10,8 @@ INSERT INTO _USER (
             city,
             phone_number,
             gender,
-            marital_status)
+            marital_status,
+            role)
     VALUES
         ('a2534a89-8706-4fce-94ac-aad1fbcc805f',
         'Krzysztof',
@@ -22,7 +23,8 @@ INSERT INTO _USER (
         'Kraków',
         '123456789',
         'MALE',
-        'MARRIED'),
+        'MARRIED',
+        "USER"),
         (
         '15c43a37-f6ca-420b-9b30-ebd4010d45df',
         'Janusz',
@@ -34,7 +36,8 @@ INSERT INTO _USER (
         'Kraków',
         '987654321',
         'MALE',
-        'MARRIED'),
+        'MARRIED',
+        'USER'),
         (
         'f74bec4d-3362-42d0-83cb-f56813f2a576',
         'Grazyna',
@@ -46,7 +49,8 @@ INSERT INTO _USER (
         'Kraków',
         '192837465',
         'FEMALE',
-        'DIVORCED');
+        'DIVORCED',
+        'USER');
 --DODANIE KONT BANKOWYCH
 INSERT INTO BANK_ACCOUNT (user_id,
                            account_id,
@@ -223,6 +227,23 @@ VALUES
     'DEBETOWA',
     (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr ='59013467890234126789012345'),
     FALSE);
+
+INSERT INTO DEPOSIT(deposit_id,
+                    deposit_type,
+                    creation_date,
+                    finish_date,
+                    amount,
+                    deposit_status,
+                    account_id)
+VALUES(
+       '44b08bab-9238-409a-8863-67ccedbbb745',
+       'ANNUAL',
+       '2023-11-11',
+       '2024-11-11',
+       20000.00,
+       'ACTIVE',
+       (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr = '78190456231890724568903214')
+);
 
 
 
