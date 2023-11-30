@@ -20,7 +20,9 @@ public class AppConfig {
     @Bean
     public CommandLineRunner commandLineRunner(DepositService depositService){
         return args -> {
-            depositService.createDeposit("84327494823748210194574587", DepositType.ANNUAL, BigDecimal.valueOf(1000));
+            //depositService.createDeposit("84327494823748210194574587", DepositType.ANNUAL, BigDecimal.valueOf(1000));
+            //depositService.suspendDeposit("b59eeda2-19e9-4c32-96dc-3a06864f95b3");
+            depositService.finishDeposit("76d2a80c-1045-4e80-9102-2f15b0f07489");
         };
     }
 }

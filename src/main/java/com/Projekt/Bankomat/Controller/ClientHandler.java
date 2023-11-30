@@ -7,7 +7,7 @@ import com.Projekt.Bankomat.Enums.CardType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.*;
-import com.Projekt.Bankomat.Service.*;
+import com.Projekt.Bankomat.IService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import static com.Projekt.Bankomat.Controller.Mapper.*;

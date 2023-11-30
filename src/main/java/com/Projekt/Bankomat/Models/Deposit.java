@@ -43,7 +43,7 @@ public class Deposit {
     @Enumerated(EnumType.STRING)
     private CurrencyType currencyType;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accountId")
     private BankAccount bankAccountDeposit;
 

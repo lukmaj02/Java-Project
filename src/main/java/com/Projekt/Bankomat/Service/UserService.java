@@ -5,6 +5,8 @@ import com.Projekt.Bankomat.Exceptions.BadCredentialsException;
 import com.Projekt.Bankomat.Exceptions.BankAccountExistsException;
 import com.Projekt.Bankomat.Exceptions.UserExistsException;
 import com.Projekt.Bankomat.Exceptions.UserNotFoundException;
+import com.Projekt.Bankomat.IService.IAdminService;
+import com.Projekt.Bankomat.IService.IUserService;
 import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Repository.UserRepo;

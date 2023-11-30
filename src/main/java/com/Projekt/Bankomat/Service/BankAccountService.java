@@ -2,23 +2,21 @@ package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
-import com.Projekt.Bankomat.Enums.DepositType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
 import com.Projekt.Bankomat.Exceptions.InvalidAccountDeletionException;
-import com.Projekt.Bankomat.Exceptions.InvalidDepositException;
 import com.Projekt.Bankomat.Generators;
+import com.Projekt.Bankomat.IService.IBankAccountService;
 import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Repository.BankAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-public class BankAccountService implements IBankAccountService{
+public class BankAccountService implements IBankAccountService {
     private final BankAccountRepo bankAccountRepo;
     private final UserService userService;
 
@@ -54,6 +52,11 @@ public class BankAccountService implements IBankAccountService{
         bankAccountRepo.save(zKonta);
         bankAccountRepo.save(doKonta);
         return true;
+    }
+
+    public void paymentToAccount(BankAccount bankAccount, BigDecimal amount){
+        bankAccount.setBalance(bankAccount.getBalance().add(amount));
+        bankAccountRepo.save(bankAccount);
     }
     @Override
     public List<BankAccount> getUserBankAccounts(String email){

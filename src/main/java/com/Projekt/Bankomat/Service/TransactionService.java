@@ -3,6 +3,7 @@ package com.Projekt.Bankomat.Service;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.InvalidTransactionException;
+import com.Projekt.Bankomat.IService.ITransactionService;
 import com.Projekt.Bankomat.Models.Transaction;
 import com.Projekt.Bankomat.Repository.TransactionRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class TransactionService implements ITransactionService{
+public class TransactionService implements ITransactionService {
     private final TransactionRepo transactionRepo;
     private final BankAccountService bankAccountService;
     @Autowired

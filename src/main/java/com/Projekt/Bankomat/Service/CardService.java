@@ -5,6 +5,7 @@ import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
 import com.Projekt.Bankomat.Exceptions.CardNotFoundException;
 import com.Projekt.Bankomat.Generators;
+import com.Projekt.Bankomat.IService.ICardService;
 import com.Projekt.Bankomat.Models.Card;
 import com.Projekt.Bankomat.Repository.CardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
-public class CardService implements ICardService{
+public class CardService implements ICardService {
     private final CardRepo cardRepo;
     private final TransactionService transactionService;
     private final BankAccountService bankAccountService;
