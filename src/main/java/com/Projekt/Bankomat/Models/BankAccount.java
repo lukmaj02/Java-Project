@@ -1,6 +1,7 @@
 package com.Projekt.Bankomat.Models;
 
 import com.Projekt.Bankomat.Enums.AccountType;
+import com.Projekt.Bankomat.Enums.CreditStatus;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,6 +34,10 @@ public class BankAccount {
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
     @OneToMany(
             mappedBy = "bankAccount",
             fetch = FetchType.EAGER,
@@ -41,10 +46,6 @@ public class BankAccount {
     )
     private Set<Card> cards;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
-
     @OneToMany(
             mappedBy = "bankAccountDeposit",
             fetch = FetchType.EAGER,
@@ -52,6 +53,14 @@ public class BankAccount {
             orphanRemoval = true
     )
     private Set<Deposit> deposits;
+
+    @OneToMany(
+            mappedBy = "bankAccountCredit",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Credit> credits;
 
     @Override
     public String toString() {

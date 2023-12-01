@@ -47,7 +47,7 @@ public class AppConfig {
 //                        TransactionType.PRZELEW_EKSPRESOWY);
                 //bankAccountService.deleteAccount("78190456231890724568903214");
                 //depositService.suspendDeposit("dc29955b-2d42-4ab7-bee7-a2b40fe0581e");
-                userService.deleteUser("krzysztof.gonciarz@gmail.com");
+                //userService.deleteUser("krzysztof.gonciarz@gmail.com");
             }
             catch(RuntimeException e){
                 e.printStackTrace();

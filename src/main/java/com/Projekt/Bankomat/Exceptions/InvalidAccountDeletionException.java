@@ -1,5 +1,6 @@
 package com.Projekt.Bankomat.Exceptions;
 
+import com.Projekt.Bankomat.Enums.CreditStatus;
 import com.Projekt.Bankomat.Enums.DepositStatus;
 
 import java.math.BigDecimal;
@@ -11,5 +12,9 @@ public class InvalidAccountDeletionException extends RuntimeException{
     }
     public InvalidAccountDeletionException(DepositStatus depositStatus){
         super("Nie mozna usunac konta! Na koncie pozostały aktywne lokaty!");
+    }
+
+    public InvalidAccountDeletionException(CreditStatus creditStatus) {
+        super("Nie mozna usunac konta! Na koncie pozostały aktywne kredyty!");
     }
 }

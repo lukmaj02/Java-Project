@@ -1,6 +1,7 @@
 package com.Projekt.Bankomat.Service;
 
 import com.Projekt.Bankomat.Enums.AccountType;
+import com.Projekt.Bankomat.Enums.CreditStatus;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.DepositStatus;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
@@ -92,6 +93,8 @@ public class BankAccountService implements IBankAccountService {
             throw new InvalidAccountDeletionException(account.getBalance());
         if(account.getDeposits().stream().anyMatch(deposit -> deposit.getDepositStatus().equals(ACTIVE)))
             throw new InvalidAccountDeletionException(ACTIVE);
+        if(account.getCredits().stream().anyMatch(credit -> credit.getCreditStatus().equals(CreditStatus.ACTIVE)))
+            throw new InvalidAccountDeletionException(CreditStatus.ACTIVE);
 
         bankAccountRepo.delete(account);
     }
