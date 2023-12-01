@@ -1,16 +1,12 @@
 package com.Projekt.Bankomat;
 
-import com.Projekt.Bankomat.Enums.CurrencyType;
-import com.Projekt.Bankomat.Enums.DepositType;
-import com.Projekt.Bankomat.Enums.TransactionType;
+import com.Projekt.Bankomat.Enums.*;
 import com.Projekt.Bankomat.Repository.DepositRepository;
-import com.Projekt.Bankomat.Service.BankAccountService;
-import com.Projekt.Bankomat.Service.DepositService;
-import com.Projekt.Bankomat.Service.TransactionService;
-import com.Projekt.Bankomat.Service.UserService;
+import com.Projekt.Bankomat.Service.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.math.BigDecimal;
 import java.util.concurrent.ExecutorService;
@@ -30,7 +26,8 @@ public class AppConfig {
                                                DepositRepository depositRepository,
                                                UserService userService,
                                                TransactionService transactionService,
-                                               BankAccountService bankAccountService){
+                                               BankAccountService bankAccountService,
+                                               CreditService creditService){
         return args -> {
             try{
                 //depositService.createDeposit("84327494823748210194574587", DepositType.ANNUAL, BigDecimal.valueOf(1000));
@@ -48,6 +45,15 @@ public class AppConfig {
                 //bankAccountService.deleteAccount("78190456231890724568903214");
                 //depositService.suspendDeposit("dc29955b-2d42-4ab7-bee7-a2b40fe0581e");
                 //userService.deleteUser("krzysztof.gonciarz@gmail.com");
+                //creditService.requestCredit("78190456231890724568903214", BigDecimal.valueOf(1000), 20, CreditType.CONST);
+                //creditService.activeCredit("c8038902-de92-4fcf-a9f0-ebc508fc1e5f");
+//                transactionService.createTransaction("45678901234567890123456789",
+//                        "59013467890234126789012345",
+//                        BigDecimal.valueOf(7000000),
+//                        "za wczoraj",
+//                        CurrencyType.ZLOTY,
+//                        TransactionType.PRZELEW_EKSPRESOWY);
+                //creditService.creditsDay();
             }
             catch(RuntimeException e){
                 e.printStackTrace();

@@ -4,10 +4,7 @@ import com.Projekt.Bankomat.Enums.AccountType;
 import com.Projekt.Bankomat.Enums.CreditStatus;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.DepositStatus;
-import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
-import com.Projekt.Bankomat.Exceptions.InvalidAccountDeletionException;
-import com.Projekt.Bankomat.Exceptions.InvalidCurrencyTypeException;
-import com.Projekt.Bankomat.Exceptions.InvalidTransactionException;
+import com.Projekt.Bankomat.Exceptions.*;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.IService.IBankAccountService;
 import com.Projekt.Bankomat.Models.BankAccount;
@@ -64,7 +61,7 @@ public class BankAccountService implements IBankAccountService {
     }
 
     public void withdrawFromAccount(BankAccount bankAccount, BigDecimal amount){
-        if(bankAccount.getBalance().compareTo(amount) < 0) throw new InvalidTransactionException();
+        if(bankAccount.getBalance().compareTo(amount) < 0) throw new InvalidWithdrawException();
         bankAccount.setBalance(bankAccount.getBalance().subtract(amount));
         bankAccountRepo.save(bankAccount);
     }
@@ -88,7 +85,8 @@ public class BankAccountService implements IBankAccountService {
 
     @Override
     public void deleteAccount(String accountNr){
-        var account = bankAccountRepo.findByAccountNr(accountNr).orElseThrow(() -> new BankAccountNotFoundException(accountNr));
+        var account = bankAccountRepo.findByAccountNr(accountNr)
+                .orElseThrow(() -> new BankAccountNotFoundException(accountNr));
         if(account.getBalance().compareTo(BigDecimal.ZERO) > 0)
             throw new InvalidAccountDeletionException(account.getBalance());
         if(account.getDeposits().stream().anyMatch(deposit -> deposit.getDepositStatus().equals(ACTIVE)))

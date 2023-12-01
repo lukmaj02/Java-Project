@@ -8,6 +8,7 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
 
+
 @Getter
 @Setter
 @Builder
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Entity(name = "CREDIT")
 public class Credit {
+
     @Id
     @UuidGenerator
     @Column(name = "creditId", nullable = false)
@@ -41,7 +43,7 @@ public class Credit {
     private CreditStatus creditStatus;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "accountId", nullable = false)
     private BankAccount bankAccountCredit;
 

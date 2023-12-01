@@ -3,6 +3,7 @@ package com.Projekt.Bankomat.Service;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.InvalidTransactionException;
+import com.Projekt.Bankomat.Exceptions.InvalidWithdrawException;
 import com.Projekt.Bankomat.IService.ITransactionService;
 import com.Projekt.Bankomat.Models.Transaction;
 import com.Projekt.Bankomat.Repository.TransactionRepo;
@@ -51,7 +52,7 @@ public class TransactionService implements ITransactionService {
         try{
             transaction.setValid(bankAccountService.isPaymentValid(fromAccountNr,toAccountNr,amount));
             transactionRepo.save(transaction);
-        }catch(InvalidTransactionException e){
+        }catch(InvalidWithdrawException e){
             transaction.setValid(false);
             transactionRepo.save(transaction);
             throw new InvalidTransactionException();
