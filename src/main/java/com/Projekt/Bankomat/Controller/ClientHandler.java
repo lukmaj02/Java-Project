@@ -7,7 +7,7 @@ import com.Projekt.Bankomat.Enums.CardType;
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.*;
-import com.Projekt.Bankomat.Service.*;
+import com.Projekt.Bankomat.IService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import static com.Projekt.Bankomat.Controller.Mapper.*;
@@ -28,21 +28,23 @@ public class ClientHandler implements Callable<String> {
     private final ITransactionService transactionService;
     private final IBankAccountService bankAccountService;
     private final ICardService cardService;
-    private final IAdminService adminService;
+
     private final DecryptionManager decryptionManager;
+    private final IDepositService depositService;
 
     @Autowired
     public ClientHandler(IUserService userService,
                          ITransactionService transactionService,
                          IBankAccountService bankAccountService,
                          ICardService cardService,
-                         IAdminService adminService, DecryptionManager decryptionManager) {
+                         DecryptionManager decryptionManager,
+                         IDepositService depositService) {
         this.userService = userService;
         this.transactionService = transactionService;
         this.bankAccountService = bankAccountService;
         this.cardService = cardService;
-        this.adminService = adminService;
         this.decryptionManager = decryptionManager;
+        this.depositService = depositService;
     }
 
     public void initSocket(Socket clientSocket){
@@ -98,12 +100,10 @@ public class ClientHandler implements Callable<String> {
             case DELETE -> userService.deleteUser(data);
             case REGISTER -> userService.registerUser(toUserDto(data));
             case EDIT -> userService.editUserInformations(toUserDto(data));
-            case GET_USER -> systemResponse += (adminService.getUser(data));
             case LOGIN -> {
                 var loginInf = toLogin(data);
                 systemResponse += (userService.login(loginInf[0], loginInf[1]).toString());
             }
-            case GET_ALL -> listToString(adminService.getAllUsers());
             default -> throw new InvalidCommandException();
         }
         return systemResponse;

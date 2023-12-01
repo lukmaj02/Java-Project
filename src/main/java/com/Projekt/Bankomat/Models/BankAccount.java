@@ -45,6 +45,14 @@ public class BankAccount {
     @JoinColumn(name = "userId")
     private User user;
 
+    @OneToMany(
+            mappedBy = "bankAccountDeposit",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Deposit> deposits;
+
     @Override
     public String toString() {
         return accountId + "," +

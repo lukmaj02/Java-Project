@@ -2,6 +2,8 @@ package com.Projekt.Bankomat;
 
 
 import com.Projekt.Bankomat.Controller.ClientHandler;
+import com.Projekt.Bankomat.Enums.DepositType;
+import com.Projekt.Bankomat.Models.Deposit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -38,7 +40,6 @@ public class BankomatApplication {
 			System.out.println("Failed to wire DecryptionManager");
 			System.exit(-1);
 		}
-
 
 		while(true){
 			Socket clientSocket = serverSocket.accept();

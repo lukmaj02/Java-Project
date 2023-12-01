@@ -1,4 +1,4 @@
-package com.Projekt.Bankomat.Service;
+package com.Projekt.Bankomat.IService;
 
 import com.Projekt.Bankomat.Enums.CurrencyType;
 import com.Projekt.Bankomat.Enums.TransactionType;

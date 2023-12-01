@@ -5,6 +5,8 @@ import com.Projekt.Bankomat.Exceptions.BadCredentialsException;
 import com.Projekt.Bankomat.Exceptions.BankAccountExistsException;
 import com.Projekt.Bankomat.Exceptions.UserExistsException;
 import com.Projekt.Bankomat.Exceptions.UserNotFoundException;
+import com.Projekt.Bankomat.IService.IAdminService;
+import com.Projekt.Bankomat.IService.IUserService;
 import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Repository.UserRepo;
@@ -37,7 +39,9 @@ public class UserService implements IUserService, IAdminService {
         uzytkownik.setFirstName(userDto.getFirstName());
         uzytkownik.setLastName(userDto.getLastName());
         uzytkownik.setAddress(userDto.getAddress());
+        uzytkownik.setCity(userDto.getCity());
         uzytkownik.setPhoneNumber(userDto.getPhoneNumber());
+        uzytkownik.setMaritalStatus(userDto.getMaritalStatus());
         userRepo.save(uzytkownik);
     }
     public Set<BankAccount> getUserBankAccounts(String email){

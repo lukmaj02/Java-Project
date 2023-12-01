@@ -1,10 +1,10 @@
-package com.Projekt.Bankomat.Service;
+package com.Projekt.Bankomat.IService;
 
 import com.Projekt.Bankomat.Models.User;
 
 import java.util.List;
 
-public interface IAdminService extends IUserService{
+public interface IAdminService {
     User getUser(String email);
     List<User> getAllUsers();
 }

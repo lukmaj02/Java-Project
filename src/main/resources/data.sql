@@ -7,38 +7,50 @@ INSERT INTO _USER (
             password,
             date_of_birth,
             address,
-            phone_number)
+            city,
+            phone_number,
+            gender,
+            marital_status,
+            role)
     VALUES
-        --((SELECT uuid()),
         ('a2534a89-8706-4fce-94ac-aad1fbcc805f',
         'Krzysztof',
         'Gonciarz',
         'krzysztof.gonciarz@gmail.com',
         'password123',
         '2002-12-10',
-        'Kwiatowa 4a, Krakow',
-        '123456789'),
+        'Kwiatowa 4a',
+        'Kraków',
+        '123456789',
+        'MALE',
+        'MARRIED',
+        "USER"),
         (
-        --(SELECT uuid()),
         '15c43a37-f6ca-420b-9b30-ebd4010d45df',
         'Janusz',
         'Korwin',
         'janusz.korwin@gmail.com',
         'newpassword123',
         '1980-10-06',
-        'Polna 64, Krakow',
-        '987654321'
-        ),
+        'Polna 64',
+        'Kraków',
+        '987654321',
+        'MALE',
+        'MARRIED',
+        'USER'),
         (
-        --(SELECT uuid()),
         'f74bec4d-3362-42d0-83cb-f56813f2a576',
         'Grazyna',
         'Wielka',
         'grazyna.wielka@gmail.com',
         'oldpassword123',
         '1950-01-01',
-        'Sloneczna 5, Krakow',
-        '192837465');
+        'Sloneczna 5',
+        'Kraków',
+        '192837465',
+        'FEMALE',
+        'DIVORCED',
+        'USER');
 --DODANIE KONT BANKOWYCH
 INSERT INTO BANK_ACCOUNT (user_id,
                            account_id,
@@ -48,7 +60,6 @@ INSERT INTO BANK_ACCOUNT (user_id,
                            currency_type)
     VALUES
         ((Select user_id from _USER where first_name = 'Krzysztof' and last_name = 'Gonciarz'),
-        --(SELECT uuid()),
         '52961be6-0770-41eb-acd6-721ab011919f',
         '78190456231890724568903214',
         'OSOBISTE',
@@ -216,6 +227,25 @@ VALUES
     'DEBETOWA',
     (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr ='59013467890234126789012345'),
     FALSE);
+
+INSERT INTO DEPOSIT(deposit_id,
+                    deposit_type,
+                    creation_date,
+                    finish_date,
+                    amount,
+                    deposit_status,
+                    account_id,
+                    currency_type)
+VALUES(
+       '44b08bab-9238-409a-8863-67ccedbbb745',
+       'ANNUAL',
+       '2023-11-11',
+       '2024-11-11',
+       20000.00,
+       'ACTIVE',
+       (SELECT account_id FROM BANK_ACCOUNT WHERE account_nr = '78190456231890724568903214'),
+       'ZLOTY'
+);
 
 
 
