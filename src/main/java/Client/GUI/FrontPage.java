@@ -34,7 +34,7 @@ public class FrontPage extends Application {
         stage.show();
     }
 
-    public void executeAnAction(ActionEvent actionEvent) {
+    public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == logInButton) {
             // TODO add change scene
             System.out.println("User email: " + emailTextField.getText() + " user password: " + userPasswordPasswordField.getText() + ".");
