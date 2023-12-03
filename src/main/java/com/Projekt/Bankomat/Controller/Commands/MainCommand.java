@@ -5,5 +5,7 @@ public enum MainCommand {
     TRANSACTION,
     BANK_ACCOUNT,
     CARD,
+    DEPOSIT,
+    CREDIT,
     EXIT
 }

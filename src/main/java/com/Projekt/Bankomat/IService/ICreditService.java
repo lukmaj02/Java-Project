@@ -12,4 +12,5 @@ public interface ICreditService {
 
     void activeCredit(String creditId);
     void refuseCredit(String creditId);
+    void reactiveCredit(String creditId);
 }

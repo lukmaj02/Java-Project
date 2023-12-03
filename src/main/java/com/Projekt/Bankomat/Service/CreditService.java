@@ -30,6 +30,7 @@ public class CreditService implements ICreditService {
     }
 
     @Override
+    @Transactional
     public void requestCredit(String accountNr, BigDecimal creditAmount, Integer installmentCount, CreditType creditType) {
         var account = bankAccountService.getAccountByAccountNr(accountNr);
         var credit = Credit.builder()
@@ -61,6 +62,15 @@ public class CreditService implements ICreditService {
         var credit = creditRepo.findById(creditId).orElseThrow(CreditNotFoundExecption::new);
         if(credit.getCreditStatus().equals(CreditStatus.PROCESSED)){
             credit.setCreditStatus(CreditStatus.REFUSED);
+            creditRepo.save(credit);
+        }
+    }
+
+    @Override
+    public void reactiveCredit(String creditId) {
+        var credit = creditRepo.findById(creditId).orElseThrow(CreditNotFoundExecption::new);
+        if(credit.getCreditStatus().equals((CreditStatus.FAILED))){
+            credit.setCreditStatus(CreditStatus.ACTIVE);
             creditRepo.save(credit);
         }
     }
