@@ -75,7 +75,7 @@ public class CreditService implements ICreditService {
         }
     }
 
-    private BigDecimal calculateInstallment(double creditAmount,
+    protected BigDecimal calculateInstallment(double creditAmount,
                                            double lendingRate,
                                             int installmentCount) {
         double rata = (creditAmount * lendingRate) / (12 * (1 - Math.pow(12 /(12 +lendingRate),installmentCount)));
@@ -84,7 +84,7 @@ public class CreditService implements ICreditService {
 
     @Scheduled(cron = "0 15 10 15 * ?", zone = "Europe/Paris")
     @Transactional
-    private void creditsDay(){
+    protected void creditsDay(){
         var credits = creditRepo.findAllByCreditStatus(CreditStatus.ACTIVE);
         for (Credit credit: credits) {
             try{

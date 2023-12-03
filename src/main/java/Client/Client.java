@@ -26,7 +26,8 @@ public class Client {
         catch (Exception e){
             System.out.println("Decryption Manager Failed to launch");
         }
-        String msg = "TRANSACTION,SUC_FROM_ACC,78190456231890724568903214";
+
+        String msg = "BANK_ACCOUNT,DELETE,45678901234567890123456789";
         sender.println(encrypt(msg));
         while(true){
             String encryptedMsg = reader.readLine();

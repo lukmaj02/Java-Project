@@ -53,7 +53,6 @@ public class AppConfig {
 //                        "za wczoraj",
 //                        CurrencyType.ZLOTY,
 //                        TransactionType.PRZELEW_EKSPRESOWY);
-                //creditService.creditsDay();
             }
             catch(RuntimeException e){
                 e.printStackTrace();

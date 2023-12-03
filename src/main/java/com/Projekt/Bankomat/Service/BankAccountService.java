@@ -89,9 +89,14 @@ public class BankAccountService implements IBankAccountService {
                 .orElseThrow(() -> new BankAccountNotFoundException(accountNr));
         if(account.getBalance().compareTo(BigDecimal.ZERO) > 0)
             throw new InvalidAccountDeletionException(account.getBalance());
-        if(account.getDeposits().stream().anyMatch(deposit -> deposit.getDepositStatus().equals(ACTIVE)))
+        if(account.getDeposits()
+                .stream()
+                .anyMatch(deposit -> deposit.getDepositStatus().equals(ACTIVE)))
             throw new InvalidAccountDeletionException(ACTIVE);
-        if(account.getCredits().stream().anyMatch(credit -> credit.getCreditStatus().equals(CreditStatus.ACTIVE)))
+        if(account.getCredits()
+                .stream()
+                .anyMatch(credit -> credit.getCreditStatus().equals(CreditStatus.ACTIVE)
+                        || credit.getCreditStatus().equals(CreditStatus.FAILED)))
             throw new InvalidAccountDeletionException(CreditStatus.ACTIVE);
 
         bankAccountRepo.delete(account);
