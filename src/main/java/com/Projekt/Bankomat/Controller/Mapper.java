@@ -18,6 +18,7 @@ public class Mapper {
         return data.split(",",2);
     }
     public static String[] toCredit(String data) {return data.split(",",4);}
+    public static String[] toDeposit(String data) {return data.split(",",3);}
 
     public static UserDto toUserDto(String data){
         var splitedData = data.split(",", 7);
