@@ -32,19 +32,23 @@ public class ClientHandler implements Callable<String> {
     private final DecryptionManager decryptionManager;
     private final IDepositService depositService;
 
+    private final ICreditService creditService;
+
     @Autowired
     public ClientHandler(IUserService userService,
                          ITransactionService transactionService,
                          IBankAccountService bankAccountService,
                          ICardService cardService,
                          DecryptionManager decryptionManager,
-                         IDepositService depositService) {
+                         IDepositService depositService,
+                         ICreditService creditService) {
         this.userService = userService;
         this.transactionService = transactionService;
         this.bankAccountService = bankAccountService;
         this.cardService = cardService;
         this.decryptionManager = decryptionManager;
         this.depositService = depositService;
+        this.creditService = creditService;
     }
 
     public void initSocket(Socket clientSocket){
