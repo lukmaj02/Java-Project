@@ -73,6 +73,8 @@ public class ClientHandler implements Callable<String> {
                         case TRANSACTION -> response = transactionController(TransactionCommand.valueOf(command), data);
                         case BANK_ACCOUNT -> response = bankAccountController(BankAccountCommand.valueOf(command), data);
                         case CARD -> response = cardController(CardCommand.valueOf(command), data);
+                        case CREDIT -> response = creditController(CreditCommand.valueOf(command),data);
+                        case DEPOSIT -> response = depositController(DepositCommand.valueOf(command),data);
                         default -> throw new InvalidCommandException();
                     }
                     sender.println(response);
@@ -98,6 +100,7 @@ public class ClientHandler implements Callable<String> {
                 var dataTable = toCredit(data);
                 creditService.requestCredit(dataTable[0], new BigDecimal(dataTable[1]), Integer.valueOf(dataTable[2]), CreditType.valueOf(dataTable[3]));
             }
+            default -> throw new InvalidCommandException();
         }
         return systemResponse;
     }
@@ -111,6 +114,7 @@ public class ClientHandler implements Callable<String> {
             }
             case FINISH -> depositService.finishDeposit(data);
             case SUSPEND -> depositService.suspendDeposit(data);
+            default -> throw new InvalidCommandException();
         }
         return systemResponse;
     }
