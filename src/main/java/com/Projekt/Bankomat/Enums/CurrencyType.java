@@ -1,9 +1,9 @@
 package com.Projekt.Bankomat.Enums;
 
 public enum CurrencyType {
-    ZLOTY,
+    PLN,
     EURO,
-    DOLAR_AMERYKANSKI,
-    RUBEL,
-    KORONA_NORWESKA,
+    US_DOLLAR,
+    RUBLE,
+    NORWEGIAN_KRONE,
 }

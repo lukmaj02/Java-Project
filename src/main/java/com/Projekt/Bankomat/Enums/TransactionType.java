@@ -1,8 +1,8 @@
 package com.Projekt.Bankomat.Enums;
 
 public enum TransactionType {
-    PRZELEW_TRADYCYJNY,
-    PRZELEW_EKSPRESOWY,
+    TRADITIONAL_TRANSFER,
+    EXPRESS_TRANSFER,
     BLIK,
-    PRZELEW_KARTA
+    CREDIT_CARD_TRANSFER
 }

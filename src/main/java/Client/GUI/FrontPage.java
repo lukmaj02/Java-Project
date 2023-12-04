@@ -3,7 +3,6 @@ package Client.GUI;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
@@ -50,12 +48,26 @@ public class FrontPage extends Application {
     }
 
 
-    private void openFormula(ActionEvent event) throws IOException {
+    public void openFormula(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstFormulaPage.fxml"));
         root = loader.load();
 
         FirstFormulaPage formulaPage = loader.getController();
-        formulaPage.changeFormulaNumber(1); // change randomly|depending on users count
+        formulaPage.initializeFormula(1); // change randomly|depending on users count
+
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
+    }
+
+    public void openSecondFormulaPage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SecondFormulaPage.fxml"));
+        root = loader.load();
+
+        SecondFormulaPage secondFormulaPage = loader.getController();
+        secondFormulaPage.initializeFormula(1); // change randomly|depending on users count
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

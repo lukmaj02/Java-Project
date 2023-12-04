@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.GUI.SecondFormulaPage"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.SecondFormulaPage">
+   <children>
+      <Label fx:id="formulaLabel" layoutX="238.0" layoutY="14.0" prefHeight="40.0" prefWidth="415.0" text="Formula Page no." AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="Times New Roman Bold" size="36.0" />
+         </font>
+      </Label>
+      <Text layoutX="311.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 2: Additional Details" AnchorPane.bottomAnchor="680.0" AnchorPane.leftAnchor="311.0" AnchorPane.topAnchor="46.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="144.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="140.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="110.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Educational Qualification" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="190.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="144.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="144.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Type" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="290.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="144.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Currency Type" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="340.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="144.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Existing Account" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="440.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="141.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senior Citizen" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="390.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="educationalComboBox" layoutX="385.0" layoutY="187.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" />
+      <ComboBox fx:id="categoryComboBox" layoutX="385.0" layoutY="137.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
+      <ComboBox fx:id="occupationComboBox" layoutX="385.0" layoutY="237.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
+      <ComboBox fx:id="cardTypeComboBox" layoutX="385.0" layoutY="287.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
+      <ComboBox fx:id="currencyTypeComboBox" layoutX="385.0" layoutY="337.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
+      <RadioButton fx:id="seniorCitizenYesRadioButton" layoutX="431.0" layoutY="392.0" mnemonicParsing="false" onAction="#executeAnAction" text="Yes" AnchorPane.rightAnchor="325.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="seniorCitizenNoRadioButton" layoutX="578.0" layoutY="394.0" mnemonicParsing="false" onAction="#executeAnAction" text="No" AnchorPane.rightAnchor="162.0">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="existingAccountYesRadioButton" layoutX="432.0" layoutY="439.0" mnemonicParsing="false" onAction="#executeAnAction" text="Yes">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="existingAccountNoRadioButton" layoutX="599.0" layoutY="441.0" mnemonicParsing="false" onAction="#executeAnAction" text="No">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </RadioButton>
+      <Button fx:id="previousPageButton" layoutX="79.0" layoutY="690.0" mnemonicParsing="false" onAction="#executeAnAction" text="Previous Page">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="nextPageButton" layoutX="660.0" layoutY="691.0" mnemonicParsing="false" onAction="#executeAnAction" text="Next Page">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>

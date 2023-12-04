@@ -4,17 +4,14 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class FirstFormulaPage extends Application {
     @FXML
-    public ComboBox<String> maritalStatusComboBox;
+    private ComboBox<String> maritalStatusComboBox;
     @FXML
     private Button nextPageButton;
     @FXML
@@ -42,6 +39,8 @@ public class FirstFormulaPage extends Application {
     @FXML
     private Label formulaLabel;
 
+    public FrontPage frontPage = new FrontPage(); // to use function from this class
+
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -53,10 +52,11 @@ public class FirstFormulaPage extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+        stage.centerOnScreen();
     }
 
-    public void changeFormulaNumber(Integer number) {
-        formulaLabel.setText("First Formula Page no. " + Integer.toString(number));
+    public void initializeFormula(Integer number) {
+        formulaLabel.setText("Formula Page no. " + Integer.toString(number));
         initalizeComboBox();
     }
 
@@ -76,10 +76,8 @@ public class FirstFormulaPage extends Application {
             System.out.println(maritalStatusComboBox.getValue());
             // to check if everything is okay.
         } else if (actionEvent.getSource() == nextPageButton) {
-            //TODO change scene
-            System.out.println("Next page button click.");
+            frontPage.openSecondFormulaPage(actionEvent);
         } else if (actionEvent.getSource() == previousPageButton) {
-            FrontPage frontPage = new FrontPage();
             frontPage.returnToFrontPage(actionEvent);
         }
     }

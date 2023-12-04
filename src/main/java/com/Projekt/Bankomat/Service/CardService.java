@@ -73,7 +73,7 @@ public class CardService implements ICardService {
                 kwota,
                 "Platnosc karta",
                 kontoKarty.getCurrencyType(),
-                TransactionType.PRZELEW_KARTA
+                TransactionType.CREDIT_CARD_TRANSFER
                 );
     }
 }

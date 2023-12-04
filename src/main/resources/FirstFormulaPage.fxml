@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.FirstFormulaPage">
+<AnchorPane prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.FirstFormulaPage">
    <children>
       <Text layoutX="311.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1: Personal Details" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="310.8212890625" AnchorPane.topAnchor="47.576171875">
          <font>
@@ -78,17 +78,17 @@
          </font>
       </TextField>
       <DatePicker fx:id="dateOfBirthDatePicker" layoutX="350.0" layoutY="238.0" onAction="#executeAnAction" prefHeight="27.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="238.0" />
-      <RadioButton fx:id="maleRadioButton" layoutX="417.0" layoutY="293.0" mnemonicParsing="false" onAction="#executeAnAction" text="Male">
+      <RadioButton fx:id="maleRadioButton" layoutX="452.0" layoutY="290.0" mnemonicParsing="false" onAction="#executeAnAction" text="Male" AnchorPane.rightAnchor="344.0">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="femaleRadioButton" layoutX="550.0" layoutY="293.0" mnemonicParsing="false" onAction="#executeAnAction" text="Female" AnchorPane.rightAnchor="183.8916015625">
+      <RadioButton fx:id="femaleRadioButton" layoutX="621.0" layoutY="290.0" mnemonicParsing="false" onAction="#executeAnAction" text="Female" AnchorPane.rightAnchor="162.0">
          <font>
             <Font name="Times New Roman" size="14.0" />
          </font>
       </RadioButton>
-      <TextField fx:id="emailTextField" layoutX="386.0" layoutY="336.0" onAction="#executeAnAction" prefHeight="27.0" prefWidth="300.0" AnchorPane.rightAnchor="124.9384765625">
+      <TextField fx:id="emailTextField" layoutX="386.0" layoutY="336.0" onAction="#executeAnAction" prefHeight="27.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -123,11 +123,11 @@
             <Font name="Times New Roman" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="formulaLabel" layoutX="372.0" layoutY="31.0" text="First Formula Page no. " AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="195.9384765625" AnchorPane.topAnchor="6.0">
+      <Label fx:id="formulaLabel" layoutX="372.0" layoutY="31.0" text="Formula Page no. " AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="195.9384765625" AnchorPane.topAnchor="6.0">
          <font>
             <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Label>
-      <ComboBox fx:id="maritalStatusComboBox" layoutX="425.0" layoutY="386.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" />
+      <ComboBox fx:id="maritalStatusComboBox" layoutX="425.0" layoutY="386.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
    </children>
 </AnchorPane>

@@ -28,7 +28,7 @@
       </Text>
       <TextField fx:id="emailTextField" layoutX="273.0" layoutY="173.0" onAction="#executeAnAction" prefHeight="26.0" prefWidth="181.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="180.0" />
       <PasswordField fx:id="userPasswordPasswordField" layoutX="302.0" layoutY="244.0" onAction="#executeAnAction" prefHeight="26.0" prefWidth="181.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="260.0" />
-      <Button fx:id="signUpButton" layoutX="139.0" layoutY="340.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="31.0" prefWidth="60.0" text="Sign up" AnchorPane.leftAnchor="150.0" />
-      <Button fx:id="logInButton" layoutX="324.0" layoutY="340.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="31.0" prefWidth="60.0" text="Log in" AnchorPane.rightAnchor="150.0" />
+      <Button fx:id="signUpButton" layoutX="149.0" layoutY="340.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="31.0" prefWidth="60.0" text="Sign up" AnchorPane.leftAnchor="149.0" />
+      <Button fx:id="logInButton" layoutX="322.0" layoutY="340.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="31.0" prefWidth="60.0" text="Log in" AnchorPane.rightAnchor="135.0" />
    </children>
 </AnchorPane>
