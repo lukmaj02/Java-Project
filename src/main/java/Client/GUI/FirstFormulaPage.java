@@ -4,13 +4,13 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class FirstFormulaPage extends Application {
     @FXML
@@ -43,6 +43,8 @@ public class FirstFormulaPage extends Application {
     private TextField stateTextField;
     @FXML
     private TextField pinCodeTextField;
+    @FXML
+    private Label formulaLabel;
 
 
     @Override
@@ -53,10 +55,15 @@ public class FirstFormulaPage extends Application {
         Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
-    public void executeAnAction(ActionEvent actionEvent) {
+    public void changeFormulaNumber(Integer number) {
+        formulaLabel.setText("First Formula Page no. " + Integer.toString(number));
+    }
+
+    public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == maleRadioButton) {
             if (femaleRadioButton.isSelected())
                 femaleRadioButton.setSelected(false);
@@ -82,8 +89,8 @@ public class FirstFormulaPage extends Application {
             //TODO change scene
             System.out.println("Next page button click.");
         } else if (actionEvent.getSource() == previousPageButton) {
-            //TODO change Scene
-            System.out.println("Previous page button click.");
+            FrontPage frontPage = new FrontPage();
+            frontPage.returnToFrontPage(actionEvent);
         }
     }
 

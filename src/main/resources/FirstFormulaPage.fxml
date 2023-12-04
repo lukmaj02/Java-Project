@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,11 +11,6 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.FirstFormulaPage">
    <children>
-      <Text fx:id="applicationFormText" layoutX="263.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Application Form" wrappingWidth="335.212890625" AnchorPane.bottomAnchor="509.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="215.0" AnchorPane.topAnchor="10.0">
-         <font>
-            <Font name="Times New Roman Bold" size="36.0" />
-         </font>
-      </Text>
       <Text layoutX="311.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1: Personal Details" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="310.8212890625">
          <font>
             <Font size="18.0" />
@@ -141,5 +137,10 @@
             <Font name="Times New Roman" size="16.0" />
          </font>
       </Button>
+      <Label fx:id="formulaLabel" layoutX="372.0" layoutY="31.0" text="First Formula Page no. " AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font name="Times New Roman Bold" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
