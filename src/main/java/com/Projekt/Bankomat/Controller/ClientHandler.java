@@ -2,10 +2,7 @@ package com.Projekt.Bankomat.Controller;
 
 import com.Projekt.Bankomat.Controller.Commands.*;
 import com.Projekt.Bankomat.DecryptionManager;
-import com.Projekt.Bankomat.Enums.AccountType;
-import com.Projekt.Bankomat.Enums.CardType;
-import com.Projekt.Bankomat.Enums.CurrencyType;
-import com.Projekt.Bankomat.Enums.TransactionType;
+import com.Projekt.Bankomat.Enums.*;
 import com.Projekt.Bankomat.Exceptions.*;
 import com.Projekt.Bankomat.IService.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +93,20 @@ public class ClientHandler implements Callable<String> {
             e.printStackTrace();
         }
         return "Task completed";
+    }
+
+    private String creditController(CreditCommand command,String data) throws  RuntimeException{
+        String systemResponse = "";
+        switch (command){
+            case ACTIVE -> creditService.activeCredit(data);
+            case REFUSE -> creditService.refuseCredit(data);
+            case REACTIVE -> creditService.reactiveCredit(data);
+            case REQUEST -> {
+                var dataTable = toCredit(data);
+                creditService.requestCredit(dataTable[0],new BigDecimal(dataTable[1]),Integer.valueOf(dataTable[2]), CreditType.valueOf(dataTable[3]));
+            }
+        }
+        return systemResponse;
     }
 
     private String userController(UserCommand command, String data) throws RuntimeException{
