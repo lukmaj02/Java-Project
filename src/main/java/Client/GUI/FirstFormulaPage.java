@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class FirstFormulaPage extends Application {
+public class FirstFormulaPage extends SceneController {
     @FXML
     private ComboBox<String> maritalStatusComboBox;
     @FXML
@@ -34,8 +34,6 @@ public class FirstFormulaPage extends Application {
     private TextField stateTextField;
     @FXML
     private Label formulaLabel;
-
-    public FrontPage frontPage = new FrontPage(); // to use function from this class
 
 
     @Override
@@ -72,9 +70,9 @@ public class FirstFormulaPage extends Application {
             System.out.println(maritalStatusComboBox.getValue());
             // to check if everything is okay.
         } else if (actionEvent.getSource() == nextPageButton) {
-            frontPage.openSecondFormulaPage(actionEvent);
+            openSecondFormulaPage(actionEvent);
         } else if (actionEvent.getSource() == previousPageButton) {
-            frontPage.returnToFrontPage(actionEvent);
+            openFrontPage(actionEvent);
         }
     }
 

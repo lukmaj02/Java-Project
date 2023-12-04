@@ -1,6 +1,5 @@
 package Client.GUI;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ThirdFormulaPage extends Application {
+public class ThirdFormulaPage extends SceneController {
     @FXML
     private Label formulaLabel;
     @FXML
@@ -33,8 +32,6 @@ public class ThirdFormulaPage extends Application {
     private TextField emailTextField;
     @FXML
     private TextField cardPinTextField;
-    @FXML
-    public FrontPage frontPage = new FrontPage(); // to use function from this class
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -55,7 +52,7 @@ public class ThirdFormulaPage extends Application {
 
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource() == previousPageButton) {
-            frontPage.openSecondFormulaPage(actionEvent);
+            openSecondFormulaPage(actionEvent);
         }
     }
 

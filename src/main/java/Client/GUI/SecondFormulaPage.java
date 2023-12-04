@@ -1,6 +1,5 @@
 package Client.GUI;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
-public class SecondFormulaPage extends Application {
+public class SecondFormulaPage extends SceneController {
 
     @FXML
     private Label formulaLabel;
@@ -34,9 +33,6 @@ public class SecondFormulaPage extends Application {
     private Button previousPageButton;
     @FXML
     private Button nextPageButton;
-
-    public FrontPage frontPage = new FrontPage(); // to use function from this class
-
 
     public void initializeFormula(Integer number) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
@@ -77,9 +73,9 @@ public class SecondFormulaPage extends Application {
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == nextPageButton) {
-            frontPage.openThirdFormulaPage(actionEvent);
+            openThirdFormulaPage(actionEvent);
         } else if (actionEvent.getSource() == previousPageButton) {
-            frontPage.openFormula(actionEvent);
+            openFormula(actionEvent);
         } else if (actionEvent.getSource() == seniorCitizenYesRadioButton) {
             if (seniorCitizenNoRadioButton.isSelected())
                 seniorCitizenNoRadioButton.setSelected(false);
