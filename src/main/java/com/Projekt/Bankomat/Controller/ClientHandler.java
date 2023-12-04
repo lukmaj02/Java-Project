@@ -48,17 +48,17 @@ public class ClientHandler implements Callable<String> {
         this.creditService = creditService;
     }
 
-    public void initSocket(Socket clientSocket){
+    public void initSocket(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
 
     @Override
     public String call() {
-        try{
+        try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter sender = new PrintWriter(clientSocket.getOutputStream(), true);
 
-            while(true){
+            while (true) {
                 String message = decryptionManager.decrypt(reader.readLine());
                 String[] part = message.split(",", 3);
                 MainCommand controller = MainCommand.valueOf(part[0].toUpperCase());
@@ -66,48 +66,55 @@ public class ClientHandler implements Callable<String> {
                 String data = part[2];
 
 
-                try{
+                try {
                     String response = "OK,";
                     switch (controller) {
-                        case USER ->
-                            response = userController(UserCommand.valueOf(command), data);
-                        case TRANSACTION ->
-                            response = transactionController(TransactionCommand.valueOf(command), data);
-                        case BANK_ACCOUNT ->
-                            response = bankAccountController(BankAccountCommand.valueOf(command), data);
-                        case CARD ->
-                            response = cardController(CardCommand.valueOf(command), data);
+                        case USER -> response = userController(UserCommand.valueOf(command), data);
+                        case TRANSACTION -> response = transactionController(TransactionCommand.valueOf(command), data);
+                        case BANK_ACCOUNT -> response = bankAccountController(BankAccountCommand.valueOf(command), data);
+                        case CARD -> response = cardController(CardCommand.valueOf(command), data);
                         default -> throw new InvalidCommandException();
                     }
                     sender.println(response);
-                }
-                catch(RuntimeException e){
+                } catch (RuntimeException e) {
                     sender.println("ERROR," + e.getMessage());
                 }
             }
-        }
-        catch(SocketException e){
+        } catch (SocketException e) {
             System.out.println("Client Disconnected");
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "Task completed";
     }
 
-    private String creditController(CreditCommand command,String data) throws  RuntimeException{
+    private String creditController(CreditCommand command, String data) throws RuntimeException {
         String systemResponse = "";
-        switch (command){
+        switch (command) {
             case ACTIVE -> creditService.activeCredit(data);
             case REFUSE -> creditService.refuseCredit(data);
             case REACTIVE -> creditService.reactiveCredit(data);
             case REQUEST -> {
                 var dataTable = toCredit(data);
-                creditService.requestCredit(dataTable[0],new BigDecimal(dataTable[1]),Integer.valueOf(dataTable[2]), CreditType.valueOf(dataTable[3]));
+                creditService.requestCredit(dataTable[0], new BigDecimal(dataTable[1]), Integer.valueOf(dataTable[2]), CreditType.valueOf(dataTable[3]));
             }
         }
         return systemResponse;
     }
+
+    private String depositController(DepositCommand command,String data) throws  RuntimeException {
+        String systemResponse = "";
+        switch(command){
+            case CREATE -> {
+                var dataTable = toDeposit(data);
+                depositService.createDeposit(dataTable[0],DepositType.valueOf(dataTable[1]),new BigDecimal(dataTable[2]));
+            }
+            case FINISH -> depositService.finishDeposit(data);
+            case SUSPEND -> depositService.suspendDeposit(data);
+        }
+        return systemResponse;
+    }
+
 
     private String userController(UserCommand command, String data) throws RuntimeException{
         String systemResponse = "";
