@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
@@ -9,9 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="750.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.FirstFormulaPage">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.FirstFormulaPage">
    <children>
-      <Text layoutX="311.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1: Personal Details" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="310.8212890625">
+      <Text layoutX="311.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1: Personal Details" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="310.8212890625" AnchorPane.topAnchor="47.576171875">
          <font>
             <Font size="18.0" />
          </font>
@@ -21,7 +22,7 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="100.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Father's name" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="190.0">
+      <Text layoutX="100.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="190.0">
          <font>
             <Font name="Times New Roman" size="20.0" />
          </font>
@@ -87,26 +88,11 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </RadioButton>
-      <TextField fx:id="emailTextField" layoutX="350.0" layoutY="338.0" onAction="#executeAnAction" prefHeight="27.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0">
+      <TextField fx:id="emailTextField" layoutX="386.0" layoutY="336.0" onAction="#executeAnAction" prefHeight="27.0" prefWidth="300.0" AnchorPane.rightAnchor="124.9384765625">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <RadioButton fx:id="marriedRadioButton" layoutX="400.0" layoutY="392.0" mnemonicParsing="false" onAction="#executeAnAction" text="Married">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="unmarriedRadioButton" layoutX="489.0" layoutY="392.0" mnemonicParsing="false" onAction="#executeAnAction" text="Unmarried">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="otherMaritalStatusRadioButton" layoutX="593.0" layoutY="392.0" mnemonicParsing="false" onAction="#executeAnAction" text="Other">
-         <font>
-            <Font name="Times New Roman" size="14.0" />
-         </font>
-      </RadioButton>
       <TextField fx:id="addressTextField" layoutX="360.0" layoutY="438.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0">
          <font>
             <Font size="14.0" />
@@ -137,10 +123,11 @@
             <Font name="Times New Roman" size="16.0" />
          </font>
       </Button>
-      <Label fx:id="formulaLabel" layoutX="372.0" layoutY="31.0" text="First Formula Page no. " AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="6.0">
+      <Label fx:id="formulaLabel" layoutX="372.0" layoutY="31.0" text="First Formula Page no. " AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="195.9384765625" AnchorPane.topAnchor="6.0">
          <font>
             <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Label>
+      <ComboBox fx:id="maritalStatusComboBox" layoutX="425.0" layoutY="386.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" />
    </children>
 </AnchorPane>

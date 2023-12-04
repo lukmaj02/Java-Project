@@ -14,6 +14,8 @@ import java.io.IOException;
 
 public class FirstFormulaPage extends Application {
     @FXML
+    public ComboBox<String> maritalStatusComboBox;
+    @FXML
     private Button nextPageButton;
     @FXML
     private Button previousPageButton;
@@ -29,12 +31,6 @@ public class FirstFormulaPage extends Application {
     private RadioButton femaleRadioButton;
     @FXML
     private TextField emailTextField;
-    @FXML
-    private RadioButton marriedRadioButton;
-    @FXML
-    private RadioButton unmarriedRadioButton;
-    @FXML
-    private RadioButton otherMaritalStatusRadioButton;
     @FXML
     private TextField addressTextField;
     @FXML
@@ -61,6 +57,12 @@ public class FirstFormulaPage extends Application {
 
     public void changeFormulaNumber(Integer number) {
         formulaLabel.setText("First Formula Page no. " + Integer.toString(number));
+        initalizeComboBox();
+    }
+
+    public void initalizeComboBox() {
+        maritalStatusComboBox.getItems().removeAll(maritalStatusComboBox.getItems());
+        maritalStatusComboBox.getItems().addAll("Single", "Married", "Divorced", "Widowed");
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
@@ -70,21 +72,9 @@ public class FirstFormulaPage extends Application {
         } else if (actionEvent.getSource() == femaleRadioButton) {
             if (maleRadioButton.isSelected())
                 maleRadioButton.setSelected(false);
-        } else if (actionEvent.getSource() == marriedRadioButton) {
-             if (unmarriedRadioButton.isSelected())
-                 unmarriedRadioButton.setSelected(false);
-             if (otherMaritalStatusRadioButton.isSelected())
-                 otherMaritalStatusRadioButton.setSelected(false);
-        } else if (actionEvent.getSource() == unmarriedRadioButton){
-            if (marriedRadioButton.isSelected())
-                marriedRadioButton.setSelected(false);
-            if (otherMaritalStatusRadioButton.isSelected())
-                otherMaritalStatusRadioButton.setSelected(false);
-        } else if (actionEvent.getSource() == otherMaritalStatusRadioButton) {
-            if (marriedRadioButton.isSelected())
-                marriedRadioButton.setSelected(false);
-            if (unmarriedRadioButton.isSelected())
-                unmarriedRadioButton.setSelected(false);
+        } else if (actionEvent.getSource() == maritalStatusComboBox) {
+            System.out.println(maritalStatusComboBox.getValue());
+            // to check if everything is okay.
         } else if (actionEvent.getSource() == nextPageButton) {
             //TODO change scene
             System.out.println("Next page button click.");
