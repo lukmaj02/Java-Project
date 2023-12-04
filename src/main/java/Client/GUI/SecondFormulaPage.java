@@ -31,10 +31,6 @@ public class SecondFormulaPage extends Application {
     @FXML
     private RadioButton seniorCitizenNoRadioButton;
     @FXML
-    private RadioButton existingAccountYesRadioButton;
-    @FXML
-    private RadioButton existingAccountNoRadioButton;
-    @FXML
     private Button previousPageButton;
     @FXML
     private Button nextPageButton;
@@ -81,8 +77,7 @@ public class SecondFormulaPage extends Application {
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == nextPageButton) {
-            //TODO open next page
-            System.out.println("Next page button click.");
+            frontPage.openThirdFormulaPage(actionEvent);
         } else if (actionEvent.getSource() == previousPageButton) {
             frontPage.openFormula(actionEvent);
         } else if (actionEvent.getSource() == seniorCitizenYesRadioButton) {
@@ -91,12 +86,6 @@ public class SecondFormulaPage extends Application {
         } else if (actionEvent.getSource() == seniorCitizenNoRadioButton) {
             if (seniorCitizenYesRadioButton.isSelected())
                 seniorCitizenYesRadioButton.setSelected(false);
-        } else if (actionEvent.getSource() == existingAccountYesRadioButton) {
-            if (existingAccountNoRadioButton.isSelected())
-                existingAccountNoRadioButton.setSelected(false);
-        } else if(actionEvent.getSource() == existingAccountNoRadioButton) {
-            if (existingAccountYesRadioButton.isSelected())
-                existingAccountYesRadioButton.setSelected(false);
         }
     }
 

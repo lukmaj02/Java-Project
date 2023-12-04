@@ -27,15 +27,11 @@ public class FirstFormulaPage extends Application {
     @FXML
     private RadioButton femaleRadioButton;
     @FXML
-    private TextField emailTextField;
-    @FXML
     private TextField addressTextField;
     @FXML
     private TextField cityTextField;
     @FXML
     private TextField stateTextField;
-    @FXML
-    private TextField pinCodeTextField;
     @FXML
     private Label formulaLabel;
 

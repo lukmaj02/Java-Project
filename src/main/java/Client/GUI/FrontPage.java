@@ -30,7 +30,6 @@ public class FrontPage extends Application {
     private Scene scene;
     private Parent root;
 
-
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -68,6 +67,20 @@ public class FrontPage extends Application {
 
         SecondFormulaPage secondFormulaPage = loader.getController();
         secondFormulaPage.initializeFormula(1); // change randomly|depending on users count
+
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
+    }
+
+    public void openThirdFormulaPage(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ThirdFormulaPage.fxml"));
+        root = loader.load();
+
+        ThirdFormulaPage thirdFormulaPage = loader.getController();
+        thirdFormulaPage.initializeFormula(1); // change randomly|depending on users count
 
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

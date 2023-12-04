@@ -8,15 +8,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.SecondFormulaPage">
+<AnchorPane minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.SecondFormulaPage">
    <children>
-      <Label fx:id="formulaLabel" layoutX="238.0" layoutY="14.0" prefHeight="40.0" prefWidth="415.0" text="Formula Page no." AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="6.0">
+      <Label fx:id="formulaLabel" layoutX="238.0" layoutY="14.0" prefHeight="40.0" prefWidth="415.0" text="Formula Page no." AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0">
          <font>
             <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Label>
-      <Text layoutX="311.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 2: Additional Details" AnchorPane.bottomAnchor="680.0" AnchorPane.leftAnchor="311.0" AnchorPane.topAnchor="46.0">
+      <Text layoutX="311.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 2: Additional Details" AnchorPane.bottomAnchor="680.0" AnchorPane.leftAnchor="311.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -46,11 +45,6 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="144.0" layoutY="491.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Existing Account" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="440.0">
-         <font>
-            <Font name="Times New Roman" size="20.0" />
-         </font>
-      </Text>
       <Text layoutX="141.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senior Citizen" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="390.0">
          <font>
             <Font name="Times New Roman" size="20.0" />
@@ -71,22 +65,12 @@
             <Font name="Times New Roman" size="16.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="existingAccountYesRadioButton" layoutX="432.0" layoutY="439.0" mnemonicParsing="false" onAction="#executeAnAction" text="Yes">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </RadioButton>
-      <RadioButton fx:id="existingAccountNoRadioButton" layoutX="599.0" layoutY="441.0" mnemonicParsing="false" onAction="#executeAnAction" text="No">
-         <font>
-            <Font name="Times New Roman" size="16.0" />
-         </font>
-      </RadioButton>
-      <Button fx:id="previousPageButton" layoutX="79.0" layoutY="690.0" mnemonicParsing="false" onAction="#executeAnAction" text="Previous Page">
+      <Button fx:id="previousPageButton" layoutX="59.0" layoutY="657.0" mnemonicParsing="false" onAction="#executeAnAction" text="Previous Page" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="60.0">
          <font>
             <Font name="Times New Roman" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="nextPageButton" layoutX="660.0" layoutY="691.0" mnemonicParsing="false" onAction="#executeAnAction" text="Next Page">
+      <Button fx:id="nextPageButton" layoutX="624.0" layoutY="657.0" mnemonicParsing="false" onAction="#executeAnAction" text="Next Page" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="60.0">
          <font>
             <Font name="Times New Roman" size="16.0" />
          </font>
