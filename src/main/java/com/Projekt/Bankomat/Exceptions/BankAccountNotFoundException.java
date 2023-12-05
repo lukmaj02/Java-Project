@@ -3,11 +3,11 @@ package com.Projekt.Bankomat.Exceptions;
 import com.Projekt.Bankomat.Models.BankAccount;
 
 public class BankAccountNotFoundException extends RuntimeException {
-    public BankAccountNotFoundException(String nrKonta){
-        super("Konto z numerem " + nrKonta+ " nie znalezione");
+    public BankAccountNotFoundException(String accountNr){
+        super("Account with number " + accountNr+ " did not found");
     }
     public BankAccountNotFoundException(){
-        super("Brak konta sprawdz ponownie wprowadzone dane");
+        super("Account not found");
     }
 
 }

@@ -8,6 +8,7 @@ import com.Projekt.Bankomat.IService.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import static com.Projekt.Bankomat.Controller.Mapper.*;
+import static com.Projekt.Bankomat.Controller.Commands.MainCommand.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -25,7 +26,6 @@ public class ClientHandler implements Callable<String> {
     private final ITransactionService transactionService;
     private final IBankAccountService bankAccountService;
     private final ICardService cardService;
-
     private final DecryptionManager decryptionManager;
     private final IDepositService depositService;
 
@@ -100,7 +100,7 @@ public class ClientHandler implements Callable<String> {
                 var dataTable = toCredit(data);
                 creditService.requestCredit(dataTable[0], new BigDecimal(dataTable[1]), Integer.valueOf(dataTable[2]), CreditType.valueOf(dataTable[3]));
             }
-            default -> throw new InvalidCommandException();
+            default -> throw new InvalidCommandException(CREDIT);
         }
         return systemResponse;
     }
@@ -114,7 +114,7 @@ public class ClientHandler implements Callable<String> {
             }
             case FINISH -> depositService.finishDeposit(data);
             case SUSPEND -> depositService.suspendDeposit(data);
-            default -> throw new InvalidCommandException();
+            default -> throw new InvalidCommandException(DEPOSIT);
         }
         return systemResponse;
     }
@@ -130,7 +130,7 @@ public class ClientHandler implements Callable<String> {
                 var loginInf = toLogin(data);
                 systemResponse += (userService.login(loginInf[0], loginInf[1]).toString());
             }
-            default -> throw new InvalidCommandException();
+            default -> throw new InvalidCommandException(USER);
         }
         return systemResponse;
     }
@@ -163,7 +163,7 @@ public class ClientHandler implements Callable<String> {
             case ALL_USER ->
                     systemResponse += listToString(transactionService.getAllUserTransactions(data));
             default ->
-                    throw new InvalidCommandException();
+                    throw new InvalidCommandException(TRANSACTION);
         }
         return systemResponse;
     }
@@ -181,7 +181,7 @@ public class ClientHandler implements Callable<String> {
             }
             case USER_ACCOUNTS ->
                     systemResponse += listToString(bankAccountService.getUserBankAccounts(data));
-            default -> throw new InvalidCommandException();
+            default -> throw new InvalidCommandException(BANK_ACCOUNT);
         }
         return systemResponse;
     }
@@ -211,6 +211,7 @@ public class ClientHandler implements Callable<String> {
                         splitedData[4],
                         new BigDecimal(splitedData[5]));
             }
+            default -> throw new InvalidCommandException(CARD);
         }
         return systemResponse;
     }

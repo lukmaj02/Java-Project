@@ -7,14 +7,14 @@ import java.math.BigDecimal;
 
 public class InvalidAccountDeletionException extends RuntimeException{
     public InvalidAccountDeletionException(BigDecimal amount){
-        super("Konto nie zostało usunięte! Twoj aktualny stan konta to: " + amount.toString() +
-                ". Przelej je przed usunieciem konta");
+        super("Invalid account deletion! Your current balance equals: " + amount.toString() +
+                ". Withdraw it first");
     }
     public InvalidAccountDeletionException(DepositStatus depositStatus){
-        super("Nie mozna usunac konta! Na koncie pozostały aktywne lokaty!");
+        super("Invalid account deletion! There are still active deposits");
     }
 
     public InvalidAccountDeletionException(CreditStatus creditStatus) {
-        super("Nie mozna usunac konta! Na koncie pozostały aktywne kredyty!");
+        super("Invalid account deletion! There are still active credits!");
     }
 }
