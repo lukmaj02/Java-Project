@@ -1,5 +1,6 @@
 package Client.GUI;
 
+import Client.Client;
 import com.Projekt.Bankomat.Enums.Gender;
 import com.Projekt.Bankomat.Enums.MaritalStatus;
 import javafx.event.ActionEvent;
@@ -49,7 +50,7 @@ public class FourthFormulaPage extends SceneController {
         checkBoxTermsAndCondition.setText("I declare that all data entered by me is true and I have read and agreed to the Terms and Conditions");
     }
 
-    private void getNeededInfoToCreateUser() {
+    private void getNeededInfoToCreateUser() throws Exception {
         String firstName = firstPageData.get(0);
         String lastName = firstPageData.get(1);
         String email =  thirdPageData.get(0);
@@ -80,7 +81,9 @@ public class FourthFormulaPage extends SceneController {
         else
             maritalStatus = MaritalStatus.WIDOWED;
 
-        System.out.println(firstName + " " + lastName + " " + email + " " + password + " " + phoneNumber + " " + dateOfBirth + " " + address + " " + city + " " + gender + " " + maritalStatus);
+        
+        String message = ("USER," + "CREATE," + firstName + "," + lastName + "," + email + "," + password + "," +
+                phoneNumber + "," + dateOfBirth + "," + address + "," + city + "," + gender + "," + maritalStatus);
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
