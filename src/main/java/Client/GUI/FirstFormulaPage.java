@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -62,6 +63,42 @@ public class FirstFormulaPage extends SceneController {
         thirdPageData = thirdFormulaPageData;
         initalizeComboBox();
         initalizeData(firstPageFormulaDate);
+    }
+
+    private boolean checkIfUserProvideAllData() {
+        boolean ifSomethingEmpty = false;
+
+        if (Objects.equals(nameTextField.getText(), "") || Objects.equals(nameTextField.getText(), "Provide more details.")) {
+            nameTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(lastNameTextField.getText(), "") || Objects.equals(lastNameTextField.getText(), "Provide mode details.")) {
+            lastNameTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (dateOfBirthDatePicker.getValue() == null) {
+            ifSomethingEmpty = true;
+        }
+        if (maritalStatusComboBox.getSelectionModel().isEmpty()) {
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(addressTextField.getText(), "") ||  Objects.equals(addressTextField.getText(), "Provide mode details.")) {
+            addressTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(cityTextField.getText(), "") ||  Objects.equals(cityTextField.getText(), "Provide mode details.")) {
+            cityTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(stateTextField.getText(), "") ||  Objects.equals(stateTextField.getText(), "Provide mode details.")) {
+            stateTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (!maleRadioButton.isSelected() && !femaleRadioButton.isSelected()) {
+            ifSomethingEmpty = true;
+        }
+
+        return !ifSomethingEmpty;
     }
 
     private void initalizeData(ArrayList<String> firstPageFormulaDate) {
@@ -129,8 +166,10 @@ public class FirstFormulaPage extends SceneController {
             if (maleRadioButton.isSelected())
                 maleRadioButton.setSelected(false);
         } else if (actionEvent.getSource() == nextPageButton) {
-            //TODO przypisać tutaj wartość z formula page albo new arrayList w zależności co będzie
             fillFirstPageVariables();
+            if (!checkIfUserProvideAllData()) {
+                return;
+            }
 
             SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
             secondFormulaPage.firstPageData = firstPageData;
@@ -138,7 +177,6 @@ public class FirstFormulaPage extends SceneController {
             secondFormulaPage.thirdPageData = thirdPageData;
 
             openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
-
         } else if (actionEvent.getSource() == previousPageButton) {
             fillFirstPageVariables();
 
