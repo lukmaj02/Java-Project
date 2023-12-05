@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class SecondFormulaPage extends SceneController {
 
     @FXML
@@ -75,7 +77,7 @@ public class SecondFormulaPage extends SceneController {
         if (actionEvent.getSource() == nextPageButton) {
             openThirdFormulaPage(actionEvent);
         } else if (actionEvent.getSource() == previousPageButton) {
-            openFormula(actionEvent);
+            openFormula(actionEvent, new ArrayList<>());
         } else if (actionEvent.getSource() == seniorCitizenYesRadioButton) {
             if (seniorCitizenNoRadioButton.isSelected())
                 seniorCitizenNoRadioButton.setSelected(false);

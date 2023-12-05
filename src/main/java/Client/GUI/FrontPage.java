@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class FrontPage extends SceneController {
@@ -23,6 +23,9 @@ public class FrontPage extends SceneController {
     private Button signUpButton;
     @FXML
     private Button logInButton;
+
+    public ArrayList<String> firstFormulaPageData = new ArrayList<>();
+
 
 
     @Override
@@ -43,10 +46,9 @@ public class FrontPage extends SceneController {
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == logInButton) {
-            // TODO add change scene
             System.out.println("User email: " + emailTextField.getText() + " user password: " + userPasswordPasswordField.getText() + ".");
         } else if (actionEvent.getSource() == signUpButton) {
-            openFormula(actionEvent);
+            openFormula(actionEvent, firstFormulaPageData);
         }
     }
 }
