@@ -2,10 +2,7 @@ package Client.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 
 import java.io.IOException;
@@ -105,29 +102,56 @@ public class ThirdFormulaPage extends SceneController {
         return !ifSomethingEmpty;
     }
 
+    private void showPasswordDoesntMatchWarning() {
+        userPasswordField.setText("");
+        userRewritePasswordField.setText("");
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("You haven't input same password in two fields.");
+        alert.setContentText("Please make sure your password are the same in two fields.");
+        alert.show();
+    }
+
+    private void showPasswordDoesntHaveEnoughChars() {
+        userPasswordField.setText("");
+        userRewritePasswordField.setText("");
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("You haven't put 9 characters in password field.");
+        alert.setContentText("Please make sure your password has at least 9 chars.");
+        alert.show();
+    }
 
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
-    if (actionEvent.getSource() == previousPageButton) {
-        fillThirdPageVariables();
+        if (actionEvent.getSource() == previousPageButton) {
+            fillThirdPageVariables();
 
-        SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
-        secondFormulaPage.firstPageData = firstPageData;
-        secondFormulaPage.secondPageData = secondPageData;
-        secondFormulaPage.thirdPageData = thirdPageData;
+            SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
+            secondFormulaPage.firstPageData = firstPageData;
+            secondFormulaPage.secondPageData = secondPageData;
+            secondFormulaPage.thirdPageData = thirdPageData;
 
-        openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
-    } else if (actionEvent.getSource() == nextPageButton) {
-        fillThirdPageVariables();
-        if (!checkIfUserProvideAllData())
-            return;
+            openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+        } else if (actionEvent.getSource() == nextPageButton) {
+            fillThirdPageVariables();
+            if (!checkIfUserProvideAllData()) {
+                showProvideDataWarning();
+                return;
+            }
+            if (!Objects.equals(userPasswordField.getText(), userRewritePasswordField.getText())) {
+                showPasswordDoesntMatchWarning();
+                return;
+            }
+            if (userPasswordField.getText().length() < 9) {
+                showPasswordDoesntHaveEnoughChars();
+                return;
+            }
 
-        FourthFormulaPage fourthFormulaPage = new FourthFormulaPage();
-        fourthFormulaPage.firstPageData = firstPageData;
-        fourthFormulaPage.secondPageData = secondPageData;
-        fourthFormulaPage.thirdPageData = thirdPageData;
+            FourthFormulaPage fourthFormulaPage = new FourthFormulaPage();
+            fourthFormulaPage.firstPageData = firstPageData;
+            fourthFormulaPage.secondPageData = secondPageData;
+            fourthFormulaPage.thirdPageData = thirdPageData;
 
-        openFourhtFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
-    }
+            openFourhtFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -93,6 +94,13 @@ public class SceneController extends Application {
         _stage.setScene(_scene);
         _stage.show();
         _stage.centerOnScreen();
+    }
+
+    protected void showProvideDataWarning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Data warning, you haven't fill all fields.");
+        alert.setContentText("Provide more details!");
+        alert.show();
     }
 
     @Override

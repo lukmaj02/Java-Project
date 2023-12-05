@@ -178,8 +178,10 @@ public class FirstFormulaPage extends SceneController {
                 maleRadioButton.setSelected(false);
         } else if (actionEvent.getSource() == nextPageButton) {
             fillFirstPageVariables();
-            if (!checkIfUserProvideAllData())
+            if (!checkIfUserProvideAllData()) {
+                showProvideDataWarning();
                 return;
+            }
 
             SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
             secondFormulaPage.firstPageData = firstPageData;

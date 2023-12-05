@@ -144,8 +144,10 @@ public class SecondFormulaPage extends SceneController {
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == nextPageButton) {
             fillSecondPageVariables();
-            if (!checkIfUserProvideAllData())
+            if (!checkIfUserProvideAllData()) {
+                showProvideDataWarning();
                 return;
+            }
 
             openThirdFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         } else if (actionEvent.getSource() == previousPageButton) {
