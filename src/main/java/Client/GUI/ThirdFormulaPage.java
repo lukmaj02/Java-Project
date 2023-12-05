@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ThirdFormulaPage extends SceneController {
     @FXML
@@ -52,7 +53,7 @@ public class ThirdFormulaPage extends SceneController {
 
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource() == previousPageButton) {
-            openSecondFormulaPage(actionEvent);
+            openSecondFormulaPage(actionEvent, new ArrayList<>(),new ArrayList<>());
         }
     }
 

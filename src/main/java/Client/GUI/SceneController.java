@@ -14,15 +14,10 @@ import java.util.ArrayList;
 
 public class SceneController extends Application {
     //first formula page
-    protected String name = "";
-    protected String lastName = "";
-    protected String dateOfBirth = "";
-    protected String gender = "";
-    protected String maritalStatus = "";
-    protected String address = "";
-    protected String city = "";
-    protected String state = "";
     protected ArrayList<String> firstPageFormulaDate = new ArrayList<>();
+
+    // second formula page
+    protected ArrayList<String> secondPageFormulaDate = new ArrayList<>();
 
     // variables to control scene changes
     protected Stage _stage;
@@ -45,12 +40,12 @@ public class SceneController extends Application {
         _stage.centerOnScreen();
     }
 
-    protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData) throws IOException {
+    protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData, ArrayList<String > secondFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstFormulaPage.fxml"));
         _root = loader.load();
 
         FirstFormulaPage formulaPage = loader.getController();
-        formulaPage.initializeFormula(1, firstFormulaPageData); // change randomly|depending on users count
+        formulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData); // change randomly|depending on users count
 
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);
@@ -58,12 +53,12 @@ public class SceneController extends Application {
         _stage.show();
         _stage.centerOnScreen();
     }
-    protected void openSecondFormulaPage(ActionEvent event) throws IOException {
+    protected void openSecondFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData,ArrayList<String > secondFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SecondFormulaPage.fxml"));
         _root = loader.load();
 
         SecondFormulaPage secondFormulaPage = loader.getController();
-        secondFormulaPage.initializeFormula(1); // change randomly|depending on users count
+        secondFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData); // change randomly|depending on users count
 
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);
@@ -84,17 +79,6 @@ public class SceneController extends Application {
         _stage.setScene(_scene);
         _stage.show();
         _stage.centerOnScreen();
-    }
-
-    protected void _fillFirstFormulaPageData() {
-        name = firstPageFormulaDate.get(0);
-        lastName = firstPageFormulaDate.get(1);
-        dateOfBirth = firstPageFormulaDate.get(2);
-        gender = firstPageFormulaDate.get(3);
-        maritalStatus = firstPageFormulaDate.get(4);
-        address = firstPageFormulaDate.get(5);
-        city = firstPageFormulaDate.get(6);
-        state = firstPageFormulaDate.get(7);
     }
 
     @Override

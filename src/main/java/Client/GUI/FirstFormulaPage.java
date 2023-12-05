@@ -39,6 +39,9 @@ public class FirstFormulaPage extends SceneController {
     @FXML
     private Label formulaLabel;
 
+    public ArrayList<String > secondPageData = new ArrayList<>();
+    public ArrayList<String > firstPageData = new ArrayList<>();
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -52,8 +55,9 @@ public class FirstFormulaPage extends SceneController {
         stage.centerOnScreen();
     }
 
-    public void initializeFormula(Integer number, ArrayList<String> firstPageFormulaDate) {
+    public void initializeFormula(Integer number, ArrayList<String> firstPageFormulaDate, ArrayList<String > secondPageFormulaDate) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
+        secondPageData = secondPageFormulaDate;
         initalizeComboBox();
         initalizeData(firstPageFormulaDate);
     }
@@ -90,7 +94,7 @@ public class FirstFormulaPage extends SceneController {
     }
 
     private void fillFirstPageVariables() {
-        firstPageFormulaDate.clear();
+        firstPageData.clear();
 
         String dateAsString = "";
         if (dateOfBirthDatePicker.getValue() != null) {
@@ -106,13 +110,13 @@ public class FirstFormulaPage extends SceneController {
         if (!maritalStatusComboBox.getSelectionModel().isEmpty())
             maritalStatusAsString = maritalStatusComboBox.getValue();
 
-        firstPageFormulaDate.addAll(Arrays.asList
+        firstPageData.addAll(Arrays.asList
                 (
-                nameTextField.getText(), lastNameTextField.getText(), dateAsString, genderAsString, maritalStatusAsString, addressTextField.getText(), cityTextField.getText(), stateTextField.getText()
+                    nameTextField.getText(), lastNameTextField.getText(), dateAsString, genderAsString,
+                    maritalStatusAsString, addressTextField.getText(), cityTextField.getText(),
+                    stateTextField.getText()
                 )
         );
-
-        _fillFirstFormulaPageData();
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
@@ -123,13 +127,22 @@ public class FirstFormulaPage extends SceneController {
             if (maleRadioButton.isSelected())
                 maleRadioButton.setSelected(false);
         } else if (actionEvent.getSource() == nextPageButton) {
-            openSecondFormulaPage(actionEvent);
+            //TODO przypisać tutaj wartość z formula page albo new arrayList w zależności co będzie
+            fillFirstPageVariables();
+
+            SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
+            secondFormulaPage.firstPageFormulaDate = firstPageData;
+            secondFormulaPage.secondPageFormulaDate = secondPageData;
+
+            openSecondFormulaPage(actionEvent, firstPageData, secondPageData);
+
         } else if (actionEvent.getSource() == previousPageButton) {
             fillFirstPageVariables();
 
             // fill ArrayList from frontpage with proper values
             FrontPage frontPage = new FrontPage();
             frontPage.firstFormulaPageData = firstPageFormulaDate;
+            frontPage.secondPageFormulaDate = secondPageData;
 
             openFrontPage(actionEvent, frontPage.firstFormulaPageData);
         }

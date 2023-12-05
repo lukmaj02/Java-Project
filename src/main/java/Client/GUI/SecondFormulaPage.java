@@ -11,7 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class SecondFormulaPage extends SceneController {
 
@@ -36,10 +40,17 @@ public class SecondFormulaPage extends SceneController {
     @FXML
     private Button nextPageButton;
 
-    public void initializeFormula(Integer number) {
+    private ArrayList<String> firstPageData = new ArrayList<>();
+
+    private ArrayList<String > secondPageData = new ArrayList<>();
+
+    public void initializeFormula(Integer number, ArrayList<String> firstFormulaPageData, ArrayList<String> secondFormulaPageData) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
+        firstPageData = firstFormulaPageData;
         initializeComboBox();
+        initalizeData(secondFormulaPageData);
     }
+
     public void initializeComboBox() {
         educationalComboBox.getItems().removeAll(educationalComboBox.getItems());
         educationalComboBox.getItems().addAll("Non-Graduate","Graduate","Post-Graduate","Doctrate","Others");
@@ -57,7 +68,63 @@ public class SecondFormulaPage extends SceneController {
 
         currencyTypeComboBox.getItems().removeAll(currencyTypeComboBox.getItems());
         currencyTypeComboBox.getItems().addAll("PLN", "Euro", "US dollar", "Ruble", "Norwegian krone");
+    }
 
+    private void fillSecondPageVariables() {
+        secondPageData.clear();
+
+        String categoryAsString = "";
+        if(!categoryComboBox.getSelectionModel().isEmpty())
+            categoryAsString = categoryComboBox.getValue();
+
+        String educationalQualificationAsString = "";
+        if(!educationalComboBox.getSelectionModel().isEmpty())
+            educationalQualificationAsString = educationalComboBox.getValue();
+
+        String occupationAsString = "";
+        if(!occupationComboBox.getSelectionModel().isEmpty())
+            occupationAsString = occupationComboBox.getValue();
+
+        String cardTypeAsString = "";
+        if(!cardTypeComboBox.getSelectionModel().isEmpty())
+            cardTypeAsString = cardTypeComboBox.getValue();
+
+        String currencyTypeAsString = "";
+        if(!currencyTypeComboBox.getSelectionModel().isEmpty())
+            currencyTypeAsString = currencyTypeComboBox.getValue();
+
+        String seniorCitizenAsString = "";
+        if (seniorCitizenYesRadioButton.isSelected() || seniorCitizenNoRadioButton.isSelected())
+            seniorCitizenAsString = seniorCitizenYesRadioButton.isSelected() ? "Yes": "No";
+
+
+
+        secondPageData.addAll(Arrays.asList
+                (
+                        categoryAsString, educationalQualificationAsString, occupationAsString, cardTypeAsString,
+                        currencyTypeAsString, seniorCitizenAsString
+                )
+        );
+    }
+
+    private void initalizeData(ArrayList<String> secondPageFormulaDate) {
+        if (secondPageFormulaDate.isEmpty())
+            return;
+        if (! Objects.equals(secondPageFormulaDate.get(0), ""))
+            categoryComboBox.setValue(secondPageFormulaDate.get(0));
+        if (! Objects.equals(secondPageFormulaDate.get(1), ""))
+            educationalComboBox.setValue(secondPageFormulaDate.get(1));
+        if (! Objects.equals(secondPageFormulaDate.get(2), ""))
+            occupationComboBox.setValue(secondPageFormulaDate.get(2));
+        if (! Objects.equals(secondPageFormulaDate.get(3), ""))
+            cardTypeComboBox.setValue(secondPageFormulaDate.get(3));
+        if (! Objects.equals(secondPageFormulaDate.get(4), ""))
+            currencyTypeComboBox.setValue(secondPageFormulaDate.get(4));
+
+        if (Objects.equals(secondPageFormulaDate.get(3), "Yes"))
+            seniorCitizenYesRadioButton.setSelected(true);
+        else if (Objects.equals(secondPageFormulaDate.get(3), "No"))
+            seniorCitizenNoRadioButton.setSelected(true);
     }
 
     @Override
@@ -77,7 +144,13 @@ public class SecondFormulaPage extends SceneController {
         if (actionEvent.getSource() == nextPageButton) {
             openThirdFormulaPage(actionEvent);
         } else if (actionEvent.getSource() == previousPageButton) {
-            openFormula(actionEvent, new ArrayList<>());
+            fillSecondPageVariables();
+
+            FirstFormulaPage firstFormulaPage = new FirstFormulaPage();
+            firstFormulaPage.firstPageData = firstPageData;
+            firstFormulaPage.secondPageData = secondPageData;
+
+            openFormula(actionEvent, firstFormulaPage.firstPageData, firstFormulaPage.secondPageData);
         } else if (actionEvent.getSource() == seniorCitizenYesRadioButton) {
             if (seniorCitizenNoRadioButton.isSelected())
                 seniorCitizenNoRadioButton.setSelected(false);
