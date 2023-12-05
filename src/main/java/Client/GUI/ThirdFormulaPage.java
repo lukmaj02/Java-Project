@@ -2,19 +2,15 @@ package Client.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class ThirdFormulaPage extends SceneController {
     @FXML
@@ -36,37 +32,25 @@ public class ThirdFormulaPage extends SceneController {
     @FXML
     private TextField cardPinTextField;
 
-    private ArrayList<String > firstPageData = new ArrayList<>();
-    private ArrayList<String > secondPageData = new ArrayList<>();
-    private  ArrayList<String > thirdPageData = new ArrayList<>();
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/ThirdFormulaPage.fxml"));
-
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        stage.centerOnScreen();
-    }
+    public ArrayList<String > firstPageData = new ArrayList<>();
+    public ArrayList<String > secondPageData = new ArrayList<>();
+    public ArrayList<String > thirdPageData = new ArrayList<>();
 
     public void initializeFormula(Integer number, ArrayList<String> firstFormulaPageData, ArrayList<String> secondFormulaPageData, ArrayList<String> thirdFormulaPageData) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
         firstPageData = firstFormulaPageData;
         secondPageData = secondFormulaPageData;
-        initializeData(thirdFormulaPageData);
+        thirdPageData = thirdFormulaPageData;
+        initializeData();
     }
 
-    private void initializeData(ArrayList<String> thirdPageFormulaDate) {
-        if (thirdPageFormulaDate.isEmpty())
+    private void initializeData() {
+        if (thirdPageData.isEmpty())
             return;
 
-        emailTextField.setText(thirdPageFormulaDate.get(0));
-        areaCodeTextField.setText(thirdPageFormulaDate.get(1));
-        phoneNumberTextField.setText(thirdPageFormulaDate.get(2));
+        emailTextField.setText(thirdPageData.get(0));
+        areaCodeTextField.setText(thirdPageData.get(1));
+        phoneNumberTextField.setText(thirdPageData.get(2));
         // the rest of the variables user should provide again
     }
 
@@ -75,7 +59,7 @@ public class ThirdFormulaPage extends SceneController {
 
         thirdPageData.addAll(Arrays.asList
                 (
-                    emailTextField.getText(), areaCodeTextField.getText(), phoneNumberTextField.getText()
+                    emailTextField.getText(), areaCodeTextField.getText(), phoneNumberTextField.getText(), userPasswordField.getText(), cardPinTextField.getText()
                 )
         );
     }
@@ -91,7 +75,17 @@ public class ThirdFormulaPage extends SceneController {
             secondFormulaPage.thirdPageData = thirdPageData;
 
             openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+        } else if (actionEvent.getSource() == nextPageButton) {
+            fillThirdPageVariables();
+
+            FourthFormulaPage fourthFormulaPage = new FourthFormulaPage();
+            fourthFormulaPage.firstPageData = firstPageData;
+            fourthFormulaPage.secondPageData = secondPageData;
+            fourthFormulaPage.thirdPageData = thirdPageData;
+
+            openFourhtFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         }
+
     }
 
 }

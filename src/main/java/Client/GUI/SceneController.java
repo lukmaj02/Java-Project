@@ -81,6 +81,20 @@ public class SceneController extends Application {
         _stage.centerOnScreen();
     }
 
+    protected void openFourhtFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FourthFormulaPage.fxml"));
+        _root = loader.load();
+
+        FourthFormulaPage fourthFormulaPage = loader.getController();
+        fourthFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
+
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();

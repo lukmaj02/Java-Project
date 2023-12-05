@@ -2,17 +2,11 @@ package Client.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -126,19 +120,6 @@ public class SecondFormulaPage extends SceneController {
             seniorCitizenYesRadioButton.setSelected(true);
         else if (Objects.equals(secondPageFormulaDate.get(5), "No"))
             seniorCitizenNoRadioButton.setSelected(true);
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/SecondFormulaPage.fxml"));
-
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        stage.centerOnScreen();
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
