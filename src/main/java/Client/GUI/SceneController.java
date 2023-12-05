@@ -40,12 +40,12 @@ public class SceneController extends Application {
         _stage.centerOnScreen();
     }
 
-    protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData, ArrayList<String > secondFormulaPageData) throws IOException {
+    protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstFormulaPage.fxml"));
         _root = loader.load();
 
         FirstFormulaPage formulaPage = loader.getController();
-        formulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData); // change randomly|depending on users count
+        formulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
 
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);
@@ -53,12 +53,12 @@ public class SceneController extends Application {
         _stage.show();
         _stage.centerOnScreen();
     }
-    protected void openSecondFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData,ArrayList<String > secondFormulaPageData) throws IOException {
+    protected void openSecondFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SecondFormulaPage.fxml"));
         _root = loader.load();
 
         SecondFormulaPage secondFormulaPage = loader.getController();
-        secondFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData); // change randomly|depending on users count
+        secondFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
 
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);
@@ -67,12 +67,12 @@ public class SceneController extends Application {
         _stage.centerOnScreen();
     }
 
-    protected void openThirdFormulaPage(ActionEvent event) throws IOException {
+    protected void openThirdFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/ThirdFormulaPage.fxml"));
         _root = loader.load();
 
         ThirdFormulaPage thirdFormulaPage = loader.getController();
-        thirdFormulaPage.initializeFormula(1); // change randomly|depending on users count
+        thirdFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
 
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);

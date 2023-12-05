@@ -40,13 +40,14 @@ public class SecondFormulaPage extends SceneController {
     @FXML
     private Button nextPageButton;
 
-    private ArrayList<String> firstPageData = new ArrayList<>();
+    public ArrayList<String> firstPageData = new ArrayList<>();
+    public ArrayList<String > secondPageData = new ArrayList<>();
+    public ArrayList<String > thirdPageData = new ArrayList<>();
 
-    private ArrayList<String > secondPageData = new ArrayList<>();
-
-    public void initializeFormula(Integer number, ArrayList<String> firstFormulaPageData, ArrayList<String> secondFormulaPageData) {
+    public void initializeFormula(Integer number, ArrayList<String> firstFormulaPageData, ArrayList<String> secondFormulaPageData, ArrayList<String> thirdFormulaPageData) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
         firstPageData = firstFormulaPageData;
+        thirdPageData = thirdFormulaPageData;
         initializeComboBox();
         initalizeData(secondFormulaPageData);
     }
@@ -121,9 +122,9 @@ public class SecondFormulaPage extends SceneController {
         if (! Objects.equals(secondPageFormulaDate.get(4), ""))
             currencyTypeComboBox.setValue(secondPageFormulaDate.get(4));
 
-        if (Objects.equals(secondPageFormulaDate.get(3), "Yes"))
+        if (Objects.equals(secondPageFormulaDate.get(5), "Yes"))
             seniorCitizenYesRadioButton.setSelected(true);
-        else if (Objects.equals(secondPageFormulaDate.get(3), "No"))
+        else if (Objects.equals(secondPageFormulaDate.get(5), "No"))
             seniorCitizenNoRadioButton.setSelected(true);
     }
 
@@ -142,15 +143,18 @@ public class SecondFormulaPage extends SceneController {
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == nextPageButton) {
-            openThirdFormulaPage(actionEvent);
+            fillSecondPageVariables();
+
+            openThirdFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         } else if (actionEvent.getSource() == previousPageButton) {
             fillSecondPageVariables();
 
             FirstFormulaPage firstFormulaPage = new FirstFormulaPage();
             firstFormulaPage.firstPageData = firstPageData;
             firstFormulaPage.secondPageData = secondPageData;
+            firstFormulaPage.thirdPageData = thirdPageData;
 
-            openFormula(actionEvent, firstFormulaPage.firstPageData, firstFormulaPage.secondPageData);
+            openFormula(actionEvent, firstPageData, secondPageData, thirdPageData);
         } else if (actionEvent.getSource() == seniorCitizenYesRadioButton) {
             if (seniorCitizenNoRadioButton.isSelected())
                 seniorCitizenNoRadioButton.setSelected(false);

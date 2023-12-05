@@ -48,7 +48,7 @@ public class FrontPage extends SceneController {
         if (actionEvent.getSource() == logInButton) {
             System.out.println("User email: " + emailTextField.getText() + " user password: " + userPasswordPasswordField.getText() + ".");
         } else if (actionEvent.getSource() == signUpButton) {
-            openFormula(actionEvent, firstFormulaPageData, new ArrayList<>());
+            openFormula(actionEvent, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         }
     }
 }

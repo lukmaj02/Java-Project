@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class ThirdFormulaPage extends SceneController {
     @FXML
@@ -34,6 +36,10 @@ public class ThirdFormulaPage extends SceneController {
     @FXML
     private TextField cardPinTextField;
 
+    private ArrayList<String > firstPageData = new ArrayList<>();
+    private ArrayList<String > secondPageData = new ArrayList<>();
+    private  ArrayList<String > thirdPageData = new ArrayList<>();
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
@@ -47,13 +53,44 @@ public class ThirdFormulaPage extends SceneController {
         stage.centerOnScreen();
     }
 
-    public void initializeFormula(Integer number) {
+    public void initializeFormula(Integer number, ArrayList<String> firstFormulaPageData, ArrayList<String> secondFormulaPageData, ArrayList<String> thirdFormulaPageData) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
+        firstPageData = firstFormulaPageData;
+        secondPageData = secondFormulaPageData;
+        initializeData(thirdFormulaPageData);
     }
 
-    public void executeAnAction(ActionEvent actionEvent) throws IOException {
+    private void initializeData(ArrayList<String> thirdPageFormulaDate) {
+        if (thirdPageFormulaDate.isEmpty())
+            return;
+
+        emailTextField.setText(thirdPageFormulaDate.get(0));
+        areaCodeTextField.setText(thirdPageFormulaDate.get(1));
+        phoneNumberTextField.setText(thirdPageFormulaDate.get(2));
+        // the rest of the variables user should provide again
+    }
+
+    private void fillThirdPageVariables() {
+        thirdPageData.clear();
+
+        thirdPageData.addAll(Arrays.asList
+                (
+                    emailTextField.getText(), areaCodeTextField.getText(), phoneNumberTextField.getText()
+                )
+        );
+    }
+
+
+        public void executeAnAction(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource() == previousPageButton) {
-            openSecondFormulaPage(actionEvent, new ArrayList<>(),new ArrayList<>());
+            fillThirdPageVariables();
+
+            SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
+            secondFormulaPage.firstPageData = firstPageData;
+            secondFormulaPage.secondPageData = secondPageData;
+            secondFormulaPage.thirdPageData = thirdPageData;
+
+            openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         }
     }
 

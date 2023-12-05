@@ -41,6 +41,7 @@ public class FirstFormulaPage extends SceneController {
 
     public ArrayList<String > secondPageData = new ArrayList<>();
     public ArrayList<String > firstPageData = new ArrayList<>();
+    public ArrayList<String > thirdPageData = new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -55,9 +56,10 @@ public class FirstFormulaPage extends SceneController {
         stage.centerOnScreen();
     }
 
-    public void initializeFormula(Integer number, ArrayList<String> firstPageFormulaDate, ArrayList<String > secondPageFormulaDate) {
+    public void initializeFormula(Integer number, ArrayList<String> firstPageFormulaDate, ArrayList<String > secondPageFormulaDate, ArrayList<String> thirdFormulaPageData) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
         secondPageData = secondPageFormulaDate;
+        thirdPageData = thirdFormulaPageData;
         initalizeComboBox();
         initalizeData(firstPageFormulaDate);
     }
@@ -131,10 +133,11 @@ public class FirstFormulaPage extends SceneController {
             fillFirstPageVariables();
 
             SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
-            secondFormulaPage.firstPageFormulaDate = firstPageData;
-            secondFormulaPage.secondPageFormulaDate = secondPageData;
+            secondFormulaPage.firstPageData = firstPageData;
+            secondFormulaPage.secondPageData = secondPageData;
+            secondFormulaPage.thirdPageData = thirdPageData;
 
-            openSecondFormulaPage(actionEvent, firstPageData, secondPageData);
+            openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
 
         } else if (actionEvent.getSource() == previousPageButton) {
             fillFirstPageVariables();
