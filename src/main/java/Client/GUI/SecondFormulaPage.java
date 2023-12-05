@@ -102,6 +102,25 @@ public class SecondFormulaPage extends SceneController {
         );
     }
 
+    private boolean checkIfUserProvideAllData() {
+        boolean ifSomethingEmpty = false;
+
+        if (categoryComboBox.getSelectionModel().isEmpty())
+            ifSomethingEmpty = true;
+        if (educationalComboBox.getSelectionModel().isEmpty())
+            ifSomethingEmpty = true;
+        if (occupationComboBox.getSelectionModel().isEmpty())
+            ifSomethingEmpty = true;
+        if (cardTypeComboBox.getSelectionModel().isEmpty())
+            ifSomethingEmpty = true;
+        if (currencyTypeComboBox.getSelectionModel().isEmpty())
+            ifSomethingEmpty = true;
+        if (!seniorCitizenNoRadioButton.isSelected() && !seniorCitizenYesRadioButton.isSelected())
+            ifSomethingEmpty = true;
+
+        return !ifSomethingEmpty;
+    }
+
     private void initalizeData(ArrayList<String> secondPageFormulaDate) {
         if (secondPageFormulaDate.isEmpty())
             return;
@@ -125,6 +144,8 @@ public class SecondFormulaPage extends SceneController {
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == nextPageButton) {
             fillSecondPageVariables();
+            if (!checkIfUserProvideAllData())
+                return;
 
             openThirdFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         } else if (actionEvent.getSource() == previousPageButton) {

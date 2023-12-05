@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ThirdFormulaPage extends SceneController {
     @FXML
@@ -57,6 +58,17 @@ public class ThirdFormulaPage extends SceneController {
     private void fillThirdPageVariables() {
         thirdPageData.clear();
 
+        if (Objects.equals(emailTextField.getText(), "Provide more details."))
+            emailTextField.setText("");
+        if (Objects.equals(areaCodeTextField.getText(), "Provide more details."))
+            areaCodeTextField.setText("");
+        if (Objects.equals(phoneNumberTextField.getText(), "Provide more details."))
+            phoneNumberTextField.setText("");
+        if (Objects.equals(userPasswordField.getText(), "Provide more details."))
+            userPasswordField.setText("");
+        if (Objects.equals(cardPinTextField.getText(), "Provide more details."))
+            cardPinTextField.setText("");
+
         thirdPageData.addAll(Arrays.asList
                 (
                     emailTextField.getText(), areaCodeTextField.getText(), phoneNumberTextField.getText(), userPasswordField.getText(), cardPinTextField.getText()
@@ -65,27 +77,57 @@ public class ThirdFormulaPage extends SceneController {
     }
 
 
-        public void executeAnAction(ActionEvent actionEvent) throws IOException {
-        if (actionEvent.getSource() == previousPageButton) {
-            fillThirdPageVariables();
+    private boolean checkIfUserProvideAllData() {
+        boolean ifSomethingEmpty = false;
 
-            SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
-            secondFormulaPage.firstPageData = firstPageData;
-            secondFormulaPage.secondPageData = secondPageData;
-            secondFormulaPage.thirdPageData = thirdPageData;
-
-            openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
-        } else if (actionEvent.getSource() == nextPageButton) {
-            fillThirdPageVariables();
-
-            FourthFormulaPage fourthFormulaPage = new FourthFormulaPage();
-            fourthFormulaPage.firstPageData = firstPageData;
-            fourthFormulaPage.secondPageData = secondPageData;
-            fourthFormulaPage.thirdPageData = thirdPageData;
-
-            openFourhtFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+        if (Objects.equals(emailTextField.getText(), "") || Objects.equals(emailTextField.getText(), "Provide more details.")) {
+            emailTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(areaCodeTextField.getText(), "") || Objects.equals(areaCodeTextField.getText(), "Provide more details.")) {
+            areaCodeTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(phoneNumberTextField.getText(), "") || Objects.equals(phoneNumberTextField.getText(), "Provide more details.")) {
+            phoneNumberTextField.setText("Provide more details.");
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(userPasswordField.getText(), "")) {
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(userRewritePasswordField.getText(), "")) {
+            ifSomethingEmpty = true;
+        }
+        if (Objects.equals(cardPinTextField.getText(), "")) {
+            ifSomethingEmpty = true;
         }
 
+        return !ifSomethingEmpty;
+    }
+
+
+    public void executeAnAction(ActionEvent actionEvent) throws IOException {
+    if (actionEvent.getSource() == previousPageButton) {
+        fillThirdPageVariables();
+
+        SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
+        secondFormulaPage.firstPageData = firstPageData;
+        secondFormulaPage.secondPageData = secondPageData;
+        secondFormulaPage.thirdPageData = thirdPageData;
+
+        openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+    } else if (actionEvent.getSource() == nextPageButton) {
+        fillThirdPageVariables();
+        if (!checkIfUserProvideAllData())
+            return;
+
+        FourthFormulaPage fourthFormulaPage = new FourthFormulaPage();
+        fourthFormulaPage.firstPageData = firstPageData;
+        fourthFormulaPage.secondPageData = secondPageData;
+        fourthFormulaPage.thirdPageData = thirdPageData;
+
+        openFourhtFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+    }
     }
 
 }

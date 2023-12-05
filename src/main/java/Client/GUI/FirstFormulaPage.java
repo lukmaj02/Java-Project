@@ -149,6 +149,17 @@ public class FirstFormulaPage extends SceneController {
         if (!maritalStatusComboBox.getSelectionModel().isEmpty())
             maritalStatusAsString = maritalStatusComboBox.getValue();
 
+        if (Objects.equals(nameTextField.getText(), "Provide more details."))
+            nameTextField.setText("");
+        if (Objects.equals(lastNameTextField.getText(), "Provide more details."))
+            lastNameTextField.setText("");
+        if (Objects.equals(addressTextField.getText(), "Provide more details."))
+            addressTextField.setText("");
+        if (Objects.equals(cityTextField.getText(), "Provide more details."))
+            cityTextField.setText("");
+        if (Objects.equals(stateTextField.getText(), "Provide more details."))
+            stateTextField.setText("");
+
         firstPageData.addAll(Arrays.asList
                 (
                     nameTextField.getText(), lastNameTextField.getText(), dateAsString, genderAsString,
@@ -167,9 +178,8 @@ public class FirstFormulaPage extends SceneController {
                 maleRadioButton.setSelected(false);
         } else if (actionEvent.getSource() == nextPageButton) {
             fillFirstPageVariables();
-            if (!checkIfUserProvideAllData()) {
+            if (!checkIfUserProvideAllData())
                 return;
-            }
 
             SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
             secondFormulaPage.firstPageData = firstPageData;
