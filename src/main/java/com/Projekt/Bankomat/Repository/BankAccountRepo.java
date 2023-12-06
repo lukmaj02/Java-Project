@@ -18,7 +18,7 @@ public interface BankAccountRepo extends JpaRepository<BankAccount,String> {
             "WHERE u.email = ?1")
     List<BankAccount> findUserBankAccount(String email);
 
-    @Query(value = "SELECT k FROM BANK_ACCOUNT k JOIN k.user u WHERE k.accountType = 'OSOBISTE' and k.currencyType = ?1 and u.phoneNumber = ?2")
+    @Query(value = "SELECT k FROM BANK_ACCOUNT k JOIN k.user u WHERE k.accountType = 'PERSONAL' and k.currencyType = ?1 and u.phoneNumber = ?2")
     List<BankAccount> getAccountNrByUserPhoneNumber(CurrencyType currencyType, String phoneNumber);
 
     @Query(value = "SELECT k FROM BANK_ACCOUNT k JOIN k.user u WHERE u.email = ?1")

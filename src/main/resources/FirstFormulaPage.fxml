@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="750.0" maxWidth="810.0" minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.FirstFormulaPage">
+   <children>
+      <Text layoutX="311.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1: Personal Details" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="310.8212890625" AnchorPane.topAnchor="70.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="102.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="140.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="100.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last name" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="190.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="100.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Birth" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="240.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="100.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="290.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="100.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marital Status" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="340.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="112.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="390.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="112.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="440.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="112.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="State" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="490.0">
+         <font>
+            <Font name="Times New Roman" size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nameTextField" layoutX="350.0" layoutY="134.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="134.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="lastNameTextField" layoutX="350.0" layoutY="184.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="184.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <DatePicker fx:id="dateOfBirthDatePicker" editable="false" layoutX="350.0" layoutY="238.0" onAction="#executeAnAction" prefHeight="27.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="238.0" />
+      <RadioButton fx:id="maleRadioButton" layoutX="412.0" layoutY="290.0" mnemonicParsing="false" onAction="#executeAnAction" text="Male" AnchorPane.rightAnchor="344.0">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="femaleRadioButton" layoutX="581.0" layoutY="292.0" mnemonicParsing="false" onAction="#executeAnAction" text="Female" AnchorPane.rightAnchor="162.5">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </RadioButton>
+      <TextField fx:id="addressTextField" layoutX="393.0" layoutY="388.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="125.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="cityTextField" layoutX="393.0" layoutY="438.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="stateTextField" layoutX="385.0" layoutY="488.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <Button fx:id="nextPageButton" layoutX="650.0" layoutY="681.0" mnemonicParsing="false" onAction="#executeAnAction" text="Next Page" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="60.0">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="previousPageButton" layoutX="69.0" layoutY="680.0" mnemonicParsing="false" onAction="#executeAnAction" text="Previous Page" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="60.0">
+         <font>
+            <Font name="Times New Roman" size="16.0" />
+         </font>
+      </Button>
+      <Label fx:id="formulaLabel" layoutX="372.0" layoutY="31.0" text="Formula Page no. " AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="195.9384765625" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="Times New Roman Bold" size="36.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="maritalStatusComboBox" layoutX="385.0" layoutY="336.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
+   </children>
+</AnchorPane>
