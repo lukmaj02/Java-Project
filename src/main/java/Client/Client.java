@@ -5,6 +5,7 @@ import Client.GUI.RegistrationFormula.FirstFormulaPage;
 import Client.GUI.RegistrationFormula.FourthFormulaPage;
 import Client.GUI.RegistrationFormula.SecondFormulaPage;
 import Client.GUI.RegistrationFormula.ThirdFormulaPage;
+import Client.GUI.User.AccountCreationPage;
 import Client.GUI.User.UserInfo;
 import Client.GUI.User.UserPage;
 import Client.dto.UserDto;
@@ -70,12 +71,11 @@ public class Client extends Application {
         }
     }
 
-    protected void openFrontPage(ActionEvent event, ArrayList<String> firstFormulaPageData) throws IOException {
+    protected void openFrontPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontPage.fxml"));
         _root = loader.load();
 
         FrontPage frontPage = loader.getController();
-        frontPage.firstFormulaPageData = firstFormulaPageData;
         setStage(event);
     }
 
@@ -130,6 +130,15 @@ public class Client extends Application {
 
         UserInfo userInfo = loader.getController();
         userInfo.initialize(user);
+        setStage(event);
+    }
+
+    protected void openAccountCreationPage(ActionEvent event, UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountCreationPage.fxml"));
+        _root = loader.load();
+
+        AccountCreationPage accountCreationPage = loader.getController();
+        accountCreationPage.initialize(user);
         setStage(event);
     }
 

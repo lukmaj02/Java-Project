@@ -198,7 +198,7 @@ public class FirstFormulaPage extends Client {
             frontPage.firstFormulaPageData = firstPageFormulaDate;
             frontPage.secondPageFormulaDate = secondPageData;
 
-            openFrontPage(actionEvent, frontPage.firstFormulaPageData);
+            openFrontPage(actionEvent);
         }
     }
 

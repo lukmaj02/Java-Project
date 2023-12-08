@@ -7,9 +7,9 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.UserPage">
    <children>
-      <Label layoutX="191.0" layoutY="14.0" text="My Profile">
+      <Label layoutX="214.0" layoutY="23.0" text="My Profile">
          <font>
-            <Font name="Segoe Script" size="38.0" />
+            <Font name="AppleGothic Regular" size="38.0" />
          </font>
       </Label>
       <Label layoutX="242.0" layoutY="96.0">

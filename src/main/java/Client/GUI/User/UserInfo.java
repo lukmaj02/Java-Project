@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
@@ -31,19 +32,19 @@ public class UserInfo extends Client {
     @FXML
     public Button changeInformations;
     @FXML
-    public TextArea firstnameText;
+    public TextField firstnameText;
     @FXML
-    public TextArea lastnameText;
+    public TextField lastnameText;
     @FXML
-    public TextArea emailText;
+    public TextField emailText;
     @FXML
-    public TextArea addressText;
+    public TextField addressText;
     @FXML
-    public TextArea cityText;
+    public TextField cityText;
     @FXML
-    public TextArea phonenumberText;
+    public TextField phonenumberText;
     @FXML
-    public TextArea maritalStatusText;
+    public TextField maritalStatusText;
 
     private UserDto user;
 

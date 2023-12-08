@@ -33,5 +33,12 @@ public class UserPage extends Client {
         if(actionEvent.getSource() == userInformations){
             openUserInfo(actionEvent,user);
         }
+        else if(actionEvent.getSource() == deleteUser){
+            var msg = sendToServerWithResponse("USER,DELETE," + user.getEmail());
+            if(isResponseValid(msg)) openFrontPage(actionEvent);
+        }
+        else if(actionEvent.getSource() == accountCreation){
+            openAccountCreationPage(actionEvent, user);
+        }
     }
 }
