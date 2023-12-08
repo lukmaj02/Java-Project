@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
+
 public class UserPage extends Client {
 
     @FXML
@@ -23,9 +25,13 @@ public class UserPage extends Client {
 
     private UserDto user;
 
-    public void initialize(String data) {
+    public void initialize(UserDto user) {
+        this.user = user;
     }
 
-    public void executeAnAction(ActionEvent actionEvent) {
+    public void executeAnAction(ActionEvent actionEvent) throws IOException {
+        if(actionEvent.getSource() == userInformations){
+            openUserInfo(actionEvent,user);
+        }
     }
 }

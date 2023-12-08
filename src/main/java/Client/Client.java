@@ -5,7 +5,9 @@ import Client.GUI.RegistrationFormula.FirstFormulaPage;
 import Client.GUI.RegistrationFormula.FourthFormulaPage;
 import Client.GUI.RegistrationFormula.SecondFormulaPage;
 import Client.GUI.RegistrationFormula.ThirdFormulaPage;
+import Client.GUI.User.UserInfo;
 import Client.GUI.User.UserPage;
+import Client.dto.UserDto;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +24,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.concurrent.Callable;
 
 public class Client extends Application {
     //first formula page
@@ -48,6 +49,7 @@ public class Client extends Application {
             sender = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             EncryptionManager.initFromString();
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/FrontPage.fxml"));
 
@@ -74,12 +76,7 @@ public class Client extends Application {
 
         FrontPage frontPage = loader.getController();
         frontPage.firstFormulaPageData = firstFormulaPageData;
-
-        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        _scene = new Scene(_root);
-        _stage.setScene(_scene);
-        _stage.show();
-        _stage.centerOnScreen();
+        setStage(event);
     }
 
     protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
@@ -88,25 +85,16 @@ public class Client extends Application {
 
         FirstFormulaPage formulaPage = loader.getController();
         formulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
-
-        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        _scene = new Scene(_root);
-        _stage.setScene(_scene);
-        _stage.show();
-        _stage.centerOnScreen();
+        setStage(event);
     }
+
     protected void openSecondFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SecondFormulaPage.fxml"));
         _root = loader.load();
 
         SecondFormulaPage secondFormulaPage = loader.getController();
         secondFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
-
-        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        _scene = new Scene(_root);
-        _stage.setScene(_scene);
-        _stage.show();
-        _stage.centerOnScreen();
+        setStage(event);
     }
 
     protected void openThirdFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
@@ -115,12 +103,7 @@ public class Client extends Application {
 
         ThirdFormulaPage thirdFormulaPage = loader.getController();
         thirdFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
-
-        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        _scene = new Scene(_root);
-        _stage.setScene(_scene);
-        _stage.show();
-        _stage.centerOnScreen();
+        setStage(event);
     }
 
     protected void openFourhtFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
@@ -129,31 +112,34 @@ public class Client extends Application {
 
         FourthFormulaPage fourthFormulaPage = loader.getController();
         fourthFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
-
-        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        _scene = new Scene(_root);
-        _stage.setScene(_scene);
-        _stage.show();
-        _stage.centerOnScreen();
+        setStage(event);
     }
 
-    protected void openUserPage(ActionEvent event, String data) throws IOException {
+    protected void openUserPage(ActionEvent event, UserDto user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserPage.fxml"));
         _root = loader.load();
 
         UserPage userPage = loader.getController();
-        userPage.initialize(data);
-
-        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        _scene = new Scene(_root);
-        _stage.setScene(_scene);
-        _stage.show();
-        _stage.centerOnScreen();
+        userPage.initialize(user);
+        setStage(event);
     }
 
-    protected String sendToServer(String data) throws Exception {
-        sender.println(data);
-        return reader.readLine();
+    protected void openUserInfo(ActionEvent event, UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserInfo.fxml"));
+        _root = loader.load();
+
+        UserInfo userInfo = loader.getController();
+        userInfo.initialize(user);
+        setStage(event);
+    }
+
+    protected String sendToServerWithResponse(String data){
+        try{
+            sender.println(data);
+            return reader.readLine();
+        }catch(Exception e){
+            return "ERROR, SERVER FAILED TO READ!. CHECK LATER AGAIN";
+        }
     }
 
     protected void showProvideDataWarning() {
@@ -168,6 +154,23 @@ public class Client extends Application {
         alert.setHeaderText("WARNING");
         alert.setContentText(warningInfo);
         alert.show();
+    }
+
+    protected boolean isResponseValid(String data){
+        var splitedData = data.split(",",2);
+        if(splitedData[0].equals("ERROR")){
+            showWarning(splitedData[1]);
+            return false;
+        }
+        return true;
+    }
+
+    private void setStage(ActionEvent event){
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
     }
 }
 

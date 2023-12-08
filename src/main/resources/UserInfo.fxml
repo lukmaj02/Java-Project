@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.UserInfo">
+   <children>
+      <Label layoutX="164.0" prefHeight="70.0" prefWidth="273.0" text="Informations">
+         <font>
+            <Font name="Segoe Script" size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="firstnameLabel" layoutX="111.0" layoutY="81.0" text="firstname">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastnameLabel" layoutX="111.0" layoutY="119.0" prefHeight="27.0" prefWidth="75.0" text="lastname">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="addressLabel" layoutX="117.0" layoutY="204.0" prefHeight="27.0" prefWidth="65.0" text="address">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="cityLabel" layoutX="140.0" layoutY="249.0" prefHeight="27.0" prefWidth="31.0" text="city">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="phonenumberLabel" layoutX="54.0" layoutY="296.0" prefHeight="27.0" prefWidth="126.0" text="phone number">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="emailLabel" layoutX="134.0" layoutY="162.0" text="email">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="maritalStatusLabel" layoutX="60.0" layoutY="341.0" prefHeight="27.0" prefWidth="114.0" text="marital status">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="back" layoutX="14.0" layoutY="367.0" mnemonicParsing="false" onAction="#executeAnAction" text="Back" />
+      <Button fx:id="changeInformations" layoutX="461.0" layoutY="367.0" mnemonicParsing="false" onAction="#executeAnAction" text="Change informations" />
+      <TextArea fx:id="firstnameText" layoutX="190.0" layoutY="70.0" prefHeight="38.0" prefWidth="258.0" />
+      <TextArea fx:id="lastnameText" layoutX="190.0" layoutY="113.0" prefHeight="38.0" prefWidth="258.0" />
+      <TextArea fx:id="emailText" layoutX="190.0" layoutY="156.0" prefHeight="15.0" prefWidth="258.0" />
+      <TextArea fx:id="addressText" layoutX="190.0" layoutY="198.0" prefHeight="15.0" prefWidth="258.0" />
+      <TextArea fx:id="cityText" layoutX="190.0" layoutY="243.0" prefHeight="27.0" prefWidth="258.0" />
+      <TextArea fx:id="phonenumberText" layoutX="190.0" layoutY="290.0" prefHeight="38.0" prefWidth="258.0" />
+      <TextArea fx:id="maritalStatusText" layoutX="190.0" layoutY="335.0" prefHeight="38.0" prefWidth="258.0" />
+   </children>
+</AnchorPane>

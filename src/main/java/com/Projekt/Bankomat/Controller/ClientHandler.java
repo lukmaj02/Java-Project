@@ -67,7 +67,7 @@ public class ClientHandler implements Callable<String> {
 
 
                 try {
-                    String response = "OK,";
+                    String response = "";
                     switch (controller) {
                         case USER -> response += userController(UserCommand.valueOf(command), data);
                         case TRANSACTION -> response += transactionController(TransactionCommand.valueOf(command), data);

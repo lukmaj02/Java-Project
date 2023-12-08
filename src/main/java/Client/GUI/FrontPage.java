@@ -1,6 +1,7 @@
 package Client.GUI;
 
 import Client.Client;
+import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -25,14 +26,9 @@ public class FrontPage extends Client {
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == logInButton) {
-            var msg = sendToServer(
-                    "USER,LOGIN,"+emailTextField.getText()+","+ userPasswordPasswordField.getText())
-                    .split(",",2);
-            if(msg[0].equals("OK")){
-                openUserPage(actionEvent,msg[1]);
-            } else {
-                showWarning(msg[1]);
-            }
+            var msg = sendToServerWithResponse("USER,LOGIN,"+emailTextField.getText()+","+ userPasswordPasswordField.getText());
+            if(isResponseValid(msg)) openUserPage(actionEvent, UserDto.mapper(msg));
+
         } else if (actionEvent.getSource() == signUpButton) {
             openFormula(actionEvent, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         }
