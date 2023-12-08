@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="750.0" maxWidth="810.0" minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.FourthFormulaPage">
+<AnchorPane maxHeight="750.0" maxWidth="810.0" minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.RegistrationFormula.FourthFormulaPage">
    <children>
       <Label fx:id="formulaLabel" layoutX="382.0" layoutY="41.0" text="Formula Page no. " AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0">
          <font>

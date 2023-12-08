@@ -59,7 +59,7 @@ public class ClientHandler implements Callable<String> {
             PrintWriter sender = new PrintWriter(clientSocket.getOutputStream(), true);
 
             while (true) {
-                String message = decryptionManager.decrypt(reader.readLine());
+                String message = reader.readLine();
                 String[] part = message.split(",", 3);
                 MainCommand controller = MainCommand.valueOf(part[0].toUpperCase());
                 String command = part[1].toUpperCase();
@@ -69,12 +69,12 @@ public class ClientHandler implements Callable<String> {
                 try {
                     String response = "OK,";
                     switch (controller) {
-                        case USER -> response = userController(UserCommand.valueOf(command), data);
-                        case TRANSACTION -> response = transactionController(TransactionCommand.valueOf(command), data);
-                        case BANK_ACCOUNT -> response = bankAccountController(BankAccountCommand.valueOf(command), data);
-                        case CARD -> response = cardController(CardCommand.valueOf(command), data);
-                        case CREDIT -> response = creditController(CreditCommand.valueOf(command),data);
-                        case DEPOSIT -> response = depositController(DepositCommand.valueOf(command),data);
+                        case USER -> response += userController(UserCommand.valueOf(command), data);
+                        case TRANSACTION -> response += transactionController(TransactionCommand.valueOf(command), data);
+                        case BANK_ACCOUNT -> response += bankAccountController(BankAccountCommand.valueOf(command), data);
+                        case CARD -> response += cardController(CardCommand.valueOf(command), data);
+                        case CREDIT -> response += creditController(CreditCommand.valueOf(command),data);
+                        case DEPOSIT -> response += depositController(DepositCommand.valueOf(command),data);
                         default -> throw new InvalidCommandException();
                     }
                     sender.println(response);

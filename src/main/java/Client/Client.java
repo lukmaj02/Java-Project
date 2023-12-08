@@ -1,37 +1,173 @@
 package Client;
 
+import Client.GUI.FrontPage;
+import Client.GUI.RegistrationFormula.FirstFormulaPage;
+import Client.GUI.RegistrationFormula.FourthFormulaPage;
+import Client.GUI.RegistrationFormula.SecondFormulaPage;
+import Client.GUI.RegistrationFormula.ThirdFormulaPage;
+import Client.GUI.User.UserPage;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import static Client.EncryptionManager.*;
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
-public class Client {
-    private static Socket socket;
-    private static PrintWriter sender;
-    private static BufferedReader reader;
+public class Client extends Application {
+    //first formula page
+    protected ArrayList<String> firstPageFormulaDate = new ArrayList<>();
 
-    public static void main(String[] args) throws Exception {
-        try{
+    // second formula page
+    public ArrayList<String> secondPageFormulaDate = new ArrayList<>();
+
+    // variables to control scene changes
+    protected Stage _stage;
+    protected Scene _scene;
+    protected Parent _root;
+
+    //connection to server
+    protected static PrintWriter sender;
+    protected static BufferedReader reader;
+    protected static Socket socket;
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        try {
             socket = new Socket("localhost", 6000);
-            sender = new PrintWriter(socket.getOutputStream(),true);
+            sender = new PrintWriter(socket.getOutputStream(), true);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             EncryptionManager.initFromString();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/FrontPage.fxml"));
+
+            _root = loader.load();
+            _scene = new Scene(_root);
+            stage.getIcons().add(new Image("bank-icon.png"));
+            stage.setTitle("Virutal Banking System.");
+
+            stage.setScene(_scene);
+            stage.setResizable(false);
+            stage.show();
         }
         catch(IOException e){
-            System.out.println("Failed connection to server");
+            showWarning("Failed connection to server");
         }
-        catch (Exception e){
-            System.out.println("Decryption Manager Failed to launch");
-        }
-
-        String msg = "BANK_ACCOUNT,DELETE,45678901234567890123456789";
-        sender.println(encrypt(msg));
-        while(true){
-            String encryptedMsg = reader.readLine();
-            System.out.println(encryptedMsg);
+        catch (Exception e) {
+            showWarning("Decryption Manager Failed to launch");
         }
     }
+
+    protected void openFrontPage(ActionEvent event, ArrayList<String> firstFormulaPageData) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontPage.fxml"));
+        _root = loader.load();
+
+        FrontPage frontPage = loader.getController();
+        frontPage.firstFormulaPageData = firstFormulaPageData;
+
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
+
+    protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstFormulaPage.fxml"));
+        _root = loader.load();
+
+        FirstFormulaPage formulaPage = loader.getController();
+        formulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
+
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
+    protected void openSecondFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SecondFormulaPage.fxml"));
+        _root = loader.load();
+
+        SecondFormulaPage secondFormulaPage = loader.getController();
+        secondFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
+
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
+
+    protected void openThirdFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ThirdFormulaPage.fxml"));
+        _root = loader.load();
+
+        ThirdFormulaPage thirdFormulaPage = loader.getController();
+        thirdFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
+
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
+
+    protected void openFourhtFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FourthFormulaPage.fxml"));
+        _root = loader.load();
+
+        FourthFormulaPage fourthFormulaPage = loader.getController();
+        fourthFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
+
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
+
+    protected void openUserPage(ActionEvent event, String data) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserPage.fxml"));
+        _root = loader.load();
+
+        UserPage userPage = loader.getController();
+        userPage.initialize(data);
+
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
+
+    protected String sendToServer(String data) throws Exception {
+        sender.println(data);
+        return reader.readLine();
+    }
+
+    protected void showProvideDataWarning() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("Data warning, you haven't fill all fields.");
+        alert.setContentText("Provide more details!");
+        alert.show();
+    }
+
+    protected void showWarning(String warningInfo){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText("WARNING");
+        alert.setContentText(warningInfo);
+        alert.show();
+    }
 }
+

@@ -1,20 +1,16 @@
 package Client.GUI;
 
+import Client.Client;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
 import java.util.ArrayList;
 
 
-public class FrontPage extends SceneController {
+public class FrontPage extends Client {
     @FXML
     private TextField emailTextField;
     @FXML
@@ -29,7 +25,14 @@ public class FrontPage extends SceneController {
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == logInButton) {
-            System.out.println("User email: " + emailTextField.getText() + " user password: " + userPasswordPasswordField.getText() + ".");
+            var msg = sendToServer(
+                    "USER,LOGIN,"+emailTextField.getText()+","+ userPasswordPasswordField.getText())
+                    .split(",",2);
+            if(msg[0].equals("OK")){
+                openUserPage(actionEvent,msg[1]);
+            } else {
+                showWarning(msg[1]);
+            }
         } else if (actionEvent.getSource() == signUpButton) {
             openFormula(actionEvent, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         }

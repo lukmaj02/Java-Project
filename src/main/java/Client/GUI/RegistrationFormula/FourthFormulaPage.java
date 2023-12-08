@@ -1,4 +1,4 @@
-package Client.GUI;
+package Client.GUI.RegistrationFormula;
 
 import Client.Client;
 import com.Projekt.Bankomat.Enums.Gender;
@@ -7,9 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 import java.awt.*;
 import java.io.IOException;
@@ -20,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class FourthFormulaPage extends SceneController {
+public class FourthFormulaPage extends Client {
     @FXML
     public Label cardNumberLabel;
     @FXML
@@ -50,7 +48,7 @@ public class FourthFormulaPage extends SceneController {
         checkBoxTermsAndCondition.setText("I declare that all data entered by me is true and I have read and agreed to the Terms and Conditions");
     }
 
-    private void getNeededInfoToCreateUser() throws Exception {
+    private String getNeededInfoToCreateUser() throws Exception {
         String firstName = firstPageData.get(0);
         String lastName = firstPageData.get(1);
         String email =  thirdPageData.get(0);
@@ -81,8 +79,8 @@ public class FourthFormulaPage extends SceneController {
         else
             maritalStatus = MaritalStatus.WIDOWED;
 
-        
-        String message = ("USER," + "CREATE," + firstName + "," + lastName + "," + email + "," + password + "," +
+
+        return ("USER," + "CREATE," + firstName + "," + lastName + "," + email + "," + password + "," +
                 phoneNumber + "," + dateOfBirth + "," + address + "," + city + "," + gender + "," + maritalStatus);
     }
 
@@ -96,7 +94,7 @@ public class FourthFormulaPage extends SceneController {
                 }
             }
         } else if (actionEvent.getSource() == submitButton) {
-            getNeededInfoToCreateUser();
+            sender.println();getNeededInfoToCreateUser();
         }
 
     }

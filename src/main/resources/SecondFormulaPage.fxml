@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.SecondFormulaPage">
+<AnchorPane minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.RegistrationFormula.SecondFormulaPage">
    <children>
       <Label fx:id="formulaLabel" layoutX="238.0" layoutY="14.0" prefHeight="40.0" prefWidth="415.0" text="Formula Page no." AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0">
          <font>
