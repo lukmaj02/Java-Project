@@ -8,6 +8,7 @@ import Client.GUI.RegistrationFormula.ThirdFormulaPage;
 import Client.GUI.User.AccountCreationPage;
 import Client.GUI.User.UserInfo;
 import Client.GUI.User.UserPage;
+import Client.dto.BankAccountDto;
 import Client.dto.UserDto;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class Client extends Application {
     //first formula page
@@ -141,6 +143,10 @@ public class Client extends Application {
         accountCreationPage.initialize(user);
         setStage(event);
     }
+    protected void openUserAccounts(ActionEvent event, Set<BankAccountDto> accounts){
+
+    }
+
 
     protected String sendToServerWithResponse(String data){
         try{
@@ -162,6 +168,13 @@ public class Client extends Application {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("WARNING");
         alert.setContentText(warningInfo);
+        alert.show();
+    }
+
+    protected void showInfo(String header, String content){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
         alert.show();
     }
 

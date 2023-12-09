@@ -1,6 +1,7 @@
 package Client.GUI.User;
 
 import Client.Client;
+import Client.dto.BankAccountDto;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,6 +40,12 @@ public class UserPage extends Client {
         }
         else if(actionEvent.getSource() == accountCreation){
             openAccountCreationPage(actionEvent, user);
+        }
+        else if(actionEvent.getSource() == viewBankAccounts){
+            var msg = sendToServerWithResponse("BANK_ACCOUNT,USER_ACCOUNTS," + user.getEmail());
+            if(isResponseValid(msg)){
+                openUserAccounts(actionEvent, BankAccountDto.mapper(msg));
+            }
         }
     }
 }
