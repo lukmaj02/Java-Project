@@ -1,10 +1,7 @@
 package Client.GUI.User;
 
 import Client.Client;
-import Client.dto.BankAccountDto;
-import Client.dto.DepositDto;
-import Client.dto.TransactionDto;
-import Client.dto.UserDto;
+import Client.dto.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -45,6 +42,9 @@ public class UserPage extends Client {
             var msg = sendToServerWithResponse("USER,DELETE," + user.getEmail());
             if(isResponseValid(msg)) openFrontPage(actionEvent);
         }
+        else if (actionEvent.getSource()== logOut) {
+            openFrontPage(actionEvent);
+        }
         else if(actionEvent.getSource() == accountCreation){
             openAccountCreationPage(actionEvent, user);
         }
@@ -64,7 +64,6 @@ public class UserPage extends Client {
                         user);
             }
         }
-
         else if (actionEvent.getSource() == viewDeposits){
             var msg = sendToServerWithResponse("DEPOSIT,ALL_USER," + user.getEmail());
             if(isResponseValid(msg)){
@@ -72,9 +71,8 @@ public class UserPage extends Client {
             }
         }
         else if (actionEvent.getSource() == viewCredits) {
-            //todo var msg = sendToServerWithResponse("CREDIT,");
-        } else if (actionEvent.getSource()== logOut) {
-            openFrontPage(actionEvent);
+            var msg = sendToServerWithResponse("CREDIT,ALL_USER," + user.getEmail());
+            if(isResponseValid(msg)) openUserCreditPage(actionEvent, CreditDto.mapper(msg), user);
         }
     }
 }

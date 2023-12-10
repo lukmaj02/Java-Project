@@ -50,10 +50,13 @@ public class Credit {
     @Override
     public String toString() {
         return creditId + "," +
+                bankAccountCredit.getAccountNr() + "," +
                 installmentCount + "," +
                 lendingRate + "," +
                 creditAmount + "," +
                 installmentAmount + "," +
+                bankAccountCredit.getCurrencyType() + "," +
+                creditStatus + "," +
                 creditType + ",,";
     }
 }

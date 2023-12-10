@@ -100,6 +100,11 @@ public class ClientHandler implements Callable<String> {
                 var dataTable = toCredit(data);
                 creditService.requestCredit(dataTable[0], new BigDecimal(dataTable[1]), Integer.valueOf(dataTable[2]), CreditType.valueOf(dataTable[3]));
             }
+            case ALL_USER -> systemResponse += listToString(creditService.getUserCredits(data));
+            case CHECK_RATE -> {
+                var dataTable = data.split(",",3);
+                systemResponse += creditService.checkInstallmentRate(new BigDecimal(dataTable[0]), Integer.valueOf(dataTable[1]), CreditType.valueOf(dataTable[2]));
+            }
             default -> throw new InvalidCommandException(CREDIT);
         }
         return systemResponse;

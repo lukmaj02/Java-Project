@@ -6,10 +6,7 @@ import Client.GUI.RegistrationFormula.FourthFormulaPage;
 import Client.GUI.RegistrationFormula.SecondFormulaPage;
 import Client.GUI.RegistrationFormula.ThirdFormulaPage;
 import Client.GUI.User.*;
-import Client.dto.BankAccountDto;
-import Client.dto.DepositDto;
-import Client.dto.TransactionDto;
-import Client.dto.UserDto;
+import Client.dto.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -173,6 +170,23 @@ public class Client extends Application {
 
         UserDepositsPage userDepositsPage = loader.getController();
         userDepositsPage.initialize(deposits, user);
+        setStage(event);
+    }
+    protected void openUserCreditPage(ActionEvent event, Set<CreditDto> credits, UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Credit/UserCreditsPage.fxml"));
+        _root = loader.load();
+
+        UserCreditsPage userCreditsPage = loader.getController();
+        userCreditsPage.initialize(credits, user);
+        setStage(event);
+    }
+
+    protected void openRequestingCreditPage(ActionEvent event, UserDto user, String accountNr) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Credit/RequestCreditPage.fxml"));
+        _root = loader.load();
+
+        RequestCreditPage requestCreditPage = loader.getController();
+        requestCreditPage.initialize(user, accountNr);
         setStage(event);
     }
 

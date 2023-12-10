@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="572.0" prefWidth="898.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.UserCreditsPage">
+   <children>
+      <Label layoutX="400.0" layoutY="50.0" text="Credits">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Label>
+      <TableView fx:id="userCredits" layoutX="11.0" layoutY="136.0" prefHeight="271.0" prefWidth="877.0">
+        <columns>
+          <TableColumn fx:id="installmentCount" prefWidth="113.0" text="Intallment Count" />
+          <TableColumn fx:id="accountNumber" prefWidth="131.0" text="Account Number" />
+            <TableColumn fx:id="creditAmount" prefWidth="131.0" text="Credit Amount" />
+            <TableColumn fx:id="lendingRate" prefWidth="95.0" text="Lending Rate" />
+            <TableColumn fx:id="creditType" prefWidth="93.0" text="Credit Type" />
+            <TableColumn fx:id="installmentAmount" prefWidth="143.0" text="Installment Amount" />
+            <TableColumn fx:id="currency" prefWidth="93.0" text="Currency" />
+            <TableColumn fx:id="creditStatus" prefWidth="77.0" text="Status" />
+        </columns>
+      </TableView>
+      <Button fx:id="backButton" layoutX="42.0" layoutY="458.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="37.0" prefWidth="53.0" text="Back" />
+   </children>
+</AnchorPane>

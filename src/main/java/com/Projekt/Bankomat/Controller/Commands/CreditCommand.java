@@ -4,5 +4,7 @@ public enum CreditCommand {
     REQUEST,
     REACTIVE,
     REFUSE,
-    ACTIVE
+    ACTIVE,
+    ALL_USER,
+    CHECK_RATE
 }

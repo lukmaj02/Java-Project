@@ -5,5 +5,6 @@ public enum CreditStatus {
     FINISHED,
     PROCESSED,
     FAILED,
-    REFUSED
+    REFUSED,
+    CANCELLED
 }

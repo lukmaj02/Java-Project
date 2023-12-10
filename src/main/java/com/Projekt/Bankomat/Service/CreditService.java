@@ -77,6 +77,20 @@ public class CreditService implements ICreditService {
     }
 
     @Override
+    public void cancelCredit(String creditId) {
+        var credit = creditRepo.findById(creditId).orElseThrow(CreditNotFoundExecption::new);
+        if(credit.getCreditStatus().equals((CreditStatus.PROCESSED))){
+            credit.setCreditStatus(CreditStatus.CANCELLED);
+            creditRepo.save(credit);
+        }
+    }
+
+    @Override
+    public BigDecimal checkInstallmentRate(BigDecimal creditAmount, Integer installmentCount, CreditType creditType) {
+        return calculateInstallment(creditAmount.doubleValue(),creditType.getLendingRate().doubleValue(), installmentCount);
+    }
+
+    @Override
     public List<Credit> getUserCredits(String email) {
         return creditRepo.getAllUserCredits(email);
     }

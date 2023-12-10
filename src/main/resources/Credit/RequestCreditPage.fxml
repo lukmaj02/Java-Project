@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.RequestCreditPage">
+   <children>
+      <Label layoutX="198.0" layoutY="35.0" text="Request Credit">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="125.0" layoutY="120.0" text="Credit amount">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <TextField fx:id="amount" layoutX="282.0" layoutY="122.0" />
+      <TextField fx:id="count" layoutX="282.0" layoutY="173.0" />
+      <Label layoutX="96.0" layoutY="171.0" text="Installment Count">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="155.0" layoutY="218.0" text="Credit type">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="creditRateButton" layoutX="232.0" layoutY="319.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="137.0" text="Check Installment Rate" />
+      <Button fx:id="requestButton" layoutX="468.0" layoutY="319.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="73.0" text="Request" />
+      <ChoiceBox fx:id="type" layoutX="282.0" layoutY="221.0" prefWidth="150.0" />
+      <Button fx:id="backButton" layoutX="70.0" layoutY="319.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="52.0" text="Back" />
+   </children>
+</AnchorPane>

@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -38,9 +39,10 @@ public class UserAccountsPage extends Client {
     public Button requestCredit;
     @FXML
     public Button deleteAccount;
-    private BankAccountDto currentAccount;
+    private String currentAccountNr;
     private UserDto user;
     public Set<BankAccountDto> bankAccounts;
+    TableView.TableViewSelectionModel<BankAccountDto> selectedAccount;
     public void initialize(Set<BankAccountDto> bankAccounts, UserDto user){
         this.bankAccounts = bankAccounts;
         this.user = user;
@@ -48,8 +50,16 @@ public class UserAccountsPage extends Client {
         balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
         currencyType.setCellValueFactory(new PropertyValueFactory<>("currencyType"));
         accountType.setCellValueFactory(new PropertyValueFactory<>("accountType"));
+
         ObservableList<BankAccountDto> list = FXCollections.observableList(bankAccounts.stream().toList());
+        selectedAccount = userAccounts.getSelectionModel();
+        selectedAccount.setSelectionMode(SelectionMode.SINGLE);
         userAccounts.setItems(list);
+        userAccounts.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null && !newSelection.equals(oldSelection)) {
+                currentAccountNr = newSelection.getAccountNr();
+            }
+        });
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
@@ -61,11 +71,14 @@ public class UserAccountsPage extends Client {
         }
         else if(actionEvent.getSource() == createDeposit){
             //todo openCreationDepositPage(actionEvent,user);
-        }
-        else if(actionEvent.getSource() == requestCredit){
-            //todo openRequestingCreditPage(actionEvent, user);
-        } else if (actionEvent.getSource()==deleteAccount) {
-            //todo
+        } else if(actionEvent.getSource() == requestCredit && currentAccountNr != null){
+            openRequestingCreditPage(actionEvent, user, currentAccountNr);
+        } else if (actionEvent.getSource()==deleteAccount && currentAccountNr != null) {
+            var msg = sendToServerWithResponse("BANK_ACCOUNT,DELETE,"+ currentAccountNr);
+            if(isResponseValid(msg)) {
+                openUserPage(actionEvent,user);
+                showInfo("DELETION", "Bank account deleted successfully!");
+            }
         }
     }
 }

@@ -15,5 +15,9 @@ public interface ICreditService {
     void activeCredit(String creditId);
     void refuseCredit(String creditId);
     void reactiveCredit(String creditId);
+    void cancelCredit(String creditId);
+    BigDecimal checkInstallmentRate(BigDecimal creditAmount,
+                                    Integer installmentCount,
+                                    CreditType creditType);
     List<Credit> getUserCredits(String email);
 }
