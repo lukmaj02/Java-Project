@@ -3,5 +3,6 @@ package com.Projekt.Bankomat.Controller.Commands;
 public enum DepositCommand {
     CREATE,
     SUSPEND,
-    FINISH
+    FINISH,
+    ALL_USER
 }

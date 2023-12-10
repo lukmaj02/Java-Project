@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="447.0" prefWidth="730.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.UserDepositsPage">
+   <children>
+      <TableView fx:id="userDeposits" layoutX="36.0" layoutY="132.0" prefHeight="200.0" prefWidth="659.0">
+        <columns>
+          <TableColumn fx:id="accountNr" prefWidth="107.0" text="Account Number" />
+          <TableColumn fx:id="amount" prefWidth="105.0" text="Amount" />
+            <TableColumn fx:id="currency" prefWidth="93.0" text="Currency" />
+            <TableColumn fx:id="finishDate" prefWidth="118.0" text="Finish Date" />
+            <TableColumn fx:id="creationDate" prefWidth="104.0" text="Creation Date" />
+            <TableColumn fx:id="type" prefWidth="66.0" text="Type" />
+            <TableColumn fx:id="status" prefWidth="65.0" text="Status" />
+        </columns>
+      </TableView>
+      <Label layoutX="305.0" layoutY="37.0" text="Deposits">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" layoutX="50.0" layoutY="373.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="72.0" text="Back" />
+   </children>
+</AnchorPane>

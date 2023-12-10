@@ -114,6 +114,7 @@ public class ClientHandler implements Callable<String> {
             }
             case FINISH -> depositService.finishDeposit(data);
             case SUSPEND -> depositService.suspendDeposit(data);
+            case ALL_USER -> systemResponse += listToString(depositService.getUserDeposits(data));
             default -> throw new InvalidCommandException(DEPOSIT);
         }
         return systemResponse;

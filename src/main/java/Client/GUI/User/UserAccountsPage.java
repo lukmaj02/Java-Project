@@ -65,7 +65,7 @@ public class UserAccountsPage extends Client {
         else if(actionEvent.getSource() == requestCredit){
             //todo openRequestingCreditPage(actionEvent, user);
         } else if (actionEvent.getSource()==deleteAccount) {
-            //todo 
+            //todo
         }
     }
 }

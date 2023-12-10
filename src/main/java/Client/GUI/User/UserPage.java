@@ -2,6 +2,8 @@ package Client.GUI.User;
 
 import Client.Client;
 import Client.dto.BankAccountDto;
+import Client.dto.DepositDto;
+import Client.dto.TransactionDto;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +28,8 @@ public class UserPage extends Client {
     public Button userInformations;
     @FXML
     public Button viewCredits;
+    @FXML
+    public Button logOut;
 
     private UserDto user;
 
@@ -49,12 +53,28 @@ public class UserPage extends Client {
             if(isResponseValid(msg)) openUserAccounts(actionEvent, BankAccountDto.mapper(msg), user);
         }
         else if(actionEvent.getSource() == viewTransactions){
-            var msg = sendToServerWithResponse("TRANSACTION,ALL_USER," + user.getEmail());
-            if(isResponseValid(msg)) {
-                //todo
+            var allT = sendToServerWithResponse("TRANSACTION,ALL_USER," + user.getEmail());
+            var receivedT = sendToServerWithResponse("TRANSACTION,ALL_TO_USER,"+user.getEmail());
+            var sentT = sendToServerWithResponse("TRANSACTION,ALL_FROM_USER," + user.getEmail());
+            if(isResponseValid(allT) && isResponseValid(receivedT) && isResponseValid(sentT)) {
+                openUserTransactionPage(actionEvent,
+                        TransactionDto.mapper(allT),
+                        TransactionDto.mapper(receivedT),
+                        TransactionDto.mapper(sentT),
+                        user);
             }
-        } else if (actionEvent.getSource() == viewCredits) {
+        }
+
+        else if (actionEvent.getSource() == viewDeposits){
+            var msg = sendToServerWithResponse("DEPOSIT,ALL_USER," + user.getEmail());
+            if(isResponseValid(msg)){
+                openUserDepositPage(actionEvent, DepositDto.mapper(msg), user);
+            }
+        }
+        else if (actionEvent.getSource() == viewCredits) {
             //todo var msg = sendToServerWithResponse("CREDIT,");
+        } else if (actionEvent.getSource()== logOut) {
+            openFrontPage(actionEvent);
         }
     }
 }

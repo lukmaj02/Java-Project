@@ -1,5 +1,6 @@
 package Client.dto;
 
+import com.Projekt.Bankomat.Models.Transaction;
 import lombok.*;
 
 import java.util.HashSet;
@@ -23,8 +24,9 @@ public class TransactionDto {
     private String toAccountNr;
 
     public static Set<TransactionDto> mapper(String data){
-        var splitedData = data.split(",,");
         var transactions = new HashSet<TransactionDto>();
+        if(data.equals("")) return transactions;
+        var splitedData = data.split(",,");
         for(String transaction : splitedData){
             var atribute = transaction.split(",");
             transactions.add(TransactionDto.builder()

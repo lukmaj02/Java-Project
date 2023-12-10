@@ -52,5 +52,10 @@
             <Font name="System Bold Italic" size="12.0" />
          </font>
       </Button>
+      <Button fx:id="logOut" layoutX="480.0" layoutY="14.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="38.0" prefWidth="106.0" text="Log Out">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

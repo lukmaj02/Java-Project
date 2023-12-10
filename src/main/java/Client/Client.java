@@ -5,11 +5,10 @@ import Client.GUI.RegistrationFormula.FirstFormulaPage;
 import Client.GUI.RegistrationFormula.FourthFormulaPage;
 import Client.GUI.RegistrationFormula.SecondFormulaPage;
 import Client.GUI.RegistrationFormula.ThirdFormulaPage;
-import Client.GUI.User.AccountCreationPage;
-import Client.GUI.User.UserAccountsPage;
-import Client.GUI.User.UserInfo;
-import Client.GUI.User.UserPage;
+import Client.GUI.User.*;
 import Client.dto.BankAccountDto;
+import Client.dto.DepositDto;
+import Client.dto.TransactionDto;
 import Client.dto.UserDto;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -145,14 +144,38 @@ public class Client extends Application {
         accountCreationPage.initialize(user);
         setStage(event);
     }
-    protected void openUserAccounts(ActionEvent event, Set<BankAccountDto>accounts, UserDto user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserAccountsPage.fxml"));
+    protected void openUserAccounts(ActionEvent event,
+                                    Set<BankAccountDto>accounts,
+                                    UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BankAccount/UserAccountsPage.fxml"));
         _root = loader.load();
 
         UserAccountsPage userAccountsPage = loader.getController();
         userAccountsPage.initialize(accounts,user);
         setStage(event);
     }
+    protected void openUserTransactionPage(ActionEvent event,
+                                           Set<TransactionDto> allT,
+                                           Set<TransactionDto> receivedT,
+                                           Set<TransactionDto> sentT,
+                                           UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/UserTransactionsPage.fxml"));
+        _root = loader.load();
+
+        UserTransactionsPage UserTransactionsPage = loader.getController();
+        UserTransactionsPage.initialize(allT, receivedT, sentT, user);
+        setStage(event);
+    }
+
+    protected void openUserDepositPage(ActionEvent event, Set<DepositDto> deposits, UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Deposit/UserDepositsPage.fxml"));
+        _root = loader.load();
+
+        UserDepositsPage userDepositsPage = loader.getController();
+        userDepositsPage.initialize(deposits, user);
+        setStage(event);
+    }
+
 
 
     protected String sendToServerWithResponse(String data){

@@ -54,6 +54,6 @@ public class Credit {
                 lendingRate + "," +
                 creditAmount + "," +
                 installmentAmount + "," +
-                creditType + ",";
+                creditType + ",,";
     }
 }

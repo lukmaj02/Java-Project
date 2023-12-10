@@ -55,6 +55,7 @@ public class Deposit {
                 finishDate.toString() + "," +
                 amount.toString() + "," +
                 currencyType.toString() + "," +
-                depositStatus.toString() + ",";
+                depositStatus.toString() + "," +
+                bankAccountDeposit.getAccountNr() +",,";
     }
 }

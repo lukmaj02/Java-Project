@@ -18,9 +18,9 @@ public class BankAccountDto {
     private String accountType;
 
     public static Set<BankAccountDto> mapper(String data){
-        if(data.equals("")) return new HashSet<>();
-        var splitedData = data.split(",,");
         var accounts = new HashSet<BankAccountDto>();
+        if(data.equals("")) return accounts;
+        var splitedData = data.split(",,");
         for (String account : splitedData){
             var atribute = account.split(",");
             accounts.add(BankAccountDto.builder()
@@ -33,14 +33,4 @@ public class BankAccountDto {
         }
         return accounts;
     }
-
-    public List<String> toList(BankAccountDto bankAccount) {
-        List<String> resultList = new ArrayList<>();
-        resultList.add(bankAccount.getAccountNr());
-        resultList.add(bankAccount.getBalance());
-        resultList.add(bankAccount.getCurrencyType());
-        resultList.add(bankAccount.getAccountType());
-        return resultList;
-    }
-
 }
