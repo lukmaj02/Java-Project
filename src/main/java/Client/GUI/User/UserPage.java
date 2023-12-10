@@ -40,7 +40,10 @@ public class UserPage extends Client {
         }
         else if(actionEvent.getSource() == deleteUser){
             var msg = sendToServerWithResponse("USER,DELETE," + user.getEmail());
-            if(isResponseValid(msg)) openFrontPage(actionEvent);
+            if(isResponseValid(msg)) {
+                showInfo("DELETION", "Profile deleted successfully");
+                openFrontPage(actionEvent);
+            }
         }
         else if (actionEvent.getSource()== logOut) {
             openFrontPage(actionEvent);

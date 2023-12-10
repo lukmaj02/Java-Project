@@ -5,5 +5,6 @@ public enum CardCommand {
     DELETE,
     EXTEND,
     PAY,
-    DISCARD
+    DISCARD,
+    ACCOUNT_CARDS
 }

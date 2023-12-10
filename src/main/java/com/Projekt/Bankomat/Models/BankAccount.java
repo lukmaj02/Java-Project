@@ -40,7 +40,7 @@ public class BankAccount {
 
     @OneToMany(
             mappedBy = "bankAccount",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )

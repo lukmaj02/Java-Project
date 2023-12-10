@@ -105,6 +105,7 @@ public class ClientHandler implements Callable<String> {
                 var dataTable = data.split(",",3);
                 systemResponse += creditService.checkInstallmentRate(new BigDecimal(dataTable[0]), Integer.valueOf(dataTable[1]), CreditType.valueOf(dataTable[2]));
             }
+            case CANCEL -> creditService.cancelCredit(data);
             default -> throw new InvalidCommandException(CREDIT);
         }
         return systemResponse;
@@ -207,6 +208,7 @@ public class ClientHandler implements Callable<String> {
                 splitedData[0],
                 CardType.valueOf(splitedData[1]));
             }
+            case ACCOUNT_CARDS -> systemResponse += listToString(cardService.getAccountCards(data));
             case PAY -> {
                 var splitedData = splitedData(data);
                 cardService.paymentByCard(

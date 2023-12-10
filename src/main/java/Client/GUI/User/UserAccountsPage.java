@@ -2,6 +2,7 @@ package Client.GUI.User;
 
 import Client.Client;
 import Client.dto.BankAccountDto;
+import Client.dto.CardDto;
 import Client.dto.UserDto;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -20,6 +21,8 @@ import java.util.Set;
 
 public class UserAccountsPage extends Client {
     @FXML
+    public TableView<BankAccountDto> userAccounts;
+    @FXML
     public TableColumn<BankAccountDto, String> accountNr;
     @FXML
     public TableColumn<BankAccountDto, String> balance;
@@ -27,8 +30,6 @@ public class UserAccountsPage extends Client {
     public TableColumn<BankAccountDto, String> currencyType;
     @FXML
     public TableColumn<BankAccountDto, String> accountType;
-    @FXML
-    public TableView<BankAccountDto> userAccounts;
     @FXML
     public Button backButton;
     @FXML
@@ -39,12 +40,16 @@ public class UserAccountsPage extends Client {
     public Button requestCredit;
     @FXML
     public Button deleteAccount;
+    @FXML
+    public Button createDebitCard;
+    @FXML
+    public Button createCreditCard;
+    @FXML
+    public Button viewCards;
     private String currentAccountNr;
     private UserDto user;
-    public Set<BankAccountDto> bankAccounts;
-    TableView.TableViewSelectionModel<BankAccountDto> selectedAccount;
+    public TableView.TableViewSelectionModel<BankAccountDto> selectedAccount;
     public void initialize(Set<BankAccountDto> bankAccounts, UserDto user){
-        this.bankAccounts = bankAccounts;
         this.user = user;
         accountNr.setCellValueFactory(new PropertyValueFactory<>("accountNr"));
         balance.setCellValueFactory(new PropertyValueFactory<>("balance"));
@@ -71,13 +76,29 @@ public class UserAccountsPage extends Client {
         }
         else if(actionEvent.getSource() == createDeposit){
             //todo openCreationDepositPage(actionEvent,user);
-        } else if(actionEvent.getSource() == requestCredit && currentAccountNr != null){
+        }
+        else if(actionEvent.getSource() == requestCredit && currentAccountNr != null){
             openRequestingCreditPage(actionEvent, user, currentAccountNr);
-        } else if (actionEvent.getSource()==deleteAccount && currentAccountNr != null) {
+        }
+        else if (actionEvent.getSource()==deleteAccount && currentAccountNr != null) {
             var msg = sendToServerWithResponse("BANK_ACCOUNT,DELETE,"+ currentAccountNr);
             if(isResponseValid(msg)) {
                 openUserPage(actionEvent,user);
                 showInfo("DELETION", "Bank account deleted successfully!");
+            }
+        }
+        else if (actionEvent.getSource() == createCreditCard && currentAccountNr != null) {
+            var msg = sendToServerWithResponse("CARD,CREATE,"+currentAccountNr +",CREDIT");
+            if(isResponseValid(msg)) showInfo("CREATED", "Credit card for account " +currentAccountNr + " created successfully");
+        }
+        else if (actionEvent.getSource() == createDebitCard && currentAccountNr != null) {
+            var msg = sendToServerWithResponse("CARD,CREATE,"+currentAccountNr +",DEBIT");
+            if(isResponseValid(msg)) showInfo("CREATED", "Debit card for account " +currentAccountNr + " created successfully");
+        }
+        else if (actionEvent.getSource()==viewCards) {
+            var msg = sendToServerWithResponse("CARD,ACCOUNT_CARDS,"+currentAccountNr);
+            if(isResponseValid(msg)){
+                openAccountCardsPage(actionEvent, CardDto.mapper(msg),user);
             }
         }
     }

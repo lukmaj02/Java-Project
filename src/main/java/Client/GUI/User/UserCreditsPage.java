@@ -1,6 +1,7 @@
 package Client.GUI.User;
 
 import Client.Client;
+import Client.dto.BankAccountDto;
 import Client.dto.CreditDto;
 import Client.dto.DepositDto;
 import Client.dto.UserDto;
@@ -38,8 +39,11 @@ public class UserCreditsPage extends Client {
     public TableColumn<CreditDto,String> creditStatus;
     @FXML
     public Button backButton;
-
+    @FXML
+    public Button cancelCredit;
     private UserDto user;
+    private String currentCreditId;
+    public TableView.TableViewSelectionModel<CreditDto> selectedCredit;
 
     public void initialize(Set<CreditDto> credits, UserDto user){
         this.user = user;
@@ -53,10 +57,21 @@ public class UserCreditsPage extends Client {
         creditStatus.setCellValueFactory(new PropertyValueFactory<>("creditStatus"));
         ObservableList<CreditDto> list = FXCollections.observableList(credits.stream().toList());
         userCredits.setItems(list);
+        userCredits.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null && !newSelection.equals(oldSelection)) {
+                currentCreditId = newSelection.getCreditId();
+            }
+        });
     }
     public void executeAnAction(ActionEvent event) throws IOException {
         if(event.getSource()== backButton){
             openUserPage(event,user);
+        } else if (event.getSource() == cancelCredit && currentCreditId != null) {
+            var msg = sendToServerWithResponse("CREDIT,CANCEL," + currentCreditId);
+            if(isResponseValid(msg)){
+                showInfo("CANCELLED", "Credit cancelled sucessfully");
+                openUserPage(event, user);
+            }
         }
     }
 }

@@ -27,6 +27,7 @@
             <TableColumn fx:id="creditStatus" prefWidth="77.0" text="Status" />
         </columns>
       </TableView>
-      <Button fx:id="backButton" layoutX="42.0" layoutY="458.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="37.0" prefWidth="53.0" text="Back" />
+      <Button fx:id="backButton" layoutX="57.0" layoutY="479.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="85.0" text="Back" />
+      <Button fx:id="cancelCredit" layoutX="754.0" layoutY="479.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="87.0" text="Cancel Credit" />
    </children>
 </AnchorPane>

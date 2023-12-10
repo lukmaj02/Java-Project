@@ -4,15 +4,19 @@ import com.Projekt.Bankomat.Enums.CardType;
 import com.Projekt.Bankomat.Enums.TransactionType;
 import com.Projekt.Bankomat.Exceptions.BankAccountNotFoundException;
 import com.Projekt.Bankomat.Exceptions.CardNotFoundException;
+import com.Projekt.Bankomat.Exceptions.InvalidCardDiscarding;
+import com.Projekt.Bankomat.Exceptions.InvalidExtendingValidityCard;
 import com.Projekt.Bankomat.Generators;
 import com.Projekt.Bankomat.IService.ICardService;
 import com.Projekt.Bankomat.Models.Card;
 import com.Projekt.Bankomat.Repository.CardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,7 +30,7 @@ public class CardService implements ICardService {
         this.transactionService = transactionService;
         this.bankAccountService = bankAccountService;
     }
-
+    @Transactional
     public void createCard(String accountNr, CardType cardType) throws BankAccountNotFoundException {
         var nowaKarta = Card.builder()
                 .cvc(Generators.generateRandomNumber(3))
@@ -40,37 +44,44 @@ public class CardService implements ICardService {
         cardRepo.save(nowaKarta);
     }
 
-    public void discardCard(String nrKarty){
-        var karta = cardRepo.findByCardNr(nrKarty).orElseThrow(() -> new CardNotFoundException(nrKarty));
+    @Transactional
+    public void discardCard(String cardNr){
+        var karta = cardRepo.findByCardNr(cardNr).orElseThrow(() -> new CardNotFoundException(cardNr));
+        if(karta.isDiscard()) throw new InvalidCardDiscarding();
         karta.setDiscard(true);
         cardRepo.save(karta);
     }
-
-    public void deleteCard(String nrKarty){
-        var karta = cardRepo.findByCardNr(nrKarty).orElseThrow(() -> new CardNotFoundException(nrKarty));
+    @Transactional
+    public void deleteCard(String cardNr){
+        var karta = cardRepo.findByCardNr(cardNr).orElseThrow(() -> new CardNotFoundException(cardNr));
         cardRepo.delete(karta);
     }
 
-    public void extendExpirationDate(String nrKarty){
-        var karta = cardRepo.findByCardNr(nrKarty)
-                .orElseThrow(() -> new CardNotFoundException(nrKarty));
+    @Override
+    public List<Card> getAccountCards(String accountNr) {
+        return cardRepo.findAccountsByAccountNr(accountNr);
+    }
+    @Transactional
+    public void extendExpirationDate(String cardNr){
+        var karta = cardRepo.findByCardNr(cardNr).orElseThrow(() -> new CardNotFoundException(cardNr));
+        if(karta.getExpirationDate().isAfter(LocalDate.now())) throw new InvalidExtendingValidityCard();
         karta.setExpirationDate(karta.getExpirationDate().plusYears(3));
     }
-
-    public void paymentByCard(String doNrKonta,
-                              String zNrKarty,
+    @Transactional
+    public void paymentByCard(String toAccountNr,
+                              String fromAccountNr,
                               String cvc,
-                              String imieNadawcy,
-                              String nazwiskoNadawcy,
-                              BigDecimal kwota) {
-        var kartaNadawcy = cardRepo.findUserCard(zNrKarty,cvc,imieNadawcy,nazwiskoNadawcy)
-                .orElseThrow(() -> new CardNotFoundException(zNrKarty));
+                              String userFirstname,
+                              String userLastname,
+                              BigDecimal amount) {
+        var kartaNadawcy = cardRepo.findUserCard(fromAccountNr,cvc, userFirstname, userLastname)
+                .orElseThrow(() -> new CardNotFoundException(fromAccountNr));
         var kontoKarty = kartaNadawcy.getBankAccount();
 
         transactionService.createTransaction(
                 kontoKarty.getAccountNr(),
-                doNrKonta,
-                kwota,
+                toAccountNr,
+                amount,
                 "Platnosc karta",
                 kontoKarty.getCurrencyType(),
                 TransactionType.CREDIT_CARD_TRANSFER

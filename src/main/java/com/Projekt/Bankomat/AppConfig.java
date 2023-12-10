@@ -27,7 +27,8 @@ public class AppConfig {
                                                UserService userService,
                                                TransactionService transactionService,
                                                BankAccountService bankAccountService,
-                                               CreditService creditService){
+                                               CreditService creditService,
+                                               CardService cardService){
         return args -> {
             try{
                 //depositService.createDeposit("84327494823748210194574587", DepositType.ANNUAL, BigDecimal.valueOf(1000));

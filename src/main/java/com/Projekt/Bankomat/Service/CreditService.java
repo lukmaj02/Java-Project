@@ -3,6 +3,7 @@ package com.Projekt.Bankomat.Service;
 import com.Projekt.Bankomat.Enums.CreditStatus;
 import com.Projekt.Bankomat.Enums.CreditType;
 import com.Projekt.Bankomat.Exceptions.CreditNotFoundExecption;
+import com.Projekt.Bankomat.Exceptions.InvalidCreditCancelling;
 import com.Projekt.Bankomat.Exceptions.InvalidWithdrawException;
 import com.Projekt.Bankomat.IService.ICreditService;
 import com.Projekt.Bankomat.Models.Credit;
@@ -79,10 +80,9 @@ public class CreditService implements ICreditService {
     @Override
     public void cancelCredit(String creditId) {
         var credit = creditRepo.findById(creditId).orElseThrow(CreditNotFoundExecption::new);
-        if(credit.getCreditStatus().equals((CreditStatus.PROCESSED))){
-            credit.setCreditStatus(CreditStatus.CANCELLED);
-            creditRepo.save(credit);
-        }
+        if(!credit.getCreditStatus().equals((CreditStatus.PROCESSED))) throw new InvalidCreditCancelling();
+        credit.setCreditStatus(CreditStatus.CANCELLED);
+        creditRepo.save(credit);
     }
 
     @Override

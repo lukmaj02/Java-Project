@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,5 +18,6 @@ public interface CardRepo extends JpaRepository<Card, String> {
                                 String cvc,
                                 String imie,
                                 String nazwisko);
-
+    @Query(value = "SELECT c FROM PAYMENT_CARD c JOIN bankAccount b WHERE b.accountNr = ?1")
+    List<Card> findAccountsByAccountNr(String accountNr);
 }

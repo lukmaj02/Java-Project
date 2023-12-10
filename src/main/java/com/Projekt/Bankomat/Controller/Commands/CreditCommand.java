@@ -6,5 +6,6 @@ public enum CreditCommand {
     REFUSE,
     ACTIVE,
     ALL_USER,
-    CHECK_RATE
+    CHECK_RATE,
+    CANCEL
 }

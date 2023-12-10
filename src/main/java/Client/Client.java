@@ -57,7 +57,7 @@ public class Client extends Application {
             _root = loader.load();
             _scene = new Scene(_root);
             stage.getIcons().add(new Image("bank-icon.png"));
-            stage.setTitle("Virutal Banking System.");
+            stage.setTitle("Virtual Banking System.");
 
             stage.setScene(_scene);
             stage.setResizable(false);
@@ -70,7 +70,6 @@ public class Client extends Application {
             showWarning("Decryption Manager Failed to launch");
         }
     }
-
     protected void openFrontPage(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontPage.fxml"));
         _root = loader.load();
@@ -78,7 +77,6 @@ public class Client extends Application {
         FrontPage frontPage = loader.getController();
         setStage(event);
     }
-
     protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/FirstFormulaPage.fxml"));
         _root = loader.load();
@@ -87,7 +85,6 @@ public class Client extends Application {
         formulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
         setStage(event);
     }
-
     protected void openSecondFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/SecondFormulaPage.fxml"));
         _root = loader.load();
@@ -96,7 +93,6 @@ public class Client extends Application {
         secondFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
         setStage(event);
     }
-
     protected void openThirdFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/ThirdFormulaPage.fxml"));
         _root = loader.load();
@@ -105,7 +101,6 @@ public class Client extends Application {
         thirdFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
         setStage(event);
     }
-
     protected void openFourhtFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/FourthFormulaPage.fxml"));
         _root = loader.load();
@@ -114,7 +109,6 @@ public class Client extends Application {
         fourthFormulaPage.initializeFormula(1, firstFormulaPageData, secondFormulaPageData, thirdFormulaPageData); // change randomly|depending on users count
         setStage(event);
     }
-
     protected void openUserPage(ActionEvent event, UserDto user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserPage.fxml"));
         _root = loader.load();
@@ -123,7 +117,6 @@ public class Client extends Application {
         userPage.initialize(user);
         setStage(event);
     }
-
     protected void openUserInfo(ActionEvent event, UserDto user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserInfo.fxml"));
         _root = loader.load();
@@ -132,7 +125,6 @@ public class Client extends Application {
         userInfo.initialize(user);
         setStage(event);
     }
-
     protected void openAccountCreationPage(ActionEvent event, UserDto user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/BankAccount/AccountCreationPage.fxml"));
         _root = loader.load();
@@ -163,7 +155,6 @@ public class Client extends Application {
         UserTransactionsPage.initialize(allT, receivedT, sentT, user);
         setStage(event);
     }
-
     protected void openUserDepositPage(ActionEvent event, Set<DepositDto> deposits, UserDto user) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Deposit/UserDepositsPage.fxml"));
         _root = loader.load();
@@ -180,7 +171,6 @@ public class Client extends Application {
         userCreditsPage.initialize(credits, user);
         setStage(event);
     }
-
     protected void openRequestingCreditPage(ActionEvent event, UserDto user, String accountNr) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Credit/RequestCreditPage.fxml"));
         _root = loader.load();
@@ -189,39 +179,40 @@ public class Client extends Application {
         requestCreditPage.initialize(user, accountNr);
         setStage(event);
     }
+    protected void openAccountCardsPage(ActionEvent event, Set<CardDto> accountCards, UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BankAccount/AccountCardsPage.fxml"));
+        _root = loader.load();
 
-
-
-    protected String sendToServerWithResponse(String data){
-        try{
+        AccountCardsPage accountCardsPage = loader.getController();
+        accountCardsPage.initialize(accountCards, user);
+        setStage(event);
+    }
+    protected String sendToServerWithResponse(String data) {
+        try {
             sender.println(data);
             return reader.readLine();
-        }catch(Exception e){
+        } catch (Exception e) {
             return "ERROR, SERVER FAILED TO READ!. CHECK LATER AGAIN";
         }
     }
-
     protected void showProvideDataWarning() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("Data warning, you haven't fill all fields.");
         alert.setContentText("Provide more details!");
         alert.show();
     }
-
     protected void showWarning(String warningInfo){
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText("WARNING");
         alert.setContentText(warningInfo);
         alert.show();
     }
-
     protected void showInfo(String header, String content){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.show();
     }
-
     protected boolean isResponseValid(String data){
         if(Objects.equals(data, "")) return true;
         var splitedData = data.split(",",2);
@@ -231,7 +222,6 @@ public class Client extends Application {
         }
         return true;
     }
-
     private void setStage(ActionEvent event){
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);
