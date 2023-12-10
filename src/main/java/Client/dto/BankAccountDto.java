@@ -1,9 +1,9 @@
 package Client.dto;
 
+import javafx.beans.property.StringProperty;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -18,6 +18,7 @@ public class BankAccountDto {
     private String accountType;
 
     public static Set<BankAccountDto> mapper(String data){
+        if(data.equals("")) return new HashSet<>();
         var splitedData = data.split(",,");
         var accounts = new HashSet<BankAccountDto>();
         for (String account : splitedData){
@@ -32,4 +33,14 @@ public class BankAccountDto {
         }
         return accounts;
     }
+
+    public List<String> toList(BankAccountDto bankAccount) {
+        List<String> resultList = new ArrayList<>();
+        resultList.add(bankAccount.getAccountNr());
+        resultList.add(bankAccount.getBalance());
+        resultList.add(bankAccount.getCurrencyType());
+        resultList.add(bankAccount.getAccountType());
+        return resultList;
+    }
+
 }

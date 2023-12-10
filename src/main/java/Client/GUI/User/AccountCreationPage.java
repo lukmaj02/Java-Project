@@ -32,7 +32,7 @@ public class AccountCreationPage extends Client {
         currencyTypeBox.getItems().addAll(
                 "PLN",
                 "EURO",
-                "US DOLLAR",
+                "US_DOLLAR",
                 "RUBLE",
                 "NORWEGIAN_KRONE"
         );

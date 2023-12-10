@@ -73,4 +73,9 @@ public class DepositService implements IDepositService {
         var poweredAmount = deposit.getAmount().multiply(deposit.getDepositType().getPercentage());
         bankAccountService.paymentToAccount(deposit.getBankAccountDeposit(),poweredAmount);
     }
+
+    @Override
+    public List<Deposit> getUserDeposits(String email) {
+        return depositRepository.getAllUserDeposits(email);
+    }
 }

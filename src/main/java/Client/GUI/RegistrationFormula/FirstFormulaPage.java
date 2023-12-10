@@ -48,7 +48,7 @@ public class FirstFormulaPage extends Client {
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/FirstFormulaPage.fxml"));
+        loader.setLocation(getClass().getResource("/Registration/FirstFormulaPage.fxml"));
 
         Parent root = loader.load();
         Scene scene = new Scene(root);

@@ -53,6 +53,7 @@ public class AppConfig {
 //                        "za wczoraj",
 //                        CurrencyType.ZLOTY,
 //                        TransactionType.PRZELEW_EKSPRESOWY);
+                //System.out.println(depositRepository.getAllUserDeposits("krzysztof.gonciarz@gmail.com"));
             }
             catch(RuntimeException e){
                 e.printStackTrace();

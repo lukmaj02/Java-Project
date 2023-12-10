@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -73,6 +74,11 @@ public class CreditService implements ICreditService {
             credit.setCreditStatus(CreditStatus.ACTIVE);
             creditRepo.save(credit);
         }
+    }
+
+    @Override
+    public List<Credit> getUserCredits(String email) {
+        return creditRepo.getAllUserCredits(email);
     }
 
     protected BigDecimal calculateInstallment(double creditAmount,

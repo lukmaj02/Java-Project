@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class UserPage extends Client {
 
@@ -23,6 +24,8 @@ public class UserPage extends Client {
     public Button accountCreation;
     @FXML
     public Button userInformations;
+    @FXML
+    public Button viewCredits;
 
     private UserDto user;
 
@@ -43,9 +46,15 @@ public class UserPage extends Client {
         }
         else if(actionEvent.getSource() == viewBankAccounts){
             var msg = sendToServerWithResponse("BANK_ACCOUNT,USER_ACCOUNTS," + user.getEmail());
-            if(isResponseValid(msg)){
-                openUserAccounts(actionEvent, BankAccountDto.mapper(msg));
+            if(isResponseValid(msg)) openUserAccounts(actionEvent, BankAccountDto.mapper(msg), user);
+        }
+        else if(actionEvent.getSource() == viewTransactions){
+            var msg = sendToServerWithResponse("TRANSACTION,ALL_USER," + user.getEmail());
+            if(isResponseValid(msg)) {
+                //todo
             }
+        } else if (actionEvent.getSource() == viewCredits) {
+            //todo var msg = sendToServerWithResponse("CREDIT,");
         }
     }
 }

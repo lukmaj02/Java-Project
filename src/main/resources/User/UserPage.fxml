@@ -17,7 +17,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="deleteUser" layoutX="103.0" layoutY="296.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="67.0" prefWidth="144.0" text="Delete Profile">
+      <Button fx:id="deleteUser" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="38.0" prefWidth="106.0" text="Delete Profile">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>
@@ -43,6 +43,11 @@
          </font>
       </Button>
       <Button fx:id="viewDeposits" layoutX="347.0" layoutY="200.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="67.0" prefWidth="144.0" text="View Deposits">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="viewCredits" layoutX="103.0" layoutY="296.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="67.0" prefWidth="144.0" text="View Credits">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font>

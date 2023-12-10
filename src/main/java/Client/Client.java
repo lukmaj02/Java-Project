@@ -6,6 +6,7 @@ import Client.GUI.RegistrationFormula.FourthFormulaPage;
 import Client.GUI.RegistrationFormula.SecondFormulaPage;
 import Client.GUI.RegistrationFormula.ThirdFormulaPage;
 import Client.GUI.User.AccountCreationPage;
+import Client.GUI.User.UserAccountsPage;
 import Client.GUI.User.UserInfo;
 import Client.GUI.User.UserPage;
 import Client.dto.BankAccountDto;
@@ -26,6 +27,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Set;
 
 public class Client extends Application {
@@ -82,7 +84,7 @@ public class Client extends Application {
     }
 
     protected void openFormula(ActionEvent event, ArrayList<String > firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FirstFormulaPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/FirstFormulaPage.fxml"));
         _root = loader.load();
 
         FirstFormulaPage formulaPage = loader.getController();
@@ -91,7 +93,7 @@ public class Client extends Application {
     }
 
     protected void openSecondFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SecondFormulaPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/SecondFormulaPage.fxml"));
         _root = loader.load();
 
         SecondFormulaPage secondFormulaPage = loader.getController();
@@ -100,7 +102,7 @@ public class Client extends Application {
     }
 
     protected void openThirdFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ThirdFormulaPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/ThirdFormulaPage.fxml"));
         _root = loader.load();
 
         ThirdFormulaPage thirdFormulaPage = loader.getController();
@@ -109,7 +111,7 @@ public class Client extends Application {
     }
 
     protected void openFourhtFormulaPage(ActionEvent event, ArrayList<String> firstFormulaPageData, ArrayList<String > secondFormulaPageData, ArrayList<String > thirdFormulaPageData) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FourthFormulaPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Registration/FourthFormulaPage.fxml"));
         _root = loader.load();
 
         FourthFormulaPage fourthFormulaPage = loader.getController();
@@ -118,7 +120,7 @@ public class Client extends Application {
     }
 
     protected void openUserPage(ActionEvent event, UserDto user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserPage.fxml"));
         _root = loader.load();
 
         UserPage userPage = loader.getController();
@@ -127,7 +129,7 @@ public class Client extends Application {
     }
 
     protected void openUserInfo(ActionEvent event, UserDto user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserInfo.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserInfo.fxml"));
         _root = loader.load();
 
         UserInfo userInfo = loader.getController();
@@ -136,15 +138,20 @@ public class Client extends Application {
     }
 
     protected void openAccountCreationPage(ActionEvent event, UserDto user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AccountCreationPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BankAccount/AccountCreationPage.fxml"));
         _root = loader.load();
 
         AccountCreationPage accountCreationPage = loader.getController();
         accountCreationPage.initialize(user);
         setStage(event);
     }
-    protected void openUserAccounts(ActionEvent event, Set<BankAccountDto> accounts){
+    protected void openUserAccounts(ActionEvent event, Set<BankAccountDto>accounts, UserDto user) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserAccountsPage.fxml"));
+        _root = loader.load();
 
+        UserAccountsPage userAccountsPage = loader.getController();
+        userAccountsPage.initialize(accounts,user);
+        setStage(event);
     }
 
 
@@ -179,6 +186,7 @@ public class Client extends Application {
     }
 
     protected boolean isResponseValid(String data){
+        if(Objects.equals(data, "")) return true;
         var splitedData = data.split(",",2);
         if(splitedData[0].equals("ERROR")){
             showWarning(splitedData[1]);
