@@ -121,6 +121,10 @@ public class ClientHandler implements Callable<String> {
             case FINISH -> depositService.finishDeposit(data);
             case SUSPEND -> depositService.suspendDeposit(data);
             case ALL_USER -> systemResponse += listToString(depositService.getUserDeposits(data));
+            case VIEW_PROFIT -> {
+                var splited = data.split(",");
+                systemResponse += depositService.viewProfit(DepositType.valueOf(splited[0]), new BigDecimal(splited[1]));
+            }
             default -> throw new InvalidCommandException(DEPOSIT);
         }
         return systemResponse;

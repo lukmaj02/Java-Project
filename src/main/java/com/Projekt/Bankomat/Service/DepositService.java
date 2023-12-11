@@ -75,6 +75,12 @@ public class DepositService implements IDepositService {
     }
 
     @Override
+    public BigDecimal viewProfit(DepositType depositType, BigDecimal amount) {
+        var poweredAmount = amount.multiply(depositType.getPercentage());
+        return poweredAmount.subtract(amount);
+    }
+
+    @Override
     public List<Deposit> getUserDeposits(String email) {
         return depositRepository.getAllUserDeposits(email);
     }

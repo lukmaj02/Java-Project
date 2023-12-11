@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="447.0" prefWidth="730.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.UserDepositsPage">
    <children>
       <TableView fx:id="userDeposits" layoutX="36.0" layoutY="132.0" prefHeight="200.0" prefWidth="659.0">
@@ -27,5 +26,7 @@
          </font>
       </Label>
       <Button fx:id="backButton" layoutX="50.0" layoutY="373.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="72.0" text="Back" />
+      <Button fx:id="suspendDeposit" layoutX="305.0" layoutY="373.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="112.0" text="Suspend Deposit" />
+      <Button fx:id="finishDeposit" layoutX="566.0" layoutY="373.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="94.0" text="Finish Deposit" />
    </children>
 </AnchorPane>

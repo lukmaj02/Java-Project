@@ -187,6 +187,15 @@ public class Client extends Application {
         accountCardsPage.initialize(accountCards, user);
         setStage(event);
     }
+
+    protected void openDepositCreationPage(ActionEvent event, UserDto user, String accountNr) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Deposit/DepositCreationPage.fxml"));
+        _root = loader.load();
+
+        DepositCreationPage depositCreationPage = loader.getController();
+        depositCreationPage.initialize(user, accountNr);
+        setStage(event);
+    }
     protected String sendToServerWithResponse(String data) {
         try {
             sender.println(data);

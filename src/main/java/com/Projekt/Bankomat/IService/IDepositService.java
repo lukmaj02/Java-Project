@@ -11,5 +11,6 @@ public interface IDepositService {
     void createDeposit(String accountNr, DepositType depositType, BigDecimal amount);
     void suspendDeposit(String depositId);
     void finishDeposit(String depositId);
+    BigDecimal viewProfit(DepositType depositType, BigDecimal amount);
     List<Deposit> getUserDeposits(String email);
 }

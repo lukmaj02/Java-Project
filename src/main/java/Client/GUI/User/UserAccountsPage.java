@@ -4,7 +4,6 @@ import Client.Client;
 import Client.dto.BankAccountDto;
 import Client.dto.CardDto;
 import Client.dto.UserDto;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,36 +69,29 @@ public class UserAccountsPage extends Client {
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
         if(actionEvent.getSource() == backButton){
             openUserPage(actionEvent,user);
-        }
-        else if(actionEvent.getSource()==createTransaction){
+        } else if(actionEvent.getSource()==createTransaction){
             //todo openCreationTransactionPage(actionEvent, user);
-        }
-        else if(actionEvent.getSource() == createDeposit){
-            //todo openCreationDepositPage(actionEvent,user);
-        }
-        else if(actionEvent.getSource() == requestCredit && currentAccountNr != null){
-            openRequestingCreditPage(actionEvent, user, currentAccountNr);
-        }
-        else if (actionEvent.getSource()==deleteAccount && currentAccountNr != null) {
+        } else if (actionEvent.getSource()==deleteAccount && currentAccountNr != null) {
             var msg = sendToServerWithResponse("BANK_ACCOUNT,DELETE,"+ currentAccountNr);
             if(isResponseValid(msg)) {
                 openUserPage(actionEvent,user);
                 showInfo("DELETION", "Bank account deleted successfully!");
             }
-        }
-        else if (actionEvent.getSource() == createCreditCard && currentAccountNr != null) {
+        } else if (actionEvent.getSource() == requestCredit) {
+            openRequestingCreditPage(actionEvent,user,currentAccountNr);
+        } else if (actionEvent.getSource() == createCreditCard && currentAccountNr != null) {
             var msg = sendToServerWithResponse("CARD,CREATE,"+currentAccountNr +",CREDIT");
             if(isResponseValid(msg)) showInfo("CREATED", "Credit card for account " +currentAccountNr + " created successfully");
-        }
-        else if (actionEvent.getSource() == createDebitCard && currentAccountNr != null) {
+        } else if (actionEvent.getSource() == createDebitCard && currentAccountNr != null) {
             var msg = sendToServerWithResponse("CARD,CREATE,"+currentAccountNr +",DEBIT");
             if(isResponseValid(msg)) showInfo("CREATED", "Debit card for account " +currentAccountNr + " created successfully");
-        }
-        else if (actionEvent.getSource()==viewCards) {
+        } else if (actionEvent.getSource()==viewCards && currentAccountNr != null) {
             var msg = sendToServerWithResponse("CARD,ACCOUNT_CARDS,"+currentAccountNr);
             if(isResponseValid(msg)){
                 openAccountCardsPage(actionEvent, CardDto.mapper(msg),user);
             }
+        } else if (actionEvent.getSource() == createDeposit && currentAccountNr != null) {
+            openDepositCreationPage(actionEvent,user,currentAccountNr);
         }
     }
 }
