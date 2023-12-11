@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class FourthFormulaPage extends Client {
@@ -54,48 +55,49 @@ public class FourthFormulaPage extends Client {
         String email =  thirdPageData.get(0);
         String password = thirdPageData.get(3);
         String phoneNumber = thirdPageData.get(2);
-
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
-        LocalDate dateOfBirth = LocalDate.parse(firstPageData.get(2), dateTimeFormatter);
-
         String address = firstPageData.get(5);
         String city = firstPageData.get(6);
 
-        Gender gender;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
+        LocalDate dateOfBirth = LocalDate.parse(firstPageData.get(2), dateTimeFormatter);
+        String maritalStatus;
+        String gender;
+
         if (Objects.equals(firstPageData.get(3), "Male")) {
-            gender = Gender.MALE;
+            gender = "MALE";
         }else {
-            gender = Gender.FEMALE;
+            gender = "FEMALE";
         }
-
-        MaritalStatus maritalStatus;
         if (Objects.equals(firstPageData.get(4), "Single"))
-            maritalStatus = MaritalStatus.SINGLE;
+            maritalStatus = "SINGLE";
         else if (Objects.equals(firstPageData.get(4), "Married"))
-            maritalStatus = MaritalStatus.MARRIED;
+            maritalStatus = "MARRIED";
         else if (Objects.equals(firstPageData.get(4), "Divorced"))
-            maritalStatus = MaritalStatus.DIVORCED;
+            maritalStatus = "DIVORCED";
         else
-            maritalStatus = MaritalStatus.WIDOWED;
+            maritalStatus = "WIDOWED";
 
+        return ("USER," + "REGISTER," + firstName + "," + lastName + "," + email + "," + password + "," +
+                phoneNumber + "," + dateOfBirth + "," + address + "," + city + "," + gender + "," + maritalStatus + ",USER");
+    }
 
-        return ("USER," + "CREATE," + firstName + "," + lastName + "," + email + "," + password + "," +
-                phoneNumber + "," + dateOfBirth + "," + address + "," + city + "," + gender + "," + maritalStatus);
+    public String getInfoToCreateAccount(){
+        String email =  thirdPageData.get(0);
+        String accountType = secondPageData.get(0).toUpperCase();
+        String currency = secondPageData.get(4).toUpperCase();
+        return "BANK_ACCOUNT,CREATE,"+email +"," + accountType +"," + currency;
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
-        if (actionEvent.getSource() == checkBoxTermsAndCondition) {
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                try {
-                    Desktop.getDesktop().browse(new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ&embeds_referring_euri=https%3A%2F%2Fwww.bing.com%2F&embeds_referring_origin=https%3A%2F%2Fwww.bing.com&source_ve_path=MjM4NTE&feature=emb_title"));
-                } catch (IOException | URISyntaxException ex) {
-                    ex.printStackTrace();
+        if (actionEvent.getSource() == submitButton && checkBoxTermsAndCondition.isSelected()) {
+            var msg = sendToServerWithResponse(getNeededInfoToCreateUser());
+            if(isResponseValid(msg)){
+                var account = sendToServerWithResponse(getInfoToCreateAccount());
+                if(isResponseValid(account)){
+                    showInfo("REGISTRATION", "Registration was created successfully!");
+                    openFrontPage(actionEvent);
                 }
             }
-        } else if (actionEvent.getSource() == submitButton) {
-            sender.println();getNeededInfoToCreateUser();
         }
-
     }
 }

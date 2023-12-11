@@ -71,14 +71,14 @@ public class BankAccountService implements IBankAccountService {
     }
 
     @Override
-    public void createAccount(String email, AccountType accountType, CurrencyType currencyType){
+    public void createAccount(String email, AccountType accountType, CurrencyType currency){
         var konto = BankAccount.builder()
                 .accountId(UUID.randomUUID().toString())
                 .accountNr(Generators.generateRandomNumber(26))
                 .balance(BigDecimal.valueOf(0))
                 .accountType(accountType)
                 .user(userService.getUser(email))
-                .currencyType(currencyType)
+                .currencyType(currency)
                 .build();
         bankAccountRepo.save(konto);
     }

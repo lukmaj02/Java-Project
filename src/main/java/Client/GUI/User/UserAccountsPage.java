@@ -40,11 +40,8 @@ public class UserAccountsPage extends Client {
     @FXML
     public Button deleteAccount;
     @FXML
-    public Button createDebitCard;
-    @FXML
-    public Button createCreditCard;
-    @FXML
     public Button viewCards;
+    public Button createCard;
     private String currentAccountNr;
     private UserDto user;
     public TableView.TableViewSelectionModel<BankAccountDto> selectedAccount;
@@ -79,12 +76,8 @@ public class UserAccountsPage extends Client {
             }
         } else if (actionEvent.getSource() == requestCredit) {
             openRequestingCreditPage(actionEvent,user,currentAccountNr);
-        } else if (actionEvent.getSource() == createCreditCard && currentAccountNr != null) {
-            var msg = sendToServerWithResponse("CARD,CREATE,"+currentAccountNr +",CREDIT");
-            if(isResponseValid(msg)) showInfo("CREATED", "Credit card for account " +currentAccountNr + " created successfully");
-        } else if (actionEvent.getSource() == createDebitCard && currentAccountNr != null) {
-            var msg = sendToServerWithResponse("CARD,CREATE,"+currentAccountNr +",DEBIT");
-            if(isResponseValid(msg)) showInfo("CREATED", "Debit card for account " +currentAccountNr + " created successfully");
+        } else if (actionEvent.getSource() == createCard && currentAccountNr != null) {
+            openCardCreationPage(actionEvent,user, currentAccountNr);
         } else if (actionEvent.getSource()==viewCards && currentAccountNr != null) {
             var msg = sendToServerWithResponse("CARD,ACCOUNT_CARDS,"+currentAccountNr);
             if(isResponseValid(msg)){

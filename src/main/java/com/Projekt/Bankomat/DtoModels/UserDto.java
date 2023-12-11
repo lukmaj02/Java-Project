@@ -2,6 +2,7 @@ package com.Projekt.Bankomat.DtoModels;
 
 import com.Projekt.Bankomat.Enums.Gender;
 import com.Projekt.Bankomat.Enums.MaritalStatus;
+import com.Projekt.Bankomat.Enums.Role;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ public class UserDto {
     private String city;
     private Gender gender;
     private MaritalStatus maritalStatus;
+    private Role role;
 
     @Override
     public String toString() {

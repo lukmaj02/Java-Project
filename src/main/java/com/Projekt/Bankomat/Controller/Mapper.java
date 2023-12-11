@@ -1,6 +1,9 @@
 package com.Projekt.Bankomat.Controller;
 
 import com.Projekt.Bankomat.DtoModels.UserDto;
+import com.Projekt.Bankomat.Enums.Gender;
+import com.Projekt.Bankomat.Enums.MaritalStatus;
+import com.Projekt.Bankomat.Enums.Role;
 import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Models.Transaction;
 import com.Projekt.Bankomat.Models.User;
@@ -21,7 +24,7 @@ public class Mapper {
     public static String[] toDeposit(String data) {return data.split(",",3);}
 
     public static UserDto toUserDto(String data){
-        var splitedData = data.split(",", 7);
+        var splitedData = data.split(",");
         return UserDto.builder()
                 .firstName(splitedData[0])
                 .lastName(splitedData[1])
@@ -30,6 +33,10 @@ public class Mapper {
                 .phoneNumber(splitedData[4])
                 .dateOfBirth(LocalDate.parse(splitedData[5]))
                 .address(splitedData[6])
+                .city(splitedData[7])
+                .gender(Gender.valueOf(splitedData[8]))
+                .maritalStatus(MaritalStatus.valueOf(splitedData[9]))
+                .role(Role.valueOf(splitedData[10]))
                 .build();
     }
 

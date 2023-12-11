@@ -17,6 +17,7 @@ import java.util.concurrent.*;
 @SpringBootApplication
 public class BankomatApplication {
 	private final static int SERVER_PORT = 6000;
+	private final static ExecutorService executorService = Executors.newCachedThreadPool();
 	private static ServerSocket serverSocket;
 
 	public static void main(String[] args) throws IOException {
@@ -30,7 +31,6 @@ public class BankomatApplication {
 		}
 
 		ConfigurableApplicationContext appContext = SpringApplication.run(BankomatApplication.class, args);
-		ExecutorService executorService = appContext.getBean(ExecutorService.class);
 		ClientHandler clientHandler = appContext.getBean(ClientHandler.class);
 		DecryptionManager decryptionManager = appContext.getBean(DecryptionManager.class);
 

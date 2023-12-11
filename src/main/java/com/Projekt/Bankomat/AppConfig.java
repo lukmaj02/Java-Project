@@ -17,11 +17,6 @@ import static com.Projekt.Bankomat.Enums.DepositType.ANNUAL;
 @Configuration
 public class AppConfig {
     @Bean
-    public ExecutorService executorService(){
-        return Executors.newFixedThreadPool(5);
-    }
-
-    @Bean
     public CommandLineRunner commandLineRunner(DepositService depositService,
                                                DepositRepository depositRepository,
                                                UserService userService,
@@ -55,6 +50,7 @@ public class AppConfig {
 //                        CurrencyType.ZLOTY,
 //                        TransactionType.PRZELEW_EKSPRESOWY);
                 //System.out.println(depositRepository.getAllUserDeposits("krzysztof.gonciarz@gmail.com"));
+
             }
             catch(RuntimeException e){
                 e.printStackTrace();

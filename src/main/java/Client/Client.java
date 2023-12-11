@@ -180,7 +180,7 @@ public class Client extends Application {
         setStage(event);
     }
     protected void openAccountCardsPage(ActionEvent event, Set<CardDto> accountCards, UserDto user) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/BankAccount/AccountCardsPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Card/AccountCardsPage.fxml"));
         _root = loader.load();
 
         AccountCardsPage accountCardsPage = loader.getController();
@@ -194,6 +194,14 @@ public class Client extends Application {
 
         DepositCreationPage depositCreationPage = loader.getController();
         depositCreationPage.initialize(user, accountNr);
+        setStage(event);
+    }
+    protected void openCardCreationPage(ActionEvent event, UserDto user, String accountNr) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Card/CardCreationPage.fxml"));
+        _root = loader.load();
+
+        CardCreationPage cardCreationPage = loader.getController();
+        cardCreationPage.initialize(user, accountNr);
         setStage(event);
     }
     protected String sendToServerWithResponse(String data) {

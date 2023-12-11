@@ -210,7 +210,8 @@ public class ClientHandler implements Callable<String> {
                 var splitedData = splitedData(data);
                 cardService.createCard(
                 splitedData[0],
-                CardType.valueOf(splitedData[1]));
+                CardType.valueOf(splitedData[1]),
+                splitedData[2]);
             }
             case ACCOUNT_CARDS -> systemResponse += listToString(cardService.getAccountCards(data));
             case PAY -> {

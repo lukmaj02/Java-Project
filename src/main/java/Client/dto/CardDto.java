@@ -17,6 +17,7 @@ public class CardDto {
     private String cvc;
     private String cardType;
     private String isDiscard;
+    private String pin;
 
     public static Set<CardDto> mapper(String data){
         var cards = new HashSet<CardDto>();
@@ -31,6 +32,7 @@ public class CardDto {
                     .cvc(atribute[3])
                     .cardType(atribute[4])
                     .isDiscard(atribute[5])
+                    .pin(atribute[6])
                     .build());
         }
         return cards;

@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface ICardService {
-    void createCard(String AccountNr, CardType cardType);
+    void createCard(String AccountNr, CardType cardType, String pin);
     void discardCard(String cardNr);
     void deleteCard(String cardNr);
     List<Card> getAccountCards(String accountNr);

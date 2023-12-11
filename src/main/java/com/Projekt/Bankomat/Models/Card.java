@@ -35,6 +35,9 @@ public class Card {
     @Column(name ="isDiscard", nullable = false)
     private boolean isDiscard = true;
 
+    @Column(name = "pin", nullable = false, length = 4)
+    private String pin;
+
     @ManyToOne
     @JoinColumn(name = "accountId")
     private BankAccount bankAccount;
@@ -47,6 +50,7 @@ public class Card {
                 expirationDate + "," +
                 cvc + "," +
                 cardType.toString() + "," +
-                isDiscard + ",,";
+                isDiscard + "," +
+                pin + ",,";
     }
 }

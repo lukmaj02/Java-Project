@@ -7,7 +7,7 @@ import com.Projekt.Bankomat.Models.BankAccount;
 import java.util.List;
 
 public interface IBankAccountService {
-    void deleteAccount(String nrKonta);
-    void createAccount(String email, AccountType accountType, CurrencyType waluta);
+    void deleteAccount(String accountNr);
+    void createAccount(String email, AccountType accountType, CurrencyType currency);
     List<BankAccount> getUserBankAccounts(String email);
 }

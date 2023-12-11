@@ -31,6 +31,8 @@ public class AccountCardsPage extends Client {
     @FXML
     public TableColumn<CardDto,String> isDiscard;
     @FXML
+    public TableColumn<CardDto, String> pin;
+    @FXML
     public Button backButton;
     @FXML
     public Button deleteCard;
@@ -48,6 +50,7 @@ public class AccountCardsPage extends Client {
         expirationDate.setCellValueFactory(new PropertyValueFactory<>("expirationDate"));
         cvc.setCellValueFactory(new PropertyValueFactory<>("cvc"));
         cardType.setCellValueFactory(new PropertyValueFactory<>("cardType"));
+        pin.setCellValueFactory(new PropertyValueFactory<>("pin"));
         isDiscard.setCellValueFactory(new PropertyValueFactory<>("isDiscard"));
 
         ObservableList<CardDto> list = FXCollections.observableList(bankAccountCards.stream().toList());

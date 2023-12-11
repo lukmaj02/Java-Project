@@ -62,6 +62,10 @@ public class UserService implements IUserService, IAdminService {
                 .password(registraionRequest.getPassword())
                 .email(registraionRequest.getEmail())
                 .phoneNumber(registraionRequest.getPhoneNumber())
+                .city(registraionRequest.getCity())
+                .role(registraionRequest.getRole())
+                .gender(registraionRequest.getGender())
+                .maritalStatus(registraionRequest.getMaritalStatus())
                 .build();
         userRepo.save(uzytkownik);
     }

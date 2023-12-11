@@ -23,12 +23,11 @@
          </columns>
       </TableView>
       <Button fx:id="backButton" layoutX="14.0" layoutY="361.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="55.0" text="Back" />
-      <Button fx:id="createTransaction" layoutX="110.0" layoutY="313.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Create Transaction" />
-      <Button fx:id="createDeposit" layoutX="110.0" layoutY="348.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Create deposit" />
+      <Button fx:id="createTransaction" layoutX="253.0" layoutY="349.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Create Transaction" />
+      <Button fx:id="createDeposit" layoutX="110.0" layoutY="348.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Create Deposit" />
       <Button fx:id="requestCredit" layoutX="389.0" layoutY="313.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Request Credit" />
-      <Button fx:id="deleteAccount" layoutX="487.0" layoutY="14.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="98.0" text="Delete Account" />
-      <Button fx:id="createCreditCard" layoutX="248.0" layoutY="313.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Create credit card" />
-      <Button fx:id="createDebitCard" layoutX="248.0" layoutY="348.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Create debit card" />
+      <Button fx:id="deleteAccount" layoutX="111.0" layoutY="313.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Delete Account" />
+      <Button fx:id="createCard" layoutX="253.0" layoutY="313.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="Create Card" />
       <Button fx:id="viewCards" layoutX="389.0" layoutY="349.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="25.0" prefWidth="124.0" text="View Cards" />
    </children>
 </AnchorPane>

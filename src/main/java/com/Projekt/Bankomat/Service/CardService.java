@@ -31,7 +31,7 @@ public class CardService implements ICardService {
         this.bankAccountService = bankAccountService;
     }
     @Transactional
-    public void createCard(String accountNr, CardType cardType) throws BankAccountNotFoundException {
+    public void createCard(String accountNr, CardType cardType, String pin) throws BankAccountNotFoundException {
         var nowaKarta = Card.builder()
                 .cvc(Generators.generateRandomNumber(3))
                 .expirationDate(LocalDate.now().plusYears(4))
@@ -40,6 +40,7 @@ public class CardService implements ICardService {
                 .cardId(UUID.randomUUID().toString())
                 .isDiscard(false)
                 .bankAccount(bankAccountService.getAccountByAccountNr(accountNr))
+                .pin(pin)
                 .build();
         cardRepo.save(nowaKarta);
     }
