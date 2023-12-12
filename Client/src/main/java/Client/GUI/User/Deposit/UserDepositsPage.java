@@ -1,6 +1,6 @@
 package Client.GUI.User.Deposit;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.DepositDto;
 import Client.dto.UserDto;
 import javafx.collections.FXCollections;
@@ -16,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.util.Set;
 
-public class UserDepositsPage extends Client {
+public class UserDepositsPage extends SceneController {
     @FXML
     public TableView<DepositDto> userDeposits;
     @FXML

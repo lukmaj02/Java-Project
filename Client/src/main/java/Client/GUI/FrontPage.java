@@ -1,6 +1,6 @@
 package Client.GUI;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import java.util.ArrayList;
 
 
-public class FrontPage extends Client {
+public class FrontPage extends SceneController {
     @FXML
     private TextField emailTextField;
     @FXML

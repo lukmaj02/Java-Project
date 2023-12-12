@@ -1,7 +1,6 @@
 package Client.GUI.RegistrationFormula;
 
-import Client.GUI.FrontPage;
-import Client.Client;
+import Client.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class FirstFormulaPage extends Client {
+public class FirstFormulaPage extends SceneController {
     public TextField lastNameTextField;
     @FXML
     private ComboBox<String> maritalStatusComboBox;

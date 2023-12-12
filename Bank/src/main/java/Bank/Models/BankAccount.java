@@ -20,7 +20,7 @@ public class BankAccount {
     @UuidGenerator
     private String accountId;
 
-    @Column(name = "accountNr", nullable = false, length = 26)
+    @Column(name = "accountNr", nullable = false, length = 26, unique = true)
     private String accountNr;
 
     @Column(name = "balance", nullable = false)
@@ -61,6 +61,14 @@ public class BankAccount {
             orphanRemoval = true
     )
     private Set<Credit> credits;
+
+    @OneToMany(
+            mappedBy = "fromAccountNr",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Transaction> transactions;
 
     @Override
     public String toString() {

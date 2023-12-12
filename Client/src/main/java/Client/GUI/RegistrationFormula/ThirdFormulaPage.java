@@ -1,6 +1,6 @@
 package Client.GUI.RegistrationFormula;
 
-import Client.Client;
+import Client.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class ThirdFormulaPage extends Client {
+public class ThirdFormulaPage extends SceneController {
     @FXML
     private Label formulaLabel;
     @FXML

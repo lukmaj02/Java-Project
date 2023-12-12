@@ -1,6 +1,6 @@
 package Client.GUI.User.Account;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +9,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import java.io.IOException;
 
-public class AccountCreationPage extends Client {
+public class AccountCreationPage extends SceneController {
     @FXML
     public Label frontLabel;
     @FXML

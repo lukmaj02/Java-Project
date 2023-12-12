@@ -1,6 +1,6 @@
 package Client.GUI.User;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import java.io.IOException;
 import java.util.Optional;
 
-public class UserPage extends Client {
+public class UserPage extends SceneController {
 
     @FXML
     public Button deleteUser;

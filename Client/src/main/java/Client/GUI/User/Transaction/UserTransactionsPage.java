@@ -1,6 +1,6 @@
 package Client.GUI.User.Transaction;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.TransactionDto;
 import Client.dto.UserDto;
 import javafx.collections.FXCollections;
@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.util.Set;
 
-public class UserTransactionsPage extends Client {
+public class UserTransactionsPage extends SceneController {
     public Button backButton;
     @FXML
     public TableView<TransactionDto> userTransactions;

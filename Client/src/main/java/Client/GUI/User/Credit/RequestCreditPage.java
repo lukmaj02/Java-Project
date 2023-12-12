@@ -1,6 +1,6 @@
 package Client.GUI.User.Credit;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class RequestCreditPage extends Client {
+public class RequestCreditPage extends SceneController {
 
     @FXML
     public TextField amount;
