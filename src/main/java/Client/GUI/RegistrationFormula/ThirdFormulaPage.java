@@ -28,8 +28,6 @@ public class ThirdFormulaPage extends Client {
     private TextField areaCodeTextField;
     @FXML
     private TextField emailTextField;
-    @FXML
-    private TextField cardPinTextField;
 
     public ArrayList<String > firstPageData = new ArrayList<>();
     public ArrayList<String > secondPageData = new ArrayList<>();
@@ -64,13 +62,8 @@ public class ThirdFormulaPage extends Client {
             phoneNumberTextField.setText("");
         if (Objects.equals(userPasswordField.getText(), "Provide more details."))
             userPasswordField.setText("");
-        if (Objects.equals(cardPinTextField.getText(), "Provide more details."))
-            cardPinTextField.setText("");
 
-        thirdPageData.addAll(Arrays.asList
-                (
-                    emailTextField.getText(), areaCodeTextField.getText(), phoneNumberTextField.getText(), userPasswordField.getText(), cardPinTextField.getText()
-                )
+        thirdPageData.addAll(Arrays.asList(emailTextField.getText(), areaCodeTextField.getText(), phoneNumberTextField.getText(), userPasswordField.getText())
         );
     }
 
@@ -94,9 +87,6 @@ public class ThirdFormulaPage extends Client {
             ifSomethingEmpty = true;
         }
         if (Objects.equals(userRewritePasswordField.getText(), "")) {
-            ifSomethingEmpty = true;
-        }
-        if (Objects.equals(cardPinTextField.getText(), "")) {
             ifSomethingEmpty = true;
         }
 
@@ -124,34 +114,24 @@ public class ThirdFormulaPage extends Client {
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource() == previousPageButton) {
             fillThirdPageVariables();
-
-            SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
-            secondFormulaPage.firstPageData = firstPageData;
-            secondFormulaPage.secondPageData = secondPageData;
-            secondFormulaPage.thirdPageData = thirdPageData;
-
             openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         } else if (actionEvent.getSource() == nextPageButton) {
             fillThirdPageVariables();
             if (!checkIfUserProvideAllData()) {
                 showProvideDataWarning();
-                return;
             }
-            if (!Objects.equals(userPasswordField.getText(), userRewritePasswordField.getText())) {
+            else if (!Objects.equals(userPasswordField.getText(), userRewritePasswordField.getText())) {
                 showPasswordDoesntMatchWarning();
-                return;
             }
-            if (userPasswordField.getText().length() < 9) {
+            else if (userPasswordField.getText().length() < 9) {
                 showPasswordDoesntHaveEnoughChars();
-                return;
             }
-
-            FourthFormulaPage fourthFormulaPage = new FourthFormulaPage();
-            fourthFormulaPage.firstPageData = firstPageData;
-            fourthFormulaPage.secondPageData = secondPageData;
-            fourthFormulaPage.thirdPageData = thirdPageData;
-
-            openFourhtFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+            else if((!phoneNumberTextField.getText().matches("[0-9]+")) || phoneNumberTextField.getLength() != 9){
+                showWarning("Invalid Phone Number!");
+            }
+            else{
+                openFourhtFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
+            }
         }
     }
 

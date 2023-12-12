@@ -161,12 +161,15 @@ public class FirstFormulaPage extends Client {
         if (Objects.equals(stateTextField.getText(), "Provide more details."))
             stateTextField.setText("");
 
-        firstPageData.addAll(Arrays.asList
-                (
-                    nameTextField.getText(), lastNameTextField.getText(), dateAsString, genderAsString,
-                    maritalStatusAsString, addressTextField.getText(), cityTextField.getText(),
-                    stateTextField.getText()
-                )
+        firstPageData.addAll(Arrays.asList(
+                nameTextField.getText(),
+                lastNameTextField.getText(),
+                dateAsString,
+                genderAsString,
+                maritalStatusAsString,
+                addressTextField.getText(),
+                cityTextField.getText(),
+                stateTextField.getText())
         );
     }
 
@@ -183,21 +186,8 @@ public class FirstFormulaPage extends Client {
                 showProvideDataWarning();
                 return;
             }
-
-            SecondFormulaPage secondFormulaPage = new SecondFormulaPage();
-            secondFormulaPage.firstPageData = firstPageData;
-            secondFormulaPage.secondPageData = secondPageData;
-            secondFormulaPage.thirdPageData = thirdPageData;
-
             openSecondFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         } else if (actionEvent.getSource() == previousPageButton) {
-            fillFirstPageVariables();
-
-            // fill ArrayList from frontpage with proper values
-            FrontPage frontPage = new FrontPage();
-            frontPage.firstFormulaPageData = firstPageFormulaDate;
-            frontPage.secondPageFormulaDate = secondPageData;
-
             openFrontPage(actionEvent);
         }
     }

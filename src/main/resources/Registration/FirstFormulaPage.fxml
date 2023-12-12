@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="750.0" maxWidth="810.0" minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.RegistrationFormula.FirstFormulaPage">
+<AnchorPane maxHeight="750.0" maxWidth="810.0" minHeight="630.0" minWidth="800.0" prefHeight="630.0" prefWidth="800.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.RegistrationFormula.FirstFormulaPage">
    <children>
       <Text layoutX="311.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 1: Personal Details" AnchorPane.leftAnchor="311.0" AnchorPane.rightAnchor="310.8212890625" AnchorPane.topAnchor="70.0">
          <font>
@@ -57,7 +57,7 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <TextField fx:id="nameTextField" layoutX="350.0" layoutY="134.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="134.0">
+      <TextField fx:id="nameTextField" layoutX="375.0" layoutY="134.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.leftAnchor="375.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="134.0">
          <font>
             <Font size="14.0" />
          </font>
@@ -78,7 +78,7 @@
             <Font name="Times New Roman" size="14.0" />
          </font>
       </RadioButton>
-      <TextField fx:id="addressTextField" layoutX="393.0" layoutY="388.0" onAction="#executeAnAction" prefHeight="25.0" prefWidth="300.0" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="125.0">
+      <TextField fx:id="addressTextField" layoutX="375.0" layoutY="388.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.leftAnchor="375.0" AnchorPane.rightAnchor="125.0">
          <font>
             <Font size="14.0" />
          </font>

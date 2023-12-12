@@ -22,8 +22,7 @@ public class SecondFormulaPage extends Client {
     private ComboBox <String> categoryComboBox;
     @FXML
     private ComboBox <String> occupationComboBox;
-    @FXML
-    private ComboBox <String> cardTypeComboBox;
+
     @FXML
     private ComboBox <String> currencyTypeComboBox;
     @FXML
@@ -57,11 +56,6 @@ public class SecondFormulaPage extends Client {
         occupationComboBox.getItems().removeAll(occupationComboBox.getItems());
         occupationComboBox.getItems().addAll("Salaried","Self-Employmed","Business","Student","Retired","Others");
 
-
-        cardTypeComboBox.getItems().removeAll(cardTypeComboBox.getItems());
-        cardTypeComboBox.getItems().addAll("Credit", "Debit");
-
-
         currencyTypeComboBox.getItems().removeAll(currencyTypeComboBox.getItems());
         currencyTypeComboBox.getItems().addAll("PLN", "Euro", "US dollar", "Ruble", "Norwegian krone");
     }
@@ -81,10 +75,6 @@ public class SecondFormulaPage extends Client {
         if(!occupationComboBox.getSelectionModel().isEmpty())
             occupationAsString = occupationComboBox.getValue();
 
-        String cardTypeAsString = "";
-        if(!cardTypeComboBox.getSelectionModel().isEmpty())
-            cardTypeAsString = cardTypeComboBox.getValue();
-
         String currencyTypeAsString = "";
         if(!currencyTypeComboBox.getSelectionModel().isEmpty())
             currencyTypeAsString = currencyTypeComboBox.getValue();
@@ -95,12 +85,12 @@ public class SecondFormulaPage extends Client {
 
 
 
-        secondPageData.addAll(Arrays.asList
-                (
-                        categoryAsString, educationalQualificationAsString, occupationAsString, cardTypeAsString,
-                        currencyTypeAsString, seniorCitizenAsString
-                )
-        );
+        secondPageData.addAll(Arrays.asList(
+                categoryAsString,
+                educationalQualificationAsString,
+                occupationAsString,
+                currencyTypeAsString,
+                seniorCitizenAsString));
     }
 
     private boolean checkIfUserProvideAllData() {
@@ -111,8 +101,6 @@ public class SecondFormulaPage extends Client {
         if (educationalComboBox.getSelectionModel().isEmpty())
             ifSomethingEmpty = true;
         if (occupationComboBox.getSelectionModel().isEmpty())
-            ifSomethingEmpty = true;
-        if (cardTypeComboBox.getSelectionModel().isEmpty())
             ifSomethingEmpty = true;
         if (currencyTypeComboBox.getSelectionModel().isEmpty())
             ifSomethingEmpty = true;
@@ -132,11 +120,8 @@ public class SecondFormulaPage extends Client {
         if (! Objects.equals(secondPageFormulaDate.get(2), ""))
             occupationComboBox.setValue(secondPageFormulaDate.get(2));
         if (! Objects.equals(secondPageFormulaDate.get(3), ""))
-            cardTypeComboBox.setValue(secondPageFormulaDate.get(3));
-        if (! Objects.equals(secondPageFormulaDate.get(4), ""))
-            currencyTypeComboBox.setValue(secondPageFormulaDate.get(4));
-
-        if (Objects.equals(secondPageFormulaDate.get(5), "Yes"))
+            currencyTypeComboBox.setValue(secondPageFormulaDate.get(3));
+        if (Objects.equals(secondPageFormulaDate.get(4), "Yes"))
             seniorCitizenYesRadioButton.setSelected(true);
         else if (Objects.equals(secondPageFormulaDate.get(5), "No"))
             seniorCitizenNoRadioButton.setSelected(true);

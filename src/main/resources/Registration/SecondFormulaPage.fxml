@@ -8,14 +8,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="750.0" minWidth="810.0" prefHeight="750.0" prefWidth="810.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.RegistrationFormula.SecondFormulaPage">
+<AnchorPane minHeight="630.0" minWidth="800.0" prefHeight="630.0" prefWidth="800.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.RegistrationFormula.SecondFormulaPage">
    <children>
-      <Label fx:id="formulaLabel" layoutX="238.0" layoutY="14.0" prefHeight="40.0" prefWidth="415.0" text="Formula Page no." AnchorPane.leftAnchor="250.0" AnchorPane.topAnchor="20.0">
+      <Label fx:id="formulaLabel" layoutX="255.0" layoutY="26.0" prefHeight="40.0" prefWidth="300.0" text="Formula Page no. 2" AnchorPane.leftAnchor="255.0" AnchorPane.topAnchor="26.0">
          <font>
             <Font name="Times New Roman Bold" size="36.0" />
          </font>
       </Label>
-      <Text layoutX="311.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Page 2: Additional Details" AnchorPane.bottomAnchor="680.0" AnchorPane.leftAnchor="311.0" AnchorPane.topAnchor="70.0">
+      <Text layoutX="335.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Additional Details" AnchorPane.bottomAnchor="439.0" AnchorPane.leftAnchor="335.0" AnchorPane.topAnchor="73.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -25,42 +25,36 @@
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="110.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Educational Qualification" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="190.0">
+      <Text layoutX="115.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Educational Qualification" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="214.177734375">
          <font>
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="144.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="240.0">
+      <Text layoutX="115.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Occupation" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="282.177734375">
          <font>
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="144.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Card Type" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="290.0">
+      <Text layoutX="115.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Currency Type" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="349.177734375">
          <font>
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="144.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Currency Type" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="340.0">
+      <Text layoutX="115.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senior Citizen" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="415.177734375">
          <font>
             <Font name="Times New Roman" size="20.0" />
          </font>
       </Text>
-      <Text layoutX="141.0" layoutY="468.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Senior Citizen" AnchorPane.leftAnchor="115.0" AnchorPane.topAnchor="390.0">
-         <font>
-            <Font name="Times New Roman" size="20.0" />
-         </font>
-      </Text>
-      <ComboBox fx:id="educationalComboBox" layoutX="385.0" layoutY="187.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" />
+      <ComboBox fx:id="educationalComboBox" layoutX="375.0" layoutY="210.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" />
       <ComboBox fx:id="categoryComboBox" layoutX="385.0" layoutY="137.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
-      <ComboBox fx:id="occupationComboBox" layoutX="385.0" layoutY="237.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
-      <ComboBox fx:id="cardTypeComboBox" layoutX="385.0" layoutY="287.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
-      <ComboBox fx:id="currencyTypeComboBox" layoutX="385.0" layoutY="337.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
-      <RadioButton fx:id="seniorCitizenYesRadioButton" layoutX="431.0" layoutY="392.0" mnemonicParsing="false" onAction="#executeAnAction" text="Yes" AnchorPane.rightAnchor="325.0">
+      <ComboBox fx:id="occupationComboBox" layoutX="375.0" layoutY="279.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="125.0" />
+      <ComboBox fx:id="currencyTypeComboBox" layoutX="376.0" layoutY="346.0" onAction="#executeAnAction" prefHeight="30.0" prefWidth="300.0" AnchorPane.rightAnchor="124.0" />
+      <RadioButton fx:id="seniorCitizenYesRadioButton" layoutX="433.0" layoutY="414.0" mnemonicParsing="false" onAction="#executeAnAction" text="Yes" AnchorPane.rightAnchor="314.0">
          <font>
             <Font size="16.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="seniorCitizenNoRadioButton" layoutX="578.0" layoutY="394.0" mnemonicParsing="false" onAction="#executeAnAction" text="No" AnchorPane.rightAnchor="162.0">
+      <RadioButton fx:id="seniorCitizenNoRadioButton" layoutX="565.0" layoutY="416.0" mnemonicParsing="false" onAction="#executeAnAction" text="No" AnchorPane.rightAnchor="186.0">
          <font>
             <Font name="Times New Roman" size="16.0" />
          </font>

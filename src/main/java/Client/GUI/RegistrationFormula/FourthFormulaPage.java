@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
 import java.awt.*;
 import java.io.IOException;
@@ -21,21 +22,35 @@ import java.util.Objects;
 
 public class FourthFormulaPage extends Client {
     @FXML
-    public Label cardNumberLabel;
-    @FXML
-    public Label pinLabel;
-    @FXML
-    public CheckBox checkBoxTermsAndCondition;
-    @FXML
     public Button cancelButton;
     @FXML
     public Button submitButton;
     @FXML
     public Label formulaLabel;
+    @FXML
+    public TextField firstname;
+    @FXML
+    public TextField lastname;
+    @FXML
+    public TextField email;
+    @FXML
+    public TextField phoneNumber;
+    @FXML
+    public TextField dateOfBirth;
+    @FXML
+    public TextField address;
+    @FXML
+    public TextField city;
+    @FXML
+    public TextField accountType;
+    @FXML
+    public TextField accountCurrency;
 
     public ArrayList<String > firstPageData = new ArrayList<>();
     public ArrayList<String > secondPageData = new ArrayList<>();
     public ArrayList<String > thirdPageData = new ArrayList<>();
+    private String password;
+
 
     public void initializeFormula(Integer number, ArrayList<String> firstFormulaPageData, ArrayList<String> secondFormulaPageData, ArrayList<String> thirdFormulaPageData) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
@@ -43,21 +58,19 @@ public class FourthFormulaPage extends Client {
         firstPageData = firstFormulaPageData;
         secondPageData = secondFormulaPageData;
         thirdPageData = thirdFormulaPageData;
-
-        cardNumberLabel.setText("XXXX-XXXX-XXXX-TEST");
-        pinLabel.setText("TEST");
-        checkBoxTermsAndCondition.setText("I declare that all data entered by me is true and I have read and agreed to the Terms and Conditions");
+        firstname.setText(firstPageData.get(0));
+        lastname.setText(firstPageData.get(1));
+        dateOfBirth.setText(firstPageData.get(2));
+        email.setText(thirdPageData.get(0));
+        phoneNumber.setText(thirdPageData.get(2));
+        address.setText(firstPageData.get(5));
+        city.setText(firstPageData.get(6));
+        accountType.setText(secondPageData.get(0).toUpperCase());
+        accountCurrency.setText(secondPageData.get(3).toUpperCase());
+        password = thirdPageData.get(2);
     }
 
     private String getNeededInfoToCreateUser() throws Exception {
-        String firstName = firstPageData.get(0);
-        String lastName = firstPageData.get(1);
-        String email =  thirdPageData.get(0);
-        String password = thirdPageData.get(3);
-        String phoneNumber = thirdPageData.get(2);
-        String address = firstPageData.get(5);
-        String city = firstPageData.get(6);
-
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
         LocalDate dateOfBirth = LocalDate.parse(firstPageData.get(2), dateTimeFormatter);
         String maritalStatus;
@@ -77,27 +90,39 @@ public class FourthFormulaPage extends Client {
         else
             maritalStatus = "WIDOWED";
 
-        return ("USER," + "REGISTER," + firstName + "," + lastName + "," + email + "," + password + "," +
-                phoneNumber + "," + dateOfBirth + "," + address + "," + city + "," + gender + "," + maritalStatus + ",USER");
+        return ("USER," + "REGISTER," +
+                firstname.getText() + "," +
+                lastname.getText() + "," +
+                email.getText() + "," +
+                password + "," +
+                phoneNumber.getText() + "," +
+                dateOfBirth + "," +
+                address.getText() + "," +
+                city.getText() + "," +
+                gender + "," +
+                maritalStatus +
+                ",USER");
     }
 
     public String getInfoToCreateAccount(){
-        String email =  thirdPageData.get(0);
-        String accountType = secondPageData.get(0).toUpperCase();
-        String currency = secondPageData.get(4).toUpperCase();
-        return "BANK_ACCOUNT,CREATE,"+email +"," + accountType +"," + currency;
+        return ("BANK_ACCOUNT,CREATE,"+
+                email.getText() +"," +
+                accountType.getText() +"," +
+                accountCurrency.getText());
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
-        if (actionEvent.getSource() == submitButton && checkBoxTermsAndCondition.isSelected()) {
+        if (actionEvent.getSource() == submitButton) {
             var msg = sendToServerWithResponse(getNeededInfoToCreateUser());
             if(isResponseValid(msg)){
                 var account = sendToServerWithResponse(getInfoToCreateAccount());
                 if(isResponseValid(account)){
-                    showInfo("REGISTRATION", "Registration was created successfully!");
+                    showInfo("REGISTRATION", "Registration was successfully!");
                     openFrontPage(actionEvent);
                 }
             }
+        } else if (actionEvent.getSource() == cancelButton) {
+            openThirdFormulaPage(actionEvent, firstPageData, secondPageData, thirdPageData);
         }
     }
 }
