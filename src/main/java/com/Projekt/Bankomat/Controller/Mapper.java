@@ -40,6 +40,17 @@ public class Mapper {
                 .build();
     }
 
+    public static UserDto toEditUserInformations(String data){
+        var splitedData = data.split(",");
+        return UserDto.builder()
+                .email(splitedData[0])
+                .address(splitedData[1])
+                .city((splitedData[2]))
+                .phoneNumber(splitedData[3])
+                .maritalStatus(MaritalStatus.valueOf(splitedData[4]))
+                .build();
+    }
+
     public static String[] toTransaction(String data){
         return data.split(",",6);
     }

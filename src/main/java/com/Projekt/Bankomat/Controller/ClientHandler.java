@@ -136,7 +136,7 @@ public class ClientHandler implements Callable<String> {
         switch (command) {
             case DELETE -> userService.deleteUser(data);
             case REGISTER -> userService.registerUser(toUserDto(data));
-            case EDIT -> userService.editUserInformations(toUserDto(data));
+            case EDIT -> userService.editUserInformations(toEditUserInformations(data));
             case LOGIN -> {
                 var loginInf = toLogin(data);
                 systemResponse += (userService.login(loginInf[0], loginInf[1]).toString());

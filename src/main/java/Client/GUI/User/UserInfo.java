@@ -4,10 +4,7 @@ import Client.Client;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -43,8 +40,7 @@ public class UserInfo extends Client {
     public TextField cityText;
     @FXML
     public TextField phonenumberText;
-    @FXML
-    public TextField maritalStatusText;
+    public ChoiceBox<String> maritalStatus;
 
     private UserDto user;
 
@@ -56,14 +52,43 @@ public class UserInfo extends Client {
         addressText.setText(user.getAddress());
         cityText.setText(user.getCity());
         phonenumberText.setText(user.getPhoneNumber());
-        maritalStatusText.setText(user.getMaritalStatus());
+        maritalStatus.getItems().addAll("SINGLE", "MARRIED", "WIDOWED", "DIVORCED");
+        maritalStatus.setValue(user.getMaritalStatus());
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
         if(actionEvent.getSource() == back){
             openUserPage(actionEvent, user);
-        } else if (actionEvent.getSource() == changeInformations) {
-
+        } else if (actionEvent.getSource() == changeInformations && areFieldsEdited()) {
+            var msg = sendToServerWithResponse(infoToEditUser());
+            if(isResponseValid(msg)){
+                updateUser();
+                showInfo("EDITED", "User information's edited successfully!");
+                openUserPage(actionEvent,user);
+            }
         }
+    }
+
+    private void updateUser(){
+        user.setAddress(addressText.getText());
+        user.setCity(cityText.getText());
+        user.setPhoneNumber(phonenumberText.getText());
+        user.setMaritalStatus(maritalStatus.getValue());
+    }
+    private boolean areFieldsEdited(){
+        if(!user.getAddress().equals(addressText.getText())) return true;
+        else if(!user.getCity().equals(cityText.getText())) return true;
+        else if(!user.getPhoneNumber().equals(phonenumberText.getText())) return true;
+        else if(!user.getMaritalStatus().equals(maritalStatus.getValue())) return true;
+        showWarning("Fields were not edited!");
+        return false;
+    }
+    private String infoToEditUser(){
+        return ("USER,EDIT," +
+                user.getEmail() + "," +
+                addressText.getText() + "," +
+                cityText.getText() + "," +
+                phonenumberText.getText() + "," +
+                maritalStatus.getValue());
     }
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -38,8 +39,10 @@ public class UserService implements IUserService, IAdminService {
 
     public void editUserInformations(UserDto userDto){
         var uzytkownik = userRepo.findByEmail(userDto.getEmail()).orElseThrow(UserNotFoundException::new);
-        uzytkownik.setFirstName(userDto.getFirstName());
-        uzytkownik.setLastName(userDto.getLastName());
+        if(!Objects.equals(uzytkownik.getPhoneNumber(), userDto.getPhoneNumber())
+                && userRepo.existsByPhoneNumber(userDto.getPhoneNumber())) {
+            throw new UserExistsException(userDto.getPhoneNumber());
+        }
         uzytkownik.setAddress(userDto.getAddress());
         uzytkownik.setCity(userDto.getCity());
         uzytkownik.setPhoneNumber(userDto.getPhoneNumber());
