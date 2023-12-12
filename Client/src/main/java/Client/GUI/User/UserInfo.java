@@ -1,6 +1,6 @@
 package Client.GUI.User;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,7 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 
-public class UserInfo extends Client {
+public class UserInfo extends SceneController {
 
     @FXML
     public Label firstnameLabel;

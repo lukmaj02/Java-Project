@@ -160,14 +160,6 @@ public class ClientHandler implements Callable<String> {
                         CurrencyType.valueOf(info[4]),
                         TransactionType.valueOf(info[5]));
             }
-            case SUC_FROM_ACC ->
-                    systemResponse += listToString(transactionService.getAllSuccessfullySentTransactionsFromBankAccount(data));
-            case NOT_SUC_FROM_ACC ->
-                    systemResponse += listToString(transactionService.getAllNotSuccessfullySentTransactionsFromBankAccount(data));
-            case SUC_TO_ACC ->
-                    systemResponse += listToString(transactionService.getAllSuccessfullySentTransactionsToBankAccount(data));
-            case ALL_FROM_ACC ->
-                    systemResponse += listToString(transactionService.getAllTransactionFromAccount(data));
             case ALL_TO_USER ->
                     systemResponse += listToString(transactionService.getAllTransactionsSentToUser(data));
             case ALL_FROM_USER ->

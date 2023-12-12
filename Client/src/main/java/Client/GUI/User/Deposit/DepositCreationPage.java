@@ -1,6 +1,6 @@
 package Client.GUI.User.Deposit;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class DepositCreationPage extends Client {
+public class DepositCreationPage extends SceneController {
 
     @FXML
     public ChoiceBox<String> type;

@@ -1,6 +1,6 @@
 package Client.GUI.User.Transaction;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class TransactionCreatePage extends Client {
+public class TransactionCreatePage extends SceneController {
     @FXML
     public TextField amount;
     @FXML

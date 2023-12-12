@@ -42,7 +42,7 @@ public class TransactionService implements ITransactionService {
                 .amount(amount)
                 .toAccountNr(toAccountNr)
                 .isValid(false)
-                .fromAccountNr(fromAccountNr)
+                .fromAccountNr(bankAccountService.getAccountByAccountNr(fromAccountNr))
                 .currencyType(currency)
                 .transactionType(transactionType)
                 .build();
@@ -55,23 +55,6 @@ public class TransactionService implements ITransactionService {
             transactionRepo.save(transaction);
         }
     }
-
-    public List<Transaction> getAllNotSuccessfullySentTransactionsFromBankAccount(String fromAccountNr){
-            return transactionRepo.findAllNotSuccessfullySentTransactionsFromBankAccount(fromAccountNr);
-        }
-
-    public List<Transaction> getAllSuccessfullySentTransactionsFromBankAccount(String FromAccountNr){
-            return transactionRepo.findAllSuccessfullyTransactionsFromBankAccount(FromAccountNr);
-        }
-
-    public List<Transaction> getAllTransactionFromAccount(String fromAccountNr){
-        return transactionRepo.findAllTransactionsFromBankAccount(fromAccountNr);
-    }
-
-    public List<Transaction> getAllSuccessfullySentTransactionsToBankAccount(String toAccountNr){
-        return transactionRepo.findAllSuccessfullySentTransactionsToBankAccount(toAccountNr);
-    }
-
     public List<Transaction> getAllTransactionsSentByUser(String email){
         return transactionRepo.findAllTransactionsSentByUser(email);
     }

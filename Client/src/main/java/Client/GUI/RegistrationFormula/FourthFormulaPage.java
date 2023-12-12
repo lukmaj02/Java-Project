@@ -1,24 +1,19 @@
 package Client.GUI.RegistrationFormula;
 
-import Client.Client;
+import Client.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Objects;
 
-public class FourthFormulaPage extends Client {
+public class FourthFormulaPage extends SceneController {
     @FXML
     public Button cancelButton;
     @FXML

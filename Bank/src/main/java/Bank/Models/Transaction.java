@@ -41,8 +41,9 @@ public class Transaction {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "fromAccountNr",nullable = false)
-    private String fromAccountNr;
+    @ManyToOne()
+    @JoinColumn(name = "fromAccountNr", referencedColumnName = "accountNr")
+    private BankAccount fromAccountNr;
 
     @Column(name = "toAccountNr", nullable = false)
     private String toAccountNr;

@@ -1,6 +1,6 @@
 package Client.GUI.User.Card;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
-public class CardCreationPage extends Client {
+public class CardCreationPage extends SceneController {
     @FXML
     public ChoiceBox<String> type;
     @FXML

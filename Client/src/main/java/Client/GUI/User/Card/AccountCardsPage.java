@@ -1,7 +1,6 @@
 package Client.GUI.User.Card;
 
-import Client.Client;
-import Client.dto.BankAccountDto;
+import Client.SceneController;
 import Client.dto.CardDto;
 import Client.dto.UserDto;
 import javafx.collections.FXCollections;
@@ -17,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.util.Set;
 
-public class AccountCardsPage extends Client {
+public class AccountCardsPage extends SceneController {
     @FXML
     public TableView<CardDto> accountCards;
     @FXML

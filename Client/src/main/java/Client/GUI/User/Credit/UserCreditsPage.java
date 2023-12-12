@@ -1,6 +1,6 @@
 package Client.GUI.User.Credit;
 
-import Client.Client;
+import Client.SceneController;
 import Client.dto.CreditDto;
 import Client.dto.UserDto;
 import javafx.collections.FXCollections;
@@ -15,7 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.util.Set;
 
-public class UserCreditsPage extends Client {
+public class UserCreditsPage extends SceneController {
     @FXML
     public TableView<CreditDto> userCredits;
     @FXML
