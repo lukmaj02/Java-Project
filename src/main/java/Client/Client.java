@@ -6,6 +6,16 @@ import Client.GUI.RegistrationFormula.FourthFormulaPage;
 import Client.GUI.RegistrationFormula.SecondFormulaPage;
 import Client.GUI.RegistrationFormula.ThirdFormulaPage;
 import Client.GUI.User.*;
+import Client.GUI.User.Account.AccountCreationPage;
+import Client.GUI.User.Account.UserAccountsPage;
+import Client.GUI.User.Card.AccountCardsPage;
+import Client.GUI.User.Card.CardCreationPage;
+import Client.GUI.User.Credit.RequestCreditPage;
+import Client.GUI.User.Credit.UserCreditsPage;
+import Client.GUI.User.Deposit.DepositCreationPage;
+import Client.GUI.User.Deposit.UserDepositsPage;
+import Client.GUI.User.Transaction.TransactionCreatePage;
+import Client.GUI.User.Transaction.UserTransactionsPage;
 import Client.dto.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -27,13 +37,6 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Client extends Application {
-    //first formula page
-    protected ArrayList<String> firstPageFormulaDate = new ArrayList<>();
-
-    // second formula page
-    public ArrayList<String> secondPageFormulaDate = new ArrayList<>();
-
-    // variables to control scene changes
     protected Stage _stage;
     protected Scene _scene;
     protected Parent _root;
@@ -204,12 +207,20 @@ public class Client extends Application {
         cardCreationPage.initialize(user, accountNr);
         setStage(event);
     }
+    protected void openTransactionCreationPage(ActionEvent event, UserDto user, String accountNr, String currency) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/TransactionCreationPage.fxml"));
+        _root = loader.load();
+
+        TransactionCreatePage transactionCreatePage = loader.getController();
+        transactionCreatePage.initialize(user, accountNr, currency);
+        setStage(event);
+    }
     protected String sendToServerWithResponse(String data) {
         try {
             sender.println(data);
             return reader.readLine();
         } catch (Exception e) {
-            return "ERROR, SERVER FAILED TO READ!. CHECK LATER AGAIN";
+            return "ERROR, SERVER FAILED TO READ! CHECK LATER AGAIN";
         }
     }
     protected void showProvideDataWarning() {

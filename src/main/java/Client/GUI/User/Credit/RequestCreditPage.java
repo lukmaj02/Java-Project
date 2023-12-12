@@ -1,4 +1,4 @@
-package Client.GUI.User;
+package Client.GUI.User.Credit;
 
 import Client.Client;
 import Client.dto.UserDto;

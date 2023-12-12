@@ -1,4 +1,4 @@
-package Client.GUI.User;
+package Client.GUI.User.Card;
 
 import Client.Client;
 import Client.dto.BankAccountDto;

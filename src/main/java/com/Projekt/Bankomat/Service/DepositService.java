@@ -20,6 +20,7 @@ import static com.Projekt.Bankomat.Enums.DepositStatus.*;
 
 
 @Service
+@Transactional
 public class DepositService implements IDepositService {
     private final BankAccountService bankAccountService;
     private final DepositRepository depositRepository;

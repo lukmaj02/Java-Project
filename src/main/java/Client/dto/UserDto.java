@@ -26,11 +26,11 @@ public class UserDto {
                 .lastname(splitedData[1])
                 .email(splitedData[2])
                 .password(splitedData[3])
-                .phoneNumber(splitedData[4])
-                .dateOfBirth(splitedData[5])
-                .address(splitedData[6])
-                .city(splitedData[7])
-                .gender(splitedData[8])
+                .dateOfBirth(splitedData[4])
+                .gender(splitedData[5])
+                .phoneNumber(splitedData[6])
+                .address(splitedData[7])
+                .city(splitedData[8])
                 .maritalStatus(splitedData[9])
                 .build();
     }

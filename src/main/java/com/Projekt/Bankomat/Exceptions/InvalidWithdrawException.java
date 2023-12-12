@@ -2,6 +2,6 @@ package com.Projekt.Bankomat.Exceptions;
 
 public class InvalidWithdrawException extends RuntimeException{
     public InvalidWithdrawException(){
-        super("Not enought money");
+        super("Not enough money");
     }
 }

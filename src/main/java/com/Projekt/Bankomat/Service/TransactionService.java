@@ -26,7 +26,6 @@ public class TransactionService implements ITransactionService {
         this.bankAccountService = bankAccountService;
     }
 
-    @Transactional
     public void createTransaction(String fromAccountNr,
                                   String toAccountNr,
                                   BigDecimal amount,
@@ -43,19 +42,19 @@ public class TransactionService implements ITransactionService {
                 .transactionDate(LocalDate.now())
                 .title(title)
                 .amount(amount)
-                .toAccountNr(fromAccountNr)
-                .fromAccountNr(toAccountNr)
+                .toAccountNr(toAccountNr)
+                .isValid(false)
+                .fromAccountNr(fromAccountNr)
                 .currencyType(currency)
                 .transactionType(transactionType)
                 .build();
-
         try{
-            transaction.setValid(bankAccountService.isPaymentValid(fromAccountNr,toAccountNr,amount));
+            bankAccountService.payment(fromAccountNr,toAccountNr,amount);
+            transaction.setValid(true);
+        } catch (InvalidWithdrawException e){
+            throw new InvalidWithdrawException();
+        } finally {
             transactionRepo.save(transaction);
-        }catch(InvalidWithdrawException e){
-            transaction.setValid(false);
-            transactionRepo.save(transaction);
-            throw new InvalidTransactionException();
         }
     }
 

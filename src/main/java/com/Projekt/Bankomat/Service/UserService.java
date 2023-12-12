@@ -12,12 +12,14 @@ import com.Projekt.Bankomat.Models.User;
 import com.Projekt.Bankomat.Repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class UserService implements IUserService, IAdminService {
     private final UserRepo userRepo;
     @Autowired
@@ -50,7 +52,7 @@ public class UserService implements IUserService, IAdminService {
     }
 
     public void registerUser(UserDto registraionRequest){
-        if(userRepo.existsByEmail(registraionRequest.getEmail()) || userRepo.existsByPhoneNumber(registraionRequest.getPhoneNumber())){
+        if(userRepo.existsByEmailOrPhoneNumber(registraionRequest.getEmail(), registraionRequest.getPhoneNumber())){
             throw new UserExistsException(registraionRequest.getEmail(), registraionRequest.getPhoneNumber());
         }
         var uzytkownik = User.builder()

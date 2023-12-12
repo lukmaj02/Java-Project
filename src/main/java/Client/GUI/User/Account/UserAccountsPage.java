@@ -1,4 +1,4 @@
-package Client.GUI.User;
+package Client.GUI.User.Account;
 
 import Client.Client;
 import Client.dto.BankAccountDto;
@@ -41,10 +41,13 @@ public class UserAccountsPage extends Client {
     public Button deleteAccount;
     @FXML
     public Button viewCards;
+    @FXML
     public Button createCard;
     private String currentAccountNr;
     private UserDto user;
     public TableView.TableViewSelectionModel<BankAccountDto> selectedAccount;
+    private String currentCurrency;
+
     public void initialize(Set<BankAccountDto> bankAccounts, UserDto user){
         this.user = user;
         accountNr.setCellValueFactory(new PropertyValueFactory<>("accountNr"));
@@ -59,32 +62,33 @@ public class UserAccountsPage extends Client {
         userAccounts.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null && !newSelection.equals(oldSelection)) {
                 currentAccountNr = newSelection.getAccountNr();
+                currentCurrency = newSelection.getCurrencyType();
             }
         });
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
-        if(actionEvent.getSource() == backButton){
-            openUserPage(actionEvent,user);
-        } else if(actionEvent.getSource()==createTransaction){
-            //todo openCreationTransactionPage(actionEvent, user);
-        } else if (actionEvent.getSource()==deleteAccount && currentAccountNr != null) {
-            var msg = sendToServerWithResponse("BANK_ACCOUNT,DELETE,"+ currentAccountNr);
-            if(isResponseValid(msg)) {
-                openUserPage(actionEvent,user);
-                showInfo("DELETION", "Bank account deleted successfully!");
-            }
+        if (actionEvent.getSource() == backButton) {
+            openUserPage(actionEvent, user);
+        } else if (actionEvent.getSource() == createTransaction) {
+            openTransactionCreationPage(actionEvent, user, currentAccountNr, currentCurrency);
         } else if (actionEvent.getSource() == requestCredit) {
-            openRequestingCreditPage(actionEvent,user,currentAccountNr);
+            openRequestingCreditPage(actionEvent, user, currentAccountNr);
         } else if (actionEvent.getSource() == createCard && currentAccountNr != null) {
-            openCardCreationPage(actionEvent,user, currentAccountNr);
-        } else if (actionEvent.getSource()==viewCards && currentAccountNr != null) {
-            var msg = sendToServerWithResponse("CARD,ACCOUNT_CARDS,"+currentAccountNr);
-            if(isResponseValid(msg)){
-                openAccountCardsPage(actionEvent, CardDto.mapper(msg),user);
+            openCardCreationPage(actionEvent, user, currentAccountNr);
+        } else if (actionEvent.getSource() == viewCards && currentAccountNr != null) {
+            var msg = sendToServerWithResponse("CARD,ACCOUNT_CARDS," + currentAccountNr);
+            if (isResponseValid(msg)) {
+                openAccountCardsPage(actionEvent, CardDto.mapper(msg), user);
             }
         } else if (actionEvent.getSource() == createDeposit && currentAccountNr != null) {
-            openDepositCreationPage(actionEvent,user,currentAccountNr);
+            openDepositCreationPage(actionEvent, user, currentAccountNr);
+        } else if (actionEvent.getSource() == deleteAccount && currentAccountNr != null) {
+            var msg = sendToServerWithResponse("BANK_ACCOUNT,DELETE," + currentAccountNr);
+            if (isResponseValid(msg)) {
+                openUserPage(actionEvent, user);
+                showInfo("DELETION", "Bank account deleted successfully!");
+            }
         }
     }
 }

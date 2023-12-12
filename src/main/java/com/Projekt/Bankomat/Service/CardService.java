@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class CardService implements ICardService {
     private final CardRepo cardRepo;
     private final TransactionService transactionService;
@@ -30,7 +31,7 @@ public class CardService implements ICardService {
         this.transactionService = transactionService;
         this.bankAccountService = bankAccountService;
     }
-    @Transactional
+
     public void createCard(String accountNr, CardType cardType, String pin) throws BankAccountNotFoundException {
         var nowaKarta = Card.builder()
                 .cvc(Generators.generateRandomNumber(3))
@@ -45,30 +46,26 @@ public class CardService implements ICardService {
         cardRepo.save(nowaKarta);
     }
 
-    @Transactional
     public void discardCard(String cardNr){
         var karta = cardRepo.findByCardNr(cardNr).orElseThrow(() -> new CardNotFoundException(cardNr));
         if(karta.isDiscard()) throw new InvalidCardDiscarding();
         karta.setDiscard(true);
         cardRepo.save(karta);
     }
-    @Transactional
     public void deleteCard(String cardNr){
         var karta = cardRepo.findByCardNr(cardNr).orElseThrow(() -> new CardNotFoundException(cardNr));
         cardRepo.delete(karta);
     }
 
-    @Override
     public List<Card> getAccountCards(String accountNr) {
         return cardRepo.findAccountsByAccountNr(accountNr);
     }
-    @Transactional
+
     public void extendExpirationDate(String cardNr){
         var karta = cardRepo.findByCardNr(cardNr).orElseThrow(() -> new CardNotFoundException(cardNr));
         if(karta.getExpirationDate().isAfter(LocalDate.now())) throw new InvalidExtendingValidityCard();
         karta.setExpirationDate(karta.getExpirationDate().plusYears(3));
     }
-    @Transactional
     public void paymentByCard(String toAccountNr,
                               String fromAccountNr,
                               String cvc,

@@ -38,7 +38,7 @@ public class Card {
     @Column(name = "pin", nullable = false, length = 4)
     private String pin;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accountId")
     private BankAccount bankAccount;
 

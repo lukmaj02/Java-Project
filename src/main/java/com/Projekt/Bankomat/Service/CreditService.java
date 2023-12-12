@@ -21,6 +21,7 @@ import java.util.UUID;
 
 @Service
 @EnableScheduling
+@Transactional
 public class CreditService implements ICreditService {
     private final CreditRepo creditRepo;
     private final BankAccountService bankAccountService;

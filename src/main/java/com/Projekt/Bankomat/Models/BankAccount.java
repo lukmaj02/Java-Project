@@ -34,7 +34,7 @@ public class BankAccount {
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private User user;
 
@@ -48,7 +48,7 @@ public class BankAccount {
 
     @OneToMany(
             mappedBy = "bankAccountDeposit",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -56,7 +56,7 @@ public class BankAccount {
 
     @OneToMany(
             mappedBy = "bankAccountCredit",
-            fetch = FetchType.EAGER,
+            fetch = FetchType.LAZY,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )

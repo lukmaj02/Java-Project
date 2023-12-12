@@ -42,7 +42,6 @@ public class Credit {
     @Enumerated(EnumType.STRING)
     private CreditStatus creditStatus;
 
-
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "accountId", nullable = false)
     private BankAccount bankAccountCredit;

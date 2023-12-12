@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="572.0" prefWidth="898.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.UserCreditsPage">
+<AnchorPane prefHeight="572.0" prefWidth="898.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.Credit.UserCreditsPage">
    <children>
       <Label layoutX="400.0" layoutY="50.0" text="Credits">
          <font>

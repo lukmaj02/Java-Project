@@ -1,4 +1,4 @@
-package Client.GUI.User;
+package Client.GUI.User.Transaction;
 
 import Client.Client;
 import Client.dto.BankAccountDto;
@@ -36,11 +36,14 @@ public class UserTransactionsPage extends Client {
     @FXML
     public TableColumn<TransactionDto, String> isValid;
     @FXML
+    public TableColumn<TransactionDto, String> type;
+    @FXML
     public Button viewSentTransactions;
     @FXML
     public Button viewReceivedTransactions;
     @FXML
     public Button viewAllTransactions;
+
 
     private Set<TransactionDto> allTransactions;
     private Set<TransactionDto> sentToUserTransactions;
@@ -62,6 +65,7 @@ public class UserTransactionsPage extends Client {
         transactionDate.setCellValueFactory(new PropertyValueFactory<>("transactionDate"));
         title.setCellValueFactory(new PropertyValueFactory<>("title"));
         isValid.setCellValueFactory(new PropertyValueFactory<>("isValid"));
+        type.setCellValueFactory(new PropertyValueFactory<>("type"));
         ObservableList<TransactionDto> list = FXCollections.observableList(allTransactions.stream().toList());
         userTransactions.setItems(list);
     }

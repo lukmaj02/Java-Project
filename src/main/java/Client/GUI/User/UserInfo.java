@@ -62,6 +62,8 @@ public class UserInfo extends Client {
     public void executeAnAction(ActionEvent actionEvent) throws IOException {
         if(actionEvent.getSource() == back){
             openUserPage(actionEvent, user);
+        } else if (actionEvent.getSource() == changeInformations) {
+
         }
     }
 }

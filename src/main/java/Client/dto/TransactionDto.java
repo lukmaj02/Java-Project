@@ -14,7 +14,7 @@ import java.util.Set;
 @Builder
 public class TransactionDto {
     private String transactionId;
-    private String transactionType;
+    private String type;
     private String isValid;
     private String transactionDate;
     private String amount;
@@ -31,7 +31,7 @@ public class TransactionDto {
             var atribute = transaction.split(",");
             transactions.add(TransactionDto.builder()
                     .transactionId(atribute[0])
-                    .transactionType(atribute[1])
+                    .type(atribute[1])
                     .isValid(atribute[2])
                     .transactionDate(atribute[3])
                     .amount(atribute[4])

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="447.0" prefWidth="730.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.UserDepositsPage">
+<AnchorPane prefHeight="447.0" prefWidth="730.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.GUI.User.Deposit.UserDepositsPage">
    <children>
       <TableView fx:id="userDeposits" layoutX="36.0" layoutY="132.0" prefHeight="200.0" prefWidth="659.0">
         <columns>

@@ -43,12 +43,12 @@ public class AppConfig {
                 //userService.deleteUser("krzysztof.gonciarz@gmail.com");
                 //creditService.requestCredit("78190456231890724568903214", BigDecimal.valueOf(1000), 20, CreditType.CONST);
                 //creditService.activeCredit("c8038902-de92-4fcf-a9f0-ebc508fc1e5f");
-//                transactionService.createTransaction("45678901234567890123456789",
-//                        "59013467890234126789012345",
-//                        BigDecimal.valueOf(7000000),
+//                transactionService.createTransaction("21299378086789260481191951",
+//                        "94830475063686771280990909",
+//                        BigDecimal.valueOf(20000),
 //                        "za wczoraj",
-//                        CurrencyType.ZLOTY,
-//                        TransactionType.PRZELEW_EKSPRESOWY);
+//                        CurrencyType.PLN,
+//                        TransactionType.TRADITIONAL_TRANSFER);
                 //System.out.println(depositRepository.getAllUserDeposits("krzysztof.gonciarz@gmail.com"));
 
             }

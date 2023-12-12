@@ -11,6 +11,7 @@ import com.Projekt.Bankomat.Models.BankAccount;
 import com.Projekt.Bankomat.Repository.BankAccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.UUID;
 import static com.Projekt.Bankomat.Enums.DepositStatus.ACTIVE;
 
 @Service
+@Transactional
 public class BankAccountService implements IBankAccountService {
     private final BankAccountRepo bankAccountRepo;
     private final UserService userService;
@@ -36,11 +38,11 @@ public class BankAccountService implements IBankAccountService {
 
     public String getAccountNrByUserPhoneNumber(String phoneNumber, CurrencyType currencyType){
         var acc = bankAccountRepo.getAccountNrByUserPhoneNumber(currencyType, phoneNumber);
-        if(acc.isEmpty()) throw new BankAccountNotFoundException();
+        if(acc.isEmpty()) throw new PersonalBankAccountNotFoundException(phoneNumber);
         return acc.get(0).getAccountNr();
     }
 
-    public boolean isPaymentValid(String fromAccountNr, String toAccountNr, BigDecimal amount){
+    public boolean payment(String fromAccountNr, String toAccountNr, BigDecimal amount){
         var fromAccount = bankAccountRepo.findByAccountNr(fromAccountNr)
                 .orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
 
