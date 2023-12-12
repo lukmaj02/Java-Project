@@ -36,6 +36,7 @@ public class UserDto {
                 address + "," +
                 city + "," +
                 gender.toString() + "," +
-                maritalStatus.toString() + ",";
+                maritalStatus.toString() + "," +
+                role.toString() + ",";
     }
 }

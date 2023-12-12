@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Employee.GUI.EmployeePage">
+   <children>
+      <Label layoutX="181.0" layoutY="36.0" text="Employee Profile">
+         <font>
+            <Font name="System Bold Italic" size="30.0" />
+         </font>
+      </Label>
+      <Button fx:id="registerEmployee" layoutX="112.0" layoutY="135.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="65.0" prefWidth="139.0" text="Register Employee" />
+      <Button fx:id="viewProcessedCredits" layoutX="350.0" layoutY="254.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="65.0" prefWidth="139.0" text="View Processed Credits" />
+      <Button fx:id="logoutButton" layoutX="112.0" layoutY="254.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="65.0" prefWidth="139.0" text="Log out" />
+      <Button fx:id="viewFailedCredits" layoutX="350.0" layoutY="135.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="65.0" prefWidth="139.0" text="View Failed Credits" />
+   </children>
+</AnchorPane>

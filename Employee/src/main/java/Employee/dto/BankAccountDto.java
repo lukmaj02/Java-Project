@@ -1,9 +1,10 @@
-package Client.dto;
+package Employee.dto;
 
 
 import lombok.*;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter

@@ -72,7 +72,8 @@ public class User {
                 phoneNumber + "," +
                 address + "," +
                 city + "," +
-                maritalStatus.toString() + ",";
+                maritalStatus.toString() + "," +
+                role.toString() + ",";
     }
 
 }
