@@ -1,5 +1,6 @@
 package Bank.IService;
 
+import Bank.Enums.CreditStatus;
 import Bank.Enums.CreditType;
 import Bank.Models.Credit;
 
@@ -20,4 +21,5 @@ public interface ICreditService {
                                     Integer installmentCount,
                                     CreditType creditType);
     List<Credit> getUserCredits(String email);
+    List<Credit> getCreditsWithStatus(CreditStatus creditStatus);
 }

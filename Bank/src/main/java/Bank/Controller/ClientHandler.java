@@ -107,6 +107,8 @@ public class ClientHandler implements Callable<String> {
                 systemResponse += creditService.checkInstallmentRate(new BigDecimal(dataTable[0]), Integer.valueOf(dataTable[1]), CreditType.valueOf(dataTable[2]));
             }
             case CANCEL -> creditService.cancelCredit(data);
+            case ALL_FAILED -> systemResponse += listToString(creditService.getCreditsWithStatus(CreditStatus.FAILED));
+            case ALL_PROCESSED -> systemResponse += listToString(creditService.getCreditsWithStatus(CreditStatus.PROCESSED));
             default -> throw new InvalidCommandException(CREDIT);
         }
         return systemResponse;

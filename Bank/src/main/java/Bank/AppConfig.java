@@ -43,7 +43,7 @@ public class AppConfig {
 //                        CurrencyType.PLN,
 //                        TransactionType.TRADITIONAL_TRANSFER);
                 //System.out.println(depositRepository.getAllUserDeposits("krzysztof.gonciarz@gmail.com"));
-
+                //System.out.println(creditService.getCreditsWithStatus(CreditStatus.PROCESSED));
             }
             catch(RuntimeException e){
                 e.printStackTrace();

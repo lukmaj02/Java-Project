@@ -1,7 +1,7 @@
 package Employee.GUI;
 
 import Employee.SceneController;
-import Employee.dto.UserDto;
+import Employee.dto.EmployeeDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -22,7 +22,7 @@ public class FrontPage extends SceneController {
         if (actionEvent.getSource() == logInButton) {
             var msg = sendToServerWithResponse("USER,LOGIN," + emailTextField.getText() + "," + userPasswordPasswordField.getText());
             if (isResponseValid(msg)) {
-                var employee = UserDto.mapper(msg);
+                var employee = EmployeeDto.mapper(msg);
                 if(employee.getRole().equals("EMPLOYEE")) {
                     openEmployeePage(actionEvent, employee);
                 }

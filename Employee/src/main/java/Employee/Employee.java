@@ -62,11 +62,14 @@ public class Employee extends Application {
             return "ERROR, SERVER FAILED TO READ! CHECK LATER AGAIN";
         }
     }
-    protected void showProvideDataWarning() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText("Data warning, you haven't fill all fields.");
-        alert.setContentText("Provide more details!");
-        alert.show();
+    protected boolean isResponseValid(String data){
+        if(Objects.equals(data, "")) return true;
+        var splitedData = data.split(",",2);
+        if(splitedData[0].equals("ERROR")){
+            showWarning(splitedData[1]);
+            return false;
+        }
+        return true;
     }
     protected void showWarning(String warningInfo){
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -80,15 +83,7 @@ public class Employee extends Application {
         alert.setContentText(content);
         alert.show();
     }
-    protected boolean isResponseValid(String data){
-        if(Objects.equals(data, "")) return true;
-        var splitedData = data.split(",",2);
-        if(splitedData[0].equals("ERROR")){
-            showWarning(splitedData[1]);
-            return false;
-        }
-        return true;
-    }
+
     void setStage(ActionEvent event){
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);

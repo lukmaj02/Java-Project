@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto {
+public class EmployeeDto {
     private String firstname;
     private String lastname;
     private String email;
@@ -20,9 +20,9 @@ public class UserDto {
     private String maritalStatus;
     private String role;
 
-    public static UserDto mapper(String data){
+    public static EmployeeDto mapper(String data){
         var splitedData = data.split(",");
-        return UserDto.builder()
+        return EmployeeDto.builder()
                 .firstname(splitedData[0])
                 .lastname(splitedData[1])
                 .email(splitedData[2])
