@@ -96,6 +96,11 @@ public class CreditService implements ICreditService {
         return creditRepo.getAllUserCredits(email);
     }
 
+    @Override
+    public List<Credit> getCreditsWithStatus(CreditStatus creditStatus) {
+        return creditRepo.findAllByCreditStatus(creditStatus);
+    }
+
     protected BigDecimal calculateInstallment(double creditAmount,
                                            double lendingRate,
                                             int installmentCount) {

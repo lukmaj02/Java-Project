@@ -36,6 +36,12 @@
 			<artifactId>javafx-fxml</artifactId>
 			<version>21-ea+24</version>
 		</dependency>
+		<dependency>
+			<groupId>Client</groupId>
+			<artifactId>Client</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

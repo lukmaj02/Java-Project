@@ -7,5 +7,7 @@ public enum CreditCommand {
     ACTIVE,
     ALL_USER,
     CHECK_RATE,
-    CANCEL
+    CANCEL,
+    ALL_PROCESSED,
+    ALL_FAILED
 }
