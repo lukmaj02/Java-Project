@@ -51,12 +51,14 @@ public class Client extends Application {
             showWarning("Failed connection to server");
         }
         catch (Exception e) {
-            showWarning("Decryption Manager Failed to launch");
+            showWarning("Encryption Manager Failed to launch");
+            e.printStackTrace();
         }
     }
     protected String sendToServerWithResponse(String data) {
         try {
-            sender.println(data);
+            System.out.println(EncryptionManager.encrypt(data));
+            sender.println(EncryptionManager.encrypt(data));
             return reader.readLine();
         } catch (Exception e) {
             return "ERROR, SERVER FAILED TO READ! CHECK LATER AGAIN";

@@ -8,7 +8,13 @@ import java.util.Base64;
 
 public class EncryptionManager {
     private EncryptionManager(){}
-    private static final String PUBLIC_KEY = "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKYmNjmj9eQAvNFVVkZToJ4fMLmnUbRYEN8nM9lC8YNItdOd8d5h5FwfLv2iti5ky4TYZ+1a4ZQ0f/X3+fiFw2ECAwEAAQ==";
+    private static final String PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg1YBfPPfFVRDRtsR3OPA" +
+            "PYLaXyvzn2e++AYgZp8iRefhA1fRNkY3kArPkrkVv3fICs4QsFCSJ4RQKm7DUre1" +
+            "gxoFKejhAxdkkYdCa+zP83DFEKUVrrTAlgE6URC2Bgk/c5xldu1MbqOi4oiWQI/N" +
+            "jePASsqrQpOFiXaf0e6pgjoxzq5FXzcyD6K05rFWSkkNiijKWkJuWqbjpn+PR1CD" +
+            "dZRjEvVb2b1yN/fN+syd1tH1z0UIL2s9WGLocKfpx5rNthXlkYlTmtRSsydHnZWK" +
+            "xzopQ74XmcWTyjK3n3/Qoj2NU/1z4QHpfj3vuBDJErZC7CzO4H/W7tMNSBO2sfVX" +
+            "CQIDAQAB";
     private static PublicKey publicKey;
 
     public static String encode(byte[] data){
