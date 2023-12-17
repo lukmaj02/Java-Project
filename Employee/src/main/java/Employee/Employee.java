@@ -23,9 +23,9 @@ public class Employee extends Application {
     protected Parent _root;
 
     //connection to server
-    protected static PrintWriter sender;
-    protected static BufferedReader reader;
-    protected static Socket socket;
+    private static PrintWriter sender;
+    private static BufferedReader reader;
+    private static Socket socket;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -84,7 +84,7 @@ public class Employee extends Application {
         alert.show();
     }
 
-    void setStage(ActionEvent event){
+    protected void setStage(ActionEvent event){
         _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         _scene = new Scene(_root);
         _stage.setScene(_scene);
