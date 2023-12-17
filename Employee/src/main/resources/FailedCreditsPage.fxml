@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="572.0" prefWidth="898.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Employee.GUI.FailedCreditsPage">
    <children>
-      <Label layoutX="400.0" layoutY="50.0" text="Failed Credits">
+      <Label layoutX="353.0" layoutY="40.0" text="Failed Credits">
+>>>>>>> dev-LM
          <font>
             <Font name="System Bold Italic" size="30.0" />
          </font>

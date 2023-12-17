@@ -60,7 +60,7 @@ public class FourthFormulaPage extends SceneController {
         city.setText(firstPageData.get(6));
         accountType.setText(secondPageData.get(0).toUpperCase());
         accountCurrency.setText(secondPageData.get(3).toUpperCase());
-        password = thirdPageData.get(2);
+        password = thirdPageData.get(3);
     }
 
     private String getNeededInfoToCreateUser() throws Exception {

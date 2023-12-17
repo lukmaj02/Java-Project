@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Employee.GUI.FrontPage">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #D4D9DB;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Employee.GUI.FrontPage">
    <children>
       <ImageView fitHeight="117.0" fitWidth="150.0" layoutX="200.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="14.0">
          <image>
@@ -28,7 +28,6 @@
       </Text>
       <TextField fx:id="emailTextField" layoutX="273.0" layoutY="173.0" onAction="#executeAnAction" prefHeight="26.0" prefWidth="181.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="180.0" />
       <PasswordField fx:id="userPasswordPasswordField" layoutX="302.0" layoutY="244.0" onAction="#executeAnAction" prefHeight="26.0" prefWidth="181.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="260.0" />
-      <Button fx:id="signUpButton" layoutX="149.0" layoutY="340.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="31.0" prefWidth="60.0" text="Sign up" AnchorPane.leftAnchor="149.0" />
-      <Button fx:id="logInButton" layoutX="322.0" layoutY="340.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="31.0" prefWidth="60.0" text="Log in" AnchorPane.rightAnchor="135.0" />
+      <Button fx:id="logInButton" layoutX="229.0" layoutY="338.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="31.0" prefWidth="60.0" text="Log in" AnchorPane.rightAnchor="228.0" />
    </children>
 </AnchorPane>

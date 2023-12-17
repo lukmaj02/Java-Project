@@ -60,7 +60,7 @@ public class ClientHandler implements Callable<String> {
             PrintWriter sender = new PrintWriter(clientSocket.getOutputStream(), true);
 
             while (true) {
-                String message = reader.readLine();
+                String message = decryptionManager.decrypt(reader.readLine());
                 String[] part = message.split(",", 3);
                 MainCommand controller = MainCommand.valueOf(part[0].toUpperCase());
                 String command = part[1].toUpperCase();

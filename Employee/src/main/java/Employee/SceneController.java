@@ -3,6 +3,7 @@ package Employee;
 import Employee.GUI.EmployeePage;
 import Employee.GUI.FailedCreditsPage;
 import Employee.GUI.FrontPage;
+import Employee.GUI.ProcessedCreditsPage;
 import Employee.GUI.RegistrationFormula.FirstFormulaPage;
 import Employee.GUI.RegistrationFormula.FourthFormulaPage;
 import Employee.GUI.RegistrationFormula.SecondFormulaPage;
@@ -82,6 +83,14 @@ public class SceneController extends Employee {
 
         FailedCreditsPage failedCreditsPage = loader.getController();
         failedCreditsPage.initialize(credits,employee); // change randomly|depending on users count
+        setStage(event);
+    }
+    protected void openProcessedCreditsPage(ActionEvent event, Set<CreditDto> credits, EmployeeDto employee) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ProcessedCreditsPage.fxml"));
+        _root = loader.load();
+
+        ProcessedCreditsPage processedCreditsPage = loader.getController();
+        processedCreditsPage.initialize(credits,employee); // change randomly|depending on users count
         setStage(event);
     }
     protected void showProvideDataWarning() {

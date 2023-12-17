@@ -26,11 +26,17 @@ public class EmployeePage extends SceneController {
             openFrontPage(event);
         } else if (event.getSource() == registerEmployee) {
             openFormula(event, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), employee);
-        }
-        else if(event.getSource() == viewFailedCredits){
+
+        } else if(event.getSource() == viewFailedCredits){
             var msg = sendToServerWithResponse("CREDIT,ALL_FAILED,");
             if(isResponseValid(msg)){
                 openFailedCreditsPage(event,CreditDto.mapper(msg), employee);
+            }
+
+        } else if (event.getSource() == viewProcessedCredits) {
+            var msg = sendToServerWithResponse("CREDIT,ALL_PROCESSED,");
+            if(isResponseValid(msg)){
+                openProcessedCreditsPage(event,CreditDto.mapper(msg), employee);
             }
         }
     }
