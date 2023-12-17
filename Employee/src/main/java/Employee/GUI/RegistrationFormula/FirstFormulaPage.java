@@ -4,11 +4,7 @@ import Employee.SceneController;
 import Employee.dto.EmployeeDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,19 +41,6 @@ public class FirstFormulaPage extends SceneController {
     public ArrayList<String > firstPageData = new ArrayList<>();
     public ArrayList<String > thirdPageData = new ArrayList<>();
     private EmployeeDto employee;
-
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Registration/FirstFormulaPage.fxml"));
-
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        stage.centerOnScreen();
-    }
 
     public void initializeFormula(Integer number,
                                   ArrayList<String> firstPageFormulaDate,

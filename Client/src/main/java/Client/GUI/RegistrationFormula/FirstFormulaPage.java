@@ -44,19 +44,6 @@ public class FirstFormulaPage extends SceneController {
     public ArrayList<String > firstPageData = new ArrayList<>();
     public ArrayList<String > thirdPageData = new ArrayList<>();
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/Registration/FirstFormulaPage.fxml"));
-
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
-        stage.centerOnScreen();
-    }
-
     public void initializeFormula(Integer number, ArrayList<String> firstPageFormulaDate, ArrayList<String > secondPageFormulaDate, ArrayList<String> thirdFormulaPageData) {
         formulaLabel.setText("Formula Page no. " + Integer.toString(number));
         secondPageData = secondPageFormulaDate;

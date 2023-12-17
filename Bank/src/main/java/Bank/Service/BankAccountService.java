@@ -46,25 +46,15 @@ public class BankAccountService implements IBankAccountService {
         return acc.get(0).getAccountNr();
     }
 
-    public boolean payment(String fromAccountNr, String toAccountNr, BigDecimal amount){
-        var fromAccount = bankAccountRepo.findByAccountNr(fromAccountNr)
-                .orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
-
-        var toAccount = bankAccountRepo.findByAccountNr(toAccountNr)
-                .orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
-
+    public void payment(String fromAccountNr, String toAccountNr, BigDecimal amount){
+        var fromAccount = bankAccountRepo.findByAccountNr(fromAccountNr).orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
+        var toAccount = bankAccountRepo.findByAccountNr(toAccountNr).orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
         var amountToAccount = amount;
-        if(!fromAccount.getCurrencyType().equals(toAccount.getCurrencyType())){
-            try{
-                amountToAccount = transferService.convertCurrencyAmount(fromAccount.getCurrencyType(), toAccount.getCurrencyType(), amount);
-            }catch (URISyntaxException | ExecutionException | InterruptedException | IOException e){
-                throw new RuntimeException("API");
-            }
-        }
+        if(!fromAccount.getCurrencyType().equals(toAccount.getCurrencyType()))
+            amountToAccount = transferService.convertCurrencyAmount(fromAccount.getCurrencyType(), toAccount.getCurrencyType(), amount);
 
         withdrawFromAccount(fromAccount,amount);
         paymentToAccount(toAccount,amountToAccount);
-        return true;
     }
 
     public void paymentToAccount(BankAccount bankAccount, BigDecimal amount){

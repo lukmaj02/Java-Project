@@ -54,6 +54,13 @@ public class Client extends Application {
             showWarning("Encryption Manager Failed to launch");
         }
     }
+    void setStage(ActionEvent event){
+        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        _scene = new Scene(_root);
+        _stage.setScene(_scene);
+        _stage.show();
+        _stage.centerOnScreen();
+    }
     protected String sendToServerWithResponse(String data) {
         try {
             System.out.println(EncryptionManager.encrypt(data));
@@ -89,13 +96,6 @@ public class Client extends Application {
             return false;
         }
         return true;
-    }
-    void setStage(ActionEvent event){
-        _stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        _scene = new Scene(_root);
-        _stage.setScene(_scene);
-        _stage.show();
-        _stage.centerOnScreen();
     }
 }
 

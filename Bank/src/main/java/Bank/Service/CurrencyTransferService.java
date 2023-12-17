@@ -23,9 +23,14 @@ public class CurrencyTransferService {
     @Autowired
     private HttpClient client;
 
-    public BigDecimal convertCurrencyAmount(CurrencyType from, CurrencyType to, BigDecimal amount) throws URISyntaxException, ExecutionException, InterruptedException, IOException {
-        var response = client.send(sendGetConvertRequest(from.getSymbol(), to.getSymbol(), amount),HttpResponse.BodyHandlers.ofString());
-        return getConvertedAmount(response.body()).setScale(2, BigDecimal.ROUND_HALF_UP);
+    public BigDecimal convertCurrencyAmount(CurrencyType from, CurrencyType to, BigDecimal amount) {
+        try{
+            var response = client.send(sendGetConvertRequest(from.getSymbol(), to.getSymbol(), amount),HttpResponse.BodyHandlers.ofString());
+            return getConvertedAmount(response.body()).setScale(2, BigDecimal.ROUND_HALF_UP);
+        } catch (URISyntaxException |IOException | InterruptedException e) {
+            throw new RuntimeException("API_TRANSFER_CURRENCY_FAILED");
+        }
+
     }
 
     private BigDecimal getConvertedAmount(String response){

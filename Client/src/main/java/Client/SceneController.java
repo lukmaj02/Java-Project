@@ -20,11 +20,9 @@ import Client.GUI.User.UserPage;
 import Client.dto.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Set;
 
 public class SceneController extends Client{

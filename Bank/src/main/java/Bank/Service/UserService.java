@@ -5,7 +5,7 @@ import Bank.Exceptions.BadCredentialsException;
 import Bank.Exceptions.BankAccountExistsException;
 import Bank.Exceptions.UserExistsException;
 import Bank.Exceptions.UserNotFoundException;
-import Bank.IService.IAdminService;
+import Bank.IService.IEmployeeService;
 import Bank.IService.IUserService;
 import Bank.Models.BankAccount;
 import Bank.Models.User;
@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @Service
 @Transactional
-public class UserService implements IUserService, IAdminService {
+public class UserService implements IUserService, IEmployeeService {
     private final UserRepo userRepo;
     @Autowired
     public UserService(UserRepo userRepo) {

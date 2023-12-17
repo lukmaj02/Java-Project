@@ -4,7 +4,7 @@ import Bank.Models.User;
 
 import java.util.List;
 
-public interface IAdminService {
+public interface IEmployeeService {
     User getUser(String email);
     List<User> getAllUsers();
 }
