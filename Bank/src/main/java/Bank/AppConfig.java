@@ -7,8 +7,16 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.math.BigDecimal;
+import java.net.http.HttpClient;
+
 @Configuration
 public class AppConfig {
+    @Bean
+    public HttpClient httpClient(){
+        return HttpClient.newHttpClient();
+    }
+
     @Bean
     public CommandLineRunner commandLineRunner(DepositService depositService,
                                                DepositRepository depositRepository,
@@ -16,7 +24,8 @@ public class AppConfig {
                                                TransactionService transactionService,
                                                BankAccountService bankAccountService,
                                                CreditService creditService,
-                                               CardService cardService){
+                                               CardService cardService,
+                                               CurrencyTransferService transferService){
         return args -> {
             try{
                 //depositService.createDeposit("84327494823748210194574587", DepositType.ANNUAL, BigDecimal.valueOf(1000));
@@ -44,6 +53,7 @@ public class AppConfig {
 //                        TransactionType.TRADITIONAL_TRANSFER);
                 //System.out.println(depositRepository.getAllUserDeposits("krzysztof.gonciarz@gmail.com"));
                 //System.out.println(creditService.getCreditsWithStatus(CreditStatus.PROCESSED));
+                System.out.println(transferService.convertCurrencyAmount(CurrencyType.PLN, CurrencyType.EURO, BigDecimal.valueOf(2000)));
             }
             catch(RuntimeException e){
                 e.printStackTrace();

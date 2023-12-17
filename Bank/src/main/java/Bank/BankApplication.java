@@ -37,9 +37,8 @@ public class BankApplication {
 		try{
 			decryptionManager.initFromString();
 		} catch (Exception e){
-//			System.out.println("Failed to wire DecryptionManager");
-//			System.exit(-1);
-			e.printStackTrace();
+			System.out.println("Failed to wire DecryptionManager");
+			System.exit(-1);
 		}
 
 		while(true){

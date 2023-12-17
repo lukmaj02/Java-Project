@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import static Bank.Enums.DepositStatus.ACTIVE;
 
@@ -23,12 +26,14 @@ import static Bank.Enums.DepositStatus.ACTIVE;
 public class BankAccountService implements IBankAccountService {
     private final BankAccountRepo bankAccountRepo;
     private final UserService userService;
+    private final CurrencyTransferService transferService;
 
 
     @Autowired
-    public BankAccountService(BankAccountRepo bankAccountRepo, UserService userService) {
+    public BankAccountService(BankAccountRepo bankAccountRepo, UserService userService, CurrencyTransferService transferService) {
         this.bankAccountRepo = bankAccountRepo;
         this.userService = userService;
+        this.transferService = transferService;
     }
 
     public BankAccount getAccountByAccountNr(String accountNr){
@@ -48,11 +53,17 @@ public class BankAccountService implements IBankAccountService {
         var toAccount = bankAccountRepo.findByAccountNr(toAccountNr)
                 .orElseThrow(() -> new BankAccountNotFoundException(fromAccountNr));
 
-        if(!fromAccount.getCurrencyType().equals(toAccount.getCurrencyType()))
-            throw new InvalidCurrencyTypeException(toAccount.getCurrencyType());
+        var amountToAccount = amount;
+        if(!fromAccount.getCurrencyType().equals(toAccount.getCurrencyType())){
+            try{
+                amountToAccount = transferService.convertCurrencyAmount(fromAccount.getCurrencyType(), toAccount.getCurrencyType(), amount);
+            }catch (URISyntaxException | ExecutionException | InterruptedException | IOException e){
+                throw new RuntimeException("API");
+            }
+        }
 
         withdrawFromAccount(fromAccount,amount);
-        paymentToAccount(toAccount,amount);
+        paymentToAccount(toAccount,amountToAccount);
         return true;
     }
 
