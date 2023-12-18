@@ -41,7 +41,7 @@ public class Transaction {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fromAccountNr", referencedColumnName = "accountNr")
     private BankAccount fromAccountNr;
 
@@ -57,7 +57,7 @@ public class Transaction {
                 amount + "," +
                 currencyType + "," +
                 title + "," +
-                fromAccountNr + "," +
+                fromAccountNr.getAccountNr() + "," +
                 toAccountNr +",,";
     }
 }
