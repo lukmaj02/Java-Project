@@ -27,7 +27,6 @@
             </columns>
         </TableView>
         <Button fx:id="backButton" layoutX="57.0" layoutY="479.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="85.0" text="Back" />
-        <Button fx:id="reactiveCredit" layoutX="754.0" layoutY="479.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="87.0" text="Cancel Credit" />
         <Button fx:id="activeCredit" layoutX="401.0" layoutY="479.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="87.0" text="Active Credit" />
       <Button fx:id="refuseCredit" layoutX="739.0" layoutY="479.0" mnemonicParsing="false" onAction="#executeAnAction" prefHeight="45.0" prefWidth="87.0" text="Refuse Credit" />
     </children>
