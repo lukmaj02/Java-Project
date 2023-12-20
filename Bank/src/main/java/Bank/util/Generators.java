@@ -1,4 +1,4 @@
-package Bank;
+package Bank.util;
 
 import java.util.Random;
 

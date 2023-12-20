@@ -1,4 +1,4 @@
-package Bank;
+package Bank.util;
 
 import org.springframework.stereotype.Component;
 
@@ -39,10 +39,14 @@ public class DecryptionManager {
             "KhmWaQygxU3YS1LFL/cjSuc=";
     private PrivateKey privateKey;
 
-    public void initFromString() throws Exception {
-        PKCS8EncodedKeySpec keySpecPrivate = new PKCS8EncodedKeySpec(decode(PRIVATE_KEY));
-        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        privateKey = keyFactory.generatePrivate(keySpecPrivate);
+    public void initFromString() {
+        try {
+            PKCS8EncodedKeySpec keySpecPrivate = new PKCS8EncodedKeySpec(decode(PRIVATE_KEY));
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            privateKey = keyFactory.generatePrivate(keySpecPrivate);
+        } catch(Exception e){
+            System.out.println("Failed to launch Decryption Manager");
+        }
     }
     public String decrypt(String encryptedMessage) throws Exception{
         byte[] encryptedBytes = decode(encryptedMessage);

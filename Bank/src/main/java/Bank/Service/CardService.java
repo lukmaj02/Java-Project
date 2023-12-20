@@ -6,7 +6,7 @@ import Bank.Exceptions.BankAccountNotFoundException;
 import Bank.Exceptions.CardNotFoundException;
 import Bank.Exceptions.InvalidCardDiscarding;
 import Bank.Exceptions.InvalidExtendingValidityCard;
-import Bank.Generators;
+import Bank.util.Generators;
 import Bank.IService.ICardService;
 import Bank.Models.Card;
 import Bank.Repository.CardRepo;

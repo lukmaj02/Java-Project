@@ -4,7 +4,7 @@ import Bank.Enums.AccountType;
 import Bank.Enums.CreditStatus;
 import Bank.Enums.CurrencyType;
 import Bank.Exceptions.*;
-import Bank.Generators;
+import Bank.util.Generators;
 import Bank.IService.IBankAccountService;
 import Bank.Models.BankAccount;
 import Bank.Repository.BankAccountRepo;
@@ -12,12 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 import static Bank.Enums.DepositStatus.ACTIVE;
 

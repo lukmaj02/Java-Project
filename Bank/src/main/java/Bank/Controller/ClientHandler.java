@@ -1,7 +1,7 @@
 package Bank.Controller;
 
 import Bank.Controller.Commands.*;
-import Bank.DecryptionManager;
+import Bank.util.DecryptionManager;
 import Bank.Enums.*;
 import Bank.Exceptions.*;
 import Bank.IService.*;
@@ -9,19 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.Socket;
 import java.net.SocketException;
-import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
 import static Bank.Controller.Commands.MainCommand.*;
 import static Bank.Controller.Mapper.*;
 
 @Component
-public class ClientHandler implements Callable<String> {
-
+public class ClientHandler implements Runnable {
     private Socket clientSocket;
     private final IUserService userService;
     private final ITransactionService transactionService;
@@ -52,9 +52,8 @@ public class ClientHandler implements Callable<String> {
     public void initSocket(Socket clientSocket) {
         this.clientSocket = clientSocket;
     }
-
     @Override
-    public String call() {
+    public void run() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter sender = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -88,7 +87,6 @@ public class ClientHandler implements Callable<String> {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Task completed";
     }
 
     private String creditController(CreditCommand command, String data) throws RuntimeException {
@@ -149,7 +147,7 @@ public class ClientHandler implements Callable<String> {
         return systemResponse;
     }
 
-    private String transactionController(TransactionCommand command, String data){
+    private String transactionController(TransactionCommand command, String data) throws ExecutionException, InterruptedException {
         String systemResponse = "";
         switch (command) {
             case CREATE -> {
