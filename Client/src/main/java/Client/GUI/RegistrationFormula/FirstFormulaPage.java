@@ -45,7 +45,7 @@ public class FirstFormulaPage extends SceneController {
     public ArrayList<String > thirdPageData = new ArrayList<>();
 
     public void initializeFormula(Integer number, ArrayList<String> firstPageFormulaDate, ArrayList<String > secondPageFormulaDate, ArrayList<String> thirdFormulaPageData) {
-        formulaLabel.setText("Formula Page no. " + Integer.toString(number));
+        formulaLabel.setText("Formula Page no. " + number);
         secondPageData = secondPageFormulaDate;
         thirdPageData = thirdFormulaPageData;
         initalizeComboBox();

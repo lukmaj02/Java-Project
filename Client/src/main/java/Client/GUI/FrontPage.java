@@ -21,9 +21,6 @@ public class FrontPage extends SceneController {
     @FXML
     private Button logInButton;
 
-    public ArrayList<String> firstFormulaPageData = new ArrayList<>();
-
-
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
         if (actionEvent.getSource() == logInButton) {
             var msg = sendToServerWithResponse("USER,LOGIN,"+emailTextField.getText()+","+ userPasswordPasswordField.getText());

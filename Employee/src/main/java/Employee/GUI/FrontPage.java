@@ -14,8 +14,6 @@ public class FrontPage extends SceneController {
     @FXML
     private PasswordField userPasswordPasswordField;
     @FXML
-    private Button signUpButton;
-    @FXML
     private Button logInButton;
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
@@ -27,8 +25,6 @@ public class FrontPage extends SceneController {
                     openEmployeePage(actionEvent, employee);
                 }
             }
-        } else if (actionEvent.getSource() == signUpButton) {
-
         }
     }
 }

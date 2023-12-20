@@ -123,8 +123,7 @@ public class SecondFormulaPage extends SceneController {
             currencyTypeComboBox.setValue(secondPageFormulaDate.get(3));
         if (Objects.equals(secondPageFormulaDate.get(4), "Yes"))
             seniorCitizenYesRadioButton.setSelected(true);
-        else if (Objects.equals(secondPageFormulaDate.get(5), "No"))
-            seniorCitizenNoRadioButton.setSelected(true);
+        else seniorCitizenYesRadioButton.setSelected(false);
     }
 
     public void executeAnAction(ActionEvent actionEvent) throws Exception {
