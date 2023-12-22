@@ -108,7 +108,6 @@ public class FirstFormulaPage extends SceneController {
         else if (Objects.equals(firstPageFormulaDate.get(3), "Female"))
             femaleRadioButton.setSelected(true);
 
-        // TODO check
         if (! Objects.equals(firstPageFormulaDate.get(4), ""))
             maritalStatusComboBox.setValue(firstPageFormulaDate.get(4));
 
