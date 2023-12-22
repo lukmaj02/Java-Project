@@ -6,10 +6,24 @@ services:
     ports:
       - '6000:6000'
     depends_on:
-      - mysql_db
+      check-db-started:
+        condition: service_completed_successfully
+
     command: sh -c './wait-for mysql_db:3306 -- npm start'
+
+  check-db-started:
+    image: jwilder/dockerize:0.6.1
+    depends_on:
+      - mysql_db
+    command: 'dockerize -wait=tcp://mysql_db:3306 -timeout 60s'
+
   mysql_db:
     container_name: mysql_db
     build: Database/.
     ports:
       - '3303:3306'
+    healthcheck:
+      test: [ "CMD", "/usr/bin/mysql", "--user=root",  "--password=root", "--execute", "SHOW DATABASES;" ]
+      interval: 2s
+      timeout: 2s
+      retries: 10
