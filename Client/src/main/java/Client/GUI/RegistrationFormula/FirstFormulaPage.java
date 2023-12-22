@@ -3,11 +3,7 @@ package Client.GUI.RegistrationFormula;
 import Client.SceneController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -48,8 +44,8 @@ public class FirstFormulaPage extends SceneController {
         formulaLabel.setText("Formula Page no. " + number);
         secondPageData = secondPageFormulaDate;
         thirdPageData = thirdFormulaPageData;
-        initalizeComboBox();
-        initalizeData(firstPageFormulaDate);
+        initializeComboBox();
+        initializeData(firstPageFormulaDate);
     }
 
     private boolean checkIfUserProvideAllData() {
@@ -88,7 +84,7 @@ public class FirstFormulaPage extends SceneController {
         return !ifSomethingEmpty;
     }
 
-    private void initalizeData(ArrayList<String> firstPageFormulaDate) {
+    private void initializeData(ArrayList<String> firstPageFormulaDate) {
         if (firstPageFormulaDate.isEmpty())
             return;
         nameTextField.setText(firstPageFormulaDate.get(0));
@@ -105,7 +101,6 @@ public class FirstFormulaPage extends SceneController {
         else if (Objects.equals(firstPageFormulaDate.get(3), "Female"))
             femaleRadioButton.setSelected(true);
 
-        // TODO check
         if (! Objects.equals(firstPageFormulaDate.get(4), ""))
             maritalStatusComboBox.setValue(firstPageFormulaDate.get(4));
 
@@ -114,7 +109,7 @@ public class FirstFormulaPage extends SceneController {
         stateTextField.setText(firstPageFormulaDate.get(7));
     }
 
-    private void initalizeComboBox() {
+    private void initializeComboBox() {
         maritalStatusComboBox.getItems().removeAll(maritalStatusComboBox.getItems());
         maritalStatusComboBox.getItems().addAll("Single", "Married", "Divorced", "Widowed");
     }
