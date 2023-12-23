@@ -15,13 +15,14 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
 import static Bank.Controller.Commands.MainCommand.*;
 import static Bank.Controller.Mapper.*;
 
 @Component
-public class ClientHandler implements Runnable {
+public class ClientHandler implements Callable<String> {
     private Socket clientSocket;
     private final IUserService userService;
     private final ITransactionService transactionService;
@@ -53,33 +54,38 @@ public class ClientHandler implements Runnable {
         this.clientSocket = clientSocket;
     }
     @Override
-    public void run() {
+    public String call() {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter sender = new PrintWriter(clientSocket.getOutputStream(), true);
 
             while (true) {
-                String message = decryptionManager.decrypt(reader.readLine());
-                String[] part = message.split(",", 3);
-                MainCommand controller = MainCommand.valueOf(part[0].toUpperCase());
-                String command = part[1].toUpperCase();
-                String data = part[2];
+                String message = null;
+                try{
+                    message = decryptionManager.decrypt(reader.readLine());
+                }catch (Exception ignored){}
+                if(message!=null){
+                    String[] part = message.split(",", 3);
+                    MainCommand controller = MainCommand.valueOf(part[0].toUpperCase());
+                    String command = part[1].toUpperCase();
+                    String data = part[2];
 
-
-                try {
-                    String response = "";
-                    switch (controller) {
-                        case USER -> response += userController(UserCommand.valueOf(command), data);
-                        case TRANSACTION -> response += transactionController(TransactionCommand.valueOf(command), data);
-                        case BANK_ACCOUNT -> response += bankAccountController(BankAccountCommand.valueOf(command), data);
-                        case CARD -> response += cardController(CardCommand.valueOf(command), data);
-                        case CREDIT -> response += creditController(CreditCommand.valueOf(command),data);
-                        case DEPOSIT -> response += depositController(DepositCommand.valueOf(command),data);
-                        default -> throw new InvalidCommandException();
+                    try {
+                        String response = "";
+                        switch (controller) {
+                            case USER -> response += userController(UserCommand.valueOf(command), data);
+                            case TRANSACTION -> response += transactionController(TransactionCommand.valueOf(command), data);
+                            case BANK_ACCOUNT -> response += bankAccountController(BankAccountCommand.valueOf(command), data);
+                            case CARD -> response += cardController(CardCommand.valueOf(command), data);
+                            case CREDIT -> response += creditController(CreditCommand.valueOf(command),data);
+                            case DEPOSIT -> response += depositController(DepositCommand.valueOf(command),data);
+                            case EXIT -> clientSocket.close();
+                            default -> throw new InvalidCommandException();
+                        }
+                        sender.println(response);
+                    } catch (RuntimeException e) {
+                        sender.println("ERROR," + e.getMessage());
                     }
-                    sender.println(response);
-                } catch (RuntimeException e) {
-                    sender.println("ERROR," + e.getMessage());
                 }
             }
         } catch (SocketException e) {
@@ -87,6 +93,7 @@ public class ClientHandler implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "Task completed";
     }
 
     private String creditController(CreditCommand command, String data) throws RuntimeException {

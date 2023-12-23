@@ -56,7 +56,7 @@ public class DecryptionManager {
         return new String(decryptedMessage, StandardCharsets.UTF_8);
     }
 
-    public byte[] decode(String data) throws  Exception {
+    public byte[] decode(String data) throws Exception {
         return Base64.getDecoder().decode(data);
     }
 }

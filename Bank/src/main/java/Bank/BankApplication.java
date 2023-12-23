@@ -45,7 +45,7 @@ public class BankApplication {
 			Socket clientSocket = serverSocket.accept();
 			clientHandler.initSocket(clientSocket);
 			System.out.println("Client connected " + clientSocket.getInetAddress().getHostAddress());
-			FutureTask<?> task = new FutureTask<Void>(clientHandler,null);
+			FutureTask<String> task = new FutureTask<String>(clientHandler);
 			executorService.submit(task);
 		}
 	}
