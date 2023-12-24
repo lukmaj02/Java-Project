@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd ..
-mvn clean install
+chmod +x mvnw
+./mvnw clean install
 docker-compose build .
 docker-compose up
