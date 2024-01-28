@@ -1,3 +1,35 @@
+# Virtual Bank App
+
+## Overview
+
+The Virtual Bank App is a Java Spring Boot application that provides a virtual banking experience. Users can create deposits, request credits, perform multi-currency transfers, and manage their profile.
+
+## Features
+
+- **Account Management:**
+  - Open new deposits.
+  - Request credit, processed by bank employees.
+  - View account balances and transaction history.
+  - Multi-currency transfers to other accounts.
+
+- **Financial Operations:**
+  - Suspend and resume deposits.
+  - Withdraw profits when the deposit term is reached.
+
+- **User Profile:**
+  - Edit personal information.
+  - Register and manage user profiles.
+
+## Technologies Used
+
+- **Backend:**
+  - Java Spring Boot
+  - RSA256 encryption for secure communication
+
+- **Database:**
+  - MySQL (for data storage)
+
+
 ## Server 
 (Docker required!)
 <br />
